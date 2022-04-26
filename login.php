@@ -1,7 +1,7 @@
 <?php
 // ==========================================
 // Date Created:   3/24/2022
-// Developer: Richard Rodgers
+// Developer: Richard Rodgerss
 // ==========================================
 session_start();
 
