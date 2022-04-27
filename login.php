@@ -10,33 +10,43 @@ $pagename = "Sign In";
 include 'db.php';
 $invalid_credentials = $empty_error = $email = $password = $suspended_err = $account_closed = $account_pending = null;
 
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['username'])) { // If a session already exists, the user is taken to the dashboard.
   header('Location: admin/dashboard');
 } elseif (isset($_POST['login'])) {
   $email = mysqli_real_escape_string($conn, $_POST['email']);
-  $password = mysqli_real_escape_string($conn, $_POST['password']);
-  if (!empty($email) && !empty($password)) { // If the email and password fields are NOT empty, run the following script.
-    $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_array($result);
+  $plain_pass = mysqli_real_escape_string($conn, $_POST['password']);
 
-    if (mysqli_num_rows($result) > 0) {
+  if (!empty($email) && !empty($plain_pass)) { // If the email and password fields are NOT empty, run the following script.
+    // Fetching the hashed password from the database using the email
+    // address provided by the user input.
+    $query = "SELECT * FROM `users` WHERE `email` = '$email' LIMIT 1";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    $hash = $row['password']; // The hashed password retrieved from the database
+    // is stored inside the '$hash' variable.
+
+    $verify = password_verify($plain_pass, $hash); // Checking to see if the password entered
+    // matches the hashed password in the database.
+
+    if ($verify == true) {
       if ($row['status'] == "active") {
         $_SESSION['username'] = $email;
         header('Location: admin/dashboard');
+      } if ($row['status'] == "pending") {
+        $account_pending = "<div class='alert alert-warning text-white'>Sorry! Your account is pending, please try again later.</div>";
       } if ($row['status'] == "suspended") {
         $suspended_err = "<div class='alert alert-danger'>Your account has been suspended. For more information please contact us at 513-318-5632.</div>";
       } if ($row['status'] == "closed") {
         $account_closed = "<div class='alert alert-danger'>As per your request, this account is scheduled to be deleted. For assistance call 513-318-5632.</div>";
-      } if ($row['status'] == "pending") {
-        $account_pending = "<div class='alert alert-warning text-white'>Sorry! Your account is pending, please try again later.</div>";
       }
     } else {
-      $invalid_credentials = "<div class='alert alert-warning text-white'>Invalid login credentials.</div>";
+      $invalid_credentials = "<div class='alert alert-danger'>Invalid credentials, please try again!</div>";
     }
+
   } else {
-    $empty_error = "<div class='alert alert-warning text-white'>All fields are required.</div>";
+    $empty_error = "<div class='alert alert-warning'>All fields are required, please try again!</div>";
   }
+
 }
 ?>
 <!doctype html>
@@ -78,6 +88,13 @@ if (isset($_SESSION['username'])) {
           <?php echo $suspended_err; ?>
           <?php echo $account_closed; ?>
           <?php echo $account_pending; ?>
+
+          <?php
+            if(isset($_SESSION['success'])&&$_SESSION['success']){
+              echo "<div class=\"alert alert-success\">{$_SESSION['success']}</div>";
+              unset($_SESSION['success']);
+            }
+          ?>
           <!-- Form -->
           <form method="POST" autocomplete="off">
 

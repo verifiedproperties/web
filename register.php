@@ -6,6 +6,7 @@
 $dba = "Verified";
 $pagename = "Join";
 include 'db.php';
+session_start();
 
 $empty_error = $email_registered = $first_name = $last_name = $email = $password = null;
 
@@ -14,22 +15,24 @@ if (isset($_POST['register'])) {
   $first_name = $_POST['fname'];
   $last_name = $_POST['lname'];
   $email = $_POST['email'];
-  $password = $_POST['password'];
+  $plain_password = $_POST['password'];
+  $hash = password_hash($plain_password, PASSWORD_DEFAULT); // The hash of the password that can be stored in the database.
   $email_check = mysqli_query($conn, "SELECT id FROM users WHERE email = '".$email."'"); // Checks to see if the email provided is already in the database
 
   // Checking for results
   if (mysqli_num_rows($email_check) > 0) {
     $email_registered = "<small class='text-danger'>The email address provided is already in use.</small>";
   } else { // If the email provided is not registered, proceed with the INSERT by first checking to see if all fields were filled out.
-    if (!empty($first_name) && !empty($last_name) && !empty($email) && !empty($password)) {
+    if (!empty($first_name) && !empty($last_name) && !empty($email) && !empty($plain_password)) {
       $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
-      $stmt->bind_param("ssss", $first_name, $last_name, $email, $password);
+      $stmt->bind_param("ssss", $first_name, $last_name, $email, $hash);
       $result = $stmt->execute();
 
       if (!$result) { // If the code above failed to execute, this script will run.
         echo("Unable to create account: " . mysqli_error($conn));
       } else { // Else, if the registration was successful.. The user will be taken to the login page with a success message.
-        header('Location: login?signup=success');
+        $_SESSION['success'] = "Your account has been created!";
+        header('Location: login');
       }
     } else { // Display error message if any of the required fields are missing an input.
       $empty_error = "<p class='text-warning'>All fields are required.</p>";
