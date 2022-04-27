@@ -22,14 +22,16 @@ if (isset($_POST['create-order'])) {
   $zip = $_POST['zip'];
   $county = $_POST['county'];
   $country = $_POST['country'];
+  $owner = $_POST['owner_name'];
   $start_date = $_POST['start_date'];
   $due_date = $_POST['due_date'];
   $instructions = $_POST['instructions'];
   $client_name = $_POST['client_name'];
+  $con = $_POST['con'];
   $service = $_POST['service'];
   if (!empty($street_address) && !empty($city) && !empty($state) && !empty($zip) && !empty($client_name) && !empty($due_date) && !empty($service)) {
-    $stmt = $conn->prepare("INSERT INTO `work-orders` (client_name, street_address, secondary_address, city, state, zip, county, country, start_date, due_date, instructions, service) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-    $stmt->bind_param('ssssssssssss', $client_name, $street_address, $secondary_address, $city, $state, $zip, $county, $country, $start_date, $due_date, $instructions, $service);
+    $stmt = $conn->prepare("INSERT INTO `work-orders` (client_name, con, street_address, secondary_address, city, state, zip, county, country, owner, start_date, due_date, instructions, service) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $stmt->bind_param('ssssssssssssss', $client_name, $con, $street_address, $secondary_address, $city, $state, $zip, $county, $country, $owner, $start_date, $due_date, $instructions, $service);
     $result = $stmt->execute();
 
     if (false == $result) {
@@ -218,11 +220,19 @@ function initMap() {
               <label class="form-label">Country*</label>
               <input type="text" class="form-control" name="country" id="country">
             </div>
+            <div class="col-12">
+              <label class="form-label">Owner's name</label>
+              <input type="text" class="form-control" name="owner_name" placeholder="Owner's name">
+            </div>
             <div class="col-6">
               <label class="form-label">Client name*</label>
               <input type="text" class="form-control" name="client_name" placeholder="Type the client's name">
             </div>
             <div class="col-6">
+              <label class="form-label">Client order number</label>
+              <input type="text" name="con" class="form-control" placeholder="Client order number">
+            </div>
+            <div class="col-12">
               <label class="form-label">Service*</label>
               <select class="form-select" name="service">
                 <option value="Interior/Exterior">Interior/Exterior</option>
