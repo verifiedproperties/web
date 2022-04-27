@@ -30,8 +30,13 @@ if (isset($_SESSION['username'])) { // If a session already exists, the user is 
 
     if ($verify == true) {
       if ($row['status'] == "active") {
-        $_SESSION['username'] = $email;
-        header('Location: admin/dashboard');
+        if ($row['role'] == '1') {
+          $_SESSION['username'] = $email;
+          header('Location: admin/dashboard');
+        } elseif ($row['role'] == '2') {
+          $_SESSION['username'] = $email;
+          header('Location: client/index');
+        }
       } if ($row['status'] == "pending") {
         $account_pending = "<div class='alert alert-warning text-white'>Sorry! Your account is pending, please try again later.</div>";
       } if ($row['status'] == "suspended") {
