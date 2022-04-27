@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 27, 2022 at 05:02 PM
+-- Generation Time: Apr 27, 2022 at 11:30 PM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 
@@ -49,8 +49,16 @@ CREATE TABLE `users` (
   `dob` date DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `joined` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` varchar(45) NOT NULL DEFAULT 'pending'
+  `status` varchar(45) NOT NULL DEFAULT 'pending',
+  `role` varchar(45) NOT NULL DEFAULT '2'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `phone`, `dob`, `password`, `joined`, `status`, `role`) VALUES
+(1, 'Richard', 'Rodgers', 'richard@verifiedproperties.com', NULL, NULL, '$2y$10$u3BwdIbyVkg.vLoghHXuFONmtPsn4MyJHXX6/Xqv3IjgYk/B0SE5m', '2022-04-27 18:21:10', 'active', '2');
 
 -- --------------------------------------------------------
 
@@ -120,7 +128,7 @@ ALTER TABLE `attachments`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `work-orders`
