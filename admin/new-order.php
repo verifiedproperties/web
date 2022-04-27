@@ -29,9 +29,10 @@ if (isset($_POST['create-order'])) {
   $client_name = $_POST['client_name'];
   $con = $_POST['con'];
   $service = $_POST['service'];
+  $access_code = $_POST['access_code'];
   if (!empty($street_address) && !empty($city) && !empty($state) && !empty($zip) && !empty($client_name) && !empty($due_date) && !empty($service)) {
-    $stmt = $conn->prepare("INSERT INTO `work-orders` (client_name, con, street_address, secondary_address, city, state, zip, county, country, owner, start_date, due_date, instructions, service) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $stmt->bind_param('ssssssssssssss', $client_name, $con, $street_address, $secondary_address, $city, $state, $zip, $county, $country, $owner, $start_date, $due_date, $instructions, $service);
+    $stmt = $conn->prepare("INSERT INTO `work-orders` (client_name, con, street_address, secondary_address, city, state, zip, county, country, owner, start_date, due_date, instructions, service, access_code) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $stmt->bind_param('sssssssssssssss', $client_name, $con, $street_address, $secondary_address, $city, $state, $zip, $county, $country, $owner, $start_date, $due_date, $instructions, $service, $access_code);
     $result = $stmt->execute();
 
     if (false == $result) {
@@ -232,7 +233,7 @@ function initMap() {
               <label class="form-label">Client order number</label>
               <input type="text" name="con" class="form-control" placeholder="Client order number">
             </div>
-            <div class="col-12">
+            <div class="col-6">
               <label class="form-label">Service*</label>
               <select class="form-select" name="service">
                 <option value="Interior/Exterior">Interior/Exterior</option>
@@ -241,6 +242,10 @@ function initMap() {
                 <option value="No Contact">No Contact</option>
                 <option value="Vehicle Inspection">Vehicle Inspection</option>
               </select>
+            </div>
+            <div class="col-6">
+              <label class="form-label">Access code</label>
+              <input type="text" class="form-control" name="access_code">
             </div>
             <div class="col-6">
               <label class="form-label">Start date</label>
