@@ -1,6 +1,6 @@
 ## API Guide
 ### Authentication
-- Login
+- Login  
 	**URL:** /api/auth/login.php  
 	**Method:** GET  
 	```json
@@ -10,7 +10,7 @@
     }
     ```
 
-- Register
+- Register  
     **URL:** /api/auth/register.php  
     **Method:** POST  
     ```json
@@ -25,11 +25,11 @@
 ------------
 
 ### Work Orders
-- Get all work orders
+- Get all work orders  
  **URL**: /api/work_orders/all.php  
  **Method**: GET  
  
-- Get specify work order
- **URL**: /api/work_orders/single.php/?id=1
+- Get specify work order  
+ **URL**: /api/work_orders/single.php/?id=1  
  **Method**: GET
  
