@@ -4,23 +4,23 @@
 	**URL:** /api/auth/login.php
 	**Method:** GET
 	```json
-{
+    {
     "email": "devleeqiang@gmail.com",
     "password" : "Slack0206!"
-}
-```
+    }
+    ```
 
 - Register
-**URL: ** /api/auth/register.php
-**Method: **POST
-```json
-{
-    "first_name" : "James",
-    "last_name" : "Paris",
-    "email" : "james@site.com",
-    "password" : "123456"
-}
-```
+    **URL:** /api/auth/register.php
+    **Method:** POST
+    ```json
+    {
+        "first_name" : "James",
+        "last_name" : "Paris",
+        "email" : "james@site.com",
+        "password" : "123456"
+    }
+    ```
 
 ------------
 
