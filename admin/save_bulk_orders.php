@@ -21,6 +21,9 @@ include '../db.php';
 				  	$keys = [];
 					foreach ($getData as $key => $value) {
 						$value = str_replace(' ', '_', strtolower($value));
+						if($value == 'client_order_number'){
+							$value = 'con';
+						}
 						$keys[] = "`{$value}`";
 					}
 					$keys = implode(',', $keys);
