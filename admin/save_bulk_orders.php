@@ -20,6 +20,7 @@ include '../db.php';
 				if($i == 0){
 				  	$keys = [];
 					foreach ($getData as $key => $value) {
+						$value = str_replace(' ', '_', strtolower($value));
 						$keys[] = "`{$value}`";
 					}
 					$keys = implode(',', $keys);
