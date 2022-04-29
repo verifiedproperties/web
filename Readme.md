@@ -1,8 +1,8 @@
 ## API Guide
 ### Authentication
 - Login
-	**URL:** /api/auth/login.php
-	**Method:** GET
+	**URL:** /api/auth/login.php  
+	**Method:** GET  
 	```json
     {
     "email": "devleeqiang@gmail.com",
@@ -11,8 +11,8 @@
     ```
 
 - Register
-    **URL:** /api/auth/register.php
-    **Method:** POST
+    **URL:** /api/auth/register.php  
+    **Method:** POST  
     ```json
     {
         "first_name" : "James",
@@ -26,8 +26,8 @@
 
 ### Work Orders
 - Get all work orders
- **URL**: /api/work_orders/all.php
- **Method**: GET
+ **URL**: /api/work_orders/all.php  
+ **Method**: GET  
  
 - Get specify work order
  **URL**: /api/work_orders/single.php/?id=1
