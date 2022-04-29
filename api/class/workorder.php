@@ -37,7 +37,7 @@
             return $rows;
         }
         // CREATE
-        public function createEmployee(){
+        public function createWorkorder(){
             $sqlQuery = "INSERT INTO
                         ". $this->db_table ."
                     SET
@@ -65,12 +65,9 @@
         
             // sanitize
             $this->client_name=htmlspecialchars(strip_tags($this->client_name));
-           
         
             // bind data
             $stmt->bindParam(":client_name", $this->client_name);
-     
-        
             if($stmt->execute()){
                return true;
             }
@@ -123,7 +120,7 @@
             return false;
         }
         // DELETE
-        function deleteEmployee(){
+        function deleteWorkorder(){
             $sqlQuery = "DELETE FROM " . $this->db_table . " WHERE id = ?";
             $stmt = $this->conn->prepare($sqlQuery);
         
