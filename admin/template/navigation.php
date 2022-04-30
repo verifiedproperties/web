@@ -102,7 +102,7 @@
       <!-- Navigation -->
       <ul class="navbar-nav mb-md-4">
         <li class="nav-item">
-          <a class="nav-link " href="./docs/changelog.html">
+          <a class="nav-link " href="assets/import-template.csv">
             <i class="fe fe-download"></i> Import Template
           </a>
         </li>
