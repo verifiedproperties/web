@@ -3,14 +3,14 @@
 // Date Created:   4/12/2022
 // Developer: Richard Rodgers
 // ==========================================
-$pagename = "Open";
-$pageheader = "Available Orders";
-include 'template/head.php';
+include '../db.php';
 session_start();
 if (!isset($_SESSION['username'])) {
   header('Location: ../login');
 }
-include '../db.php';
+include 'template/head.php';
+$pagename = "Open";
+$pageheader = "Available Orders";
 
 $emptyFields = $order_canceled = null;
 

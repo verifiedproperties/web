@@ -3,14 +3,14 @@
 // Date Created:   3/25/2022
 // Developer: Richard Rodgers
 // ==========================================
-$pagename = "Dashboard";
-$pageheader = null;
-include 'template/head.php';
 include '../db.php';
 session_start();
 if (!isset($_SESSION['username'])) {
   header('Location: ../login');
 }
+include 'template/head.php';
+$pagename = "Dashboard";
+$pageheader = null;
 
 // Getting count of open orders
 $sql = "SELECT `id` FROM `work-orders` WHERE `status` = 'open'";

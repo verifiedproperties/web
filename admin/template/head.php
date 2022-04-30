@@ -1,5 +1,7 @@
 <?php
 $dba = "Verified";
+include 'assets/functions.php';
+roleCheck($conn);
 ?>
 
 <!DOCTYPE html>

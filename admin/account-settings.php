@@ -3,14 +3,15 @@
 // Date Created:   4/3//2022
 // Developer: Richard Rodgers
 // ==========================================
-$pagename = "Account Settings";
-$pageheader = "Create a new order";
-include 'template/head.php';
+include '../db.php';
 session_start();
 if (!isset($_SESSION['username'])) {
   header('Location: ../login');
 }
-include '../db.php';
+include 'template/head.php';
+$pagename = "Account Settings";
+$pageheader = "Create a new order";
+
 $password_err = $emptyFields = $changes_saved = null;
 $username = $_SESSION['username']; // Assigning the logged in user's username to a variable
 

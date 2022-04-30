@@ -3,14 +3,14 @@
 // Date Created:   3/27/2022
 // Developer: Richard Rodgers
 // ==========================================
-$pagename = "New Order";
-$pageheader = "Create a new order";
-include 'template/head.php';
+include '../db.php';
 session_start();
 if (!isset($_SESSION['username'])) {
   header('Location: ../login');
 }
-include '../db.php';
+include 'template/head.php';
+$pagename = "New Order";
+$pageheader = "Create a new order";
 
 $emptyFields = $query_error = null;
 

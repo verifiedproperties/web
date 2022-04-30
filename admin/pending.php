@@ -3,14 +3,14 @@
 // Date Created:   4/12/2022
 // Developer: Richard Rodgers
 // ==========================================
-$pagename = "Pending";
-$pageheader = "Create a new order";
-include 'template/head.php';
+include '../db.php';
 session_start();
 if (!isset($_SESSION['username'])) {
   header('Location: ../login');
 }
-include '../db.php';
+include 'template/head.php';
+$pagename = "Pending";
+$pageheader = "Create a new order";
 
 $emptyFields = $order_approved = $order_rejected = null;
 

@@ -3,14 +3,14 @@
 // Date Created:   0/0//0000
 // Developer: Richard Rodgers
 // ==========================================
-$pagename = "Blank";
-$pageheader = "Create a new order";
-include 'template/head.php';
+include '../db.php';
 session_start();
 if (!isset($_SESSION['username'])) {
   header('Location: ../login');
 }
-include '../db.php';
+include 'template/head.php';
+$pagename = "Blank";
+$pageheader = "Create a new order";
 
 $emptyFields = null;
 ?>
