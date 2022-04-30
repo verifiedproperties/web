@@ -8,9 +8,9 @@ session_start();
 if (!isset($_SESSION['username'])) {
   header('Location: ../login');
 }
-include 'template/head.php';
 $pagename = "Open";
 $pageheader = "Available Orders";
+include 'template/head.php';
 
 $emptyFields = $order_canceled = null;
 

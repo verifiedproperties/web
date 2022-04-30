@@ -8,9 +8,9 @@ session_start();
 if (!isset($_SESSION['username'])) {
   header('Location: ../login');
 }
-include 'template/head.php';
 $pagename = "Dashboard";
 $pageheader = null;
+include 'template/head.php';
 
 // Getting count of open orders
 $sql = "SELECT `id` FROM `work-orders` WHERE `status` = 'open'";

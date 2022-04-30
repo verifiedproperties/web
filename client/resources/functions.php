@@ -1,6 +1,6 @@
 <?php
 // ==========================================
-// Date Created:   4/30//2022
+// Date Created:   4/30/2022
 // Developer: Richard Rodgers
 // ==========================================
 
@@ -25,9 +25,4 @@ function roleCheck($conn) {
     header('Location: ../404');
   }
 
-}
-
-// Sets a null value to all varibles in new-order.php
-function nullValues() {
-  $street_address = null;
 }

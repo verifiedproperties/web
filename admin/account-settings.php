@@ -8,9 +8,9 @@ session_start();
 if (!isset($_SESSION['username'])) {
   header('Location: ../login');
 }
-include 'template/head.php';
 $pagename = "Account Settings";
 $pageheader = "Create a new order";
+include 'template/head.php';
 
 $password_err = $emptyFields = $changes_saved = null;
 $username = $_SESSION['username']; // Assigning the logged in user's username to a variable

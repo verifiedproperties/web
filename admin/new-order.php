@@ -8,11 +8,11 @@ session_start();
 if (!isset($_SESSION['username'])) {
   header('Location: ../login');
 }
-include 'template/head.php';
 $pagename = "New Order";
 $pageheader = "Create a new order";
+include 'template/head.php';
 
-$emptyFields = $query_error = null;
+nullValues();
 
 if (isset($_POST['create-order'])) {
   $street_address = $_POST['street_address'];
@@ -195,7 +195,7 @@ function initMap() {
             <div class="col-12">
               <label class="form-label"><img class="sb-title-icon" src="https://fonts.gstatic.com/s/i/googlematerialicons/location_pin/v5/24px.svg" alt="">Address*</label>
               <small class="form-text text-muted">You must choose a selection from Google Maps.</small>
-              <input type="text" name="street_address" id="location" class="form-control" autocomplete="off" required>
+              <input type="text" name="street_address" id="location" class="form-control" autocomplete="off" value="<?php echo $street_address; ?>" required>
             </div>
             <div class="col-12">
               <label class="form-label">Apt, suite or unit number</label>
