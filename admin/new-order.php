@@ -12,7 +12,8 @@ $pagename = "New Order";
 $pageheader = "Create a new order";
 include 'template/head.php';
 
-nullValues();
+$street_address = $query_error = $secondary_address = $city = $state = $zip = $county = $country = $owner = $start_date =
+$due_date = $instructions = $client_name = $con = $service = $access_code = $emptyFields = null;
 
 if (isset($_POST['create-order'])) {
   $street_address = $_POST['street_address'];
@@ -159,7 +160,7 @@ function initMap() {
 }
 </script>
 <?php include 'template/offcanvas.php'; ?>
-<?php include 'template/navigation.php'; ?>
+<?php //include 'template/navigation.php'; ?>
 
   <!-- MAIN CONTENT -->
   <div class="main-content">
@@ -199,39 +200,39 @@ function initMap() {
             </div>
             <div class="col-12">
               <label class="form-label">Apt, suite or unit number</label>
-              <input type="text" class="form-control" name="secondary_address" placeholder="Unit 23">
+              <input type="text" class="form-control" name="secondary_address" placeholder="Unit 23" value="<?php echo $secondary_address; ?>">
             </div>
             <div class="col-6">
               <label class="form-label">City*</label>
-              <input type="text" class="form-control" name="city" id="locality">
+              <input type="text" class="form-control" name="city" id="locality" value="<?php echo $city; ?>">
             </div>
             <div class="col-6">
               <label class="form-label">State*</label>
-              <input type="text" class="form-control" name="state" id="administrative_area_level_1">
+              <input type="text" class="form-control" name="state" id="administrative_area_level_1" value="<?php echo $state ?>">
             </div>
             <div class="col-6">
               <label class="form-label">Zip*</label>
-              <input type="text" class="form-control" name="zip" id="postal_code">
+              <input type="text" class="form-control" name="zip" id="postal_code" value="<?php echo $zip; ?>">
             </div>
             <div class="col-6">
               <label class="form-label">County*</label>
-              <input type="text" class="form-control" name="county" id="county">
+              <input type="text" class="form-control" name="county" id="county" value="<?php echo $county; ?>">
             </div>
             <div hidden class="col-12">
               <label class="form-label">Country*</label>
-              <input type="text" class="form-control" name="country" id="country">
+              <input type="text" class="form-control" name="country" id="country" value="<?php echo $country; ?>">
             </div>
             <div class="col-12">
               <label class="form-label">Owner's name</label>
-              <input type="text" class="form-control" name="owner_name" placeholder="Owner's name">
+              <input type="text" class="form-control" name="owner_name" placeholder="Owner's name" value="<?php echo $owner; ?>">
             </div>
             <div class="col-6">
               <label class="form-label">Client name*</label>
-              <input type="text" class="form-control" name="client_name" placeholder="Type the client's name">
+              <input type="text" class="form-control" name="client_name" placeholder="Type the client's name" value="<?php echo $client_name; ?>">
             </div>
             <div class="col-6">
               <label class="form-label">Client order number</label>
-              <input type="text" name="con" class="form-control" placeholder="Client order number">
+              <input type="text" name="con" class="form-control" placeholder="Client order number" value="<?php echo $con; ?>">
             </div>
             <div class="col-6">
               <label class="form-label">Service*</label>
@@ -245,20 +246,20 @@ function initMap() {
             </div>
             <div class="col-6">
               <label class="form-label">Access code</label>
-              <input type="text" class="form-control" name="access_code">
+              <input type="text" class="form-control" name="access_code" value="<?php echo $access_code; ?>">
             </div>
             <div class="col-6">
               <label class="form-label">Start date</label>
-              <input type="text" class="form-control" name="start_date" placeholder="Select a start date" data-flatpickr>
+              <input type="text" class="form-control" name="start_date" placeholder="Select a start date" value="<?php echo $start_date; ?>" data-flatpickr>
             </div>
             <div class="col-6">
               <label class="form-label">Due date*</label>
-              <input type="text" class="form-control" name="due_date" placeholder="Select due date" data-flatpickr>
+              <input type="text" class="form-control" name="due_date" placeholder="Select due date" value="<?php echo $due_date; ?>" data-flatpickr>
             </div>
             <div class="col-12">
               <label class="form-label">Instructions</label>
               <small class="form-text text-muted">You can use this field to provide additional details reguarding your order.</small>
-              <textarea name="instructions" class="form-control" rows="5" cols="80"></textarea>
+              <textarea name="instructions" class="form-control" rows="5" cols="80"><?php echo $instructions; ?></textarea>
             </div>
             <div class="col-12">
               <label class="form-label">Attachments</label>
