@@ -5,4 +5,6 @@
 // ==========================================
 session_start();
 session_destroy();
+session_start();
+$_SESSION['loggedout'] = "You've been logged out!";
 header('Location: login');
