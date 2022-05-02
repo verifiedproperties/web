@@ -10,9 +10,23 @@ $pagename = "Sign In";
 include 'db.php';
 $invalid_credentials = $empty_error = $email = $password = $suspended_err = $account_closed = $account_pending = null;
 
-if (isset($_SESSION['username'])) { // If a session already exists, the user is taken to the dashboard.
-  header('Location: admin/dashboard');
-} elseif (isset($_POST['login'])) {
+
+// The following script will check for an existing session, if it already exits, the script will also check for the current user role
+// and send the user to it's rightful place.
+if (isset($_SESSION['username'])) { // Run the rollowing script if SESSION already exists.
+  $username = $_SESSION['username'];
+  $sql = "SELECT `role` FROM `users` WHERE `email` = '".$username."' LIMIT 1";
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+  foreach ($row as $user) {
+    if ($user['role'] == "1") { // If user role is 'Admin', they shall be taken to the admin dashboard.
+      header('Location: admin/dashboard');
+    } elseif ($user['role'] == "2") { // Else if the user role is 'Client', obsiously they will be taken to the client interface.
+      header('Location: client/index');
+    }
+  }
+} elseif (isset($_POST['login'])) { // Run this script if session does not exist.
   $email = mysqli_real_escape_string($conn, $_POST['email']);
   $plain_pass = mysqli_real_escape_string($conn, $_POST['password']);
 
