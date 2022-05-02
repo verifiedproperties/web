@@ -37,42 +37,7 @@
             return $rows;
         }
         // CREATE
-        public function createWorkorder(){
-            $sqlQuery = "INSERT INTO
-                        ". $this->db_table ."
-                    SET
-                        client_name = :client_name, 
-                        street_address = :street_address, 
-                        secondary_address = :secondary_address, 
-                        city = :city, 
-                        state = :state, 
-                        zip = :zip, 
-                        country = :country, 
-                        owner = :owner, 
-                        start_date = :start_date, 
-                        due_date = :due_date, 
-                        instructions = :instructions, 
-                        status = :status, 
-                        service = :service, 
-                        date_created = :date_created, 
-                        assignee = :assignee, 
-                        approved_by = :approved_by, 
-                        date_completed = :date_completed, 
-                        date_approved = :date_approved, 
-                        access_code = :access_code";
         
-            $stmt = $this->conn->prepare($sqlQuery);
-        
-            // sanitize
-            $this->client_name=htmlspecialchars(strip_tags($this->client_name));
-        
-            // bind data
-            $stmt->bindParam(":client_name", $this->client_name);
-            if($stmt->execute()){
-               return true;
-            }
-            return false;
-        }
         // READ single
         public function getWorkorder($id){
             $sql = "SELECT `work-orders`.*, users.first_name, users.last_name FROM `work-orders` LEFT JOIN users ON `work-orders`.assignee = users.id WHERE `work-orders`.id = $id";
@@ -81,44 +46,7 @@
             return $rows;       
         }        
         // UPDATE
-        public function updateEmployee(){
-            $sqlQuery = "UPDATE
-                        ". $this->db_table ."
-                    SET
-                        client_name = :client_name, 
-                        street_address = :street_address, 
-                        secondary_address = :secondary_address, 
-                        city = :city, 
-                        state = :state, 
-                        zip = :zip, 
-                        country = :country, 
-                        owner = :owner, 
-                        start_date = :start_date, 
-                        due_date = :due_date, 
-                        instructions = :instructions, 
-                        status = :status, 
-                        service = :service, 
-                        date_created = :date_created, 
-                        assignee = :assignee, 
-                        approved_by = :approved_by, 
-                        date_completed = :date_completed, 
-                        date_approved = :date_approved, 
-                        access_code = :access_code
-                    WHERE 
-                        id = :id";
-        
-            $stmt = $this->conn->prepare($sqlQuery);
-        
-            $this->client_name=htmlspecialchars(strip_tags($this->client_name));
-        
-            // bind data
-            $stmt->bindParam(":client_name", $this->client_name);
-        
-            if($stmt->execute()){
-               return true;
-            }
-            return false;
-        }
+         
         // DELETE
         function deleteWorkorder(){
             $sqlQuery = "DELETE FROM " . $this->db_table . " WHERE id = ?";

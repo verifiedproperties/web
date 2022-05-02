@@ -15,10 +15,9 @@
     
     $data = json_decode(file_get_contents("php://input"));
     
-    $item->id = $data->id;
-    
-    if($item->deleteEmployee()){
-        echo json_encode("Employee deleted.");
+    $item->id = $data->id;    
+    if($item->deleteWorkorder()){
+        echo json_encode("Work Order deleted.");
     } else{
         echo json_encode("Data could not be deleted");
     }

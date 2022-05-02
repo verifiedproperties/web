@@ -5,7 +5,7 @@
     header("Access-Control-Max-Age: 3600");
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     include_once '../config/database.php';
-    include_once '../class/employees.php';
+    include_once '../class/workorder.php';
     $database = new Database();
     $db = $database->getConnection();
     $item = new Employee($db);
@@ -16,7 +16,7 @@
     $item->designation = $data->designation;
     $item->created = date('Y-m-d H:i:s');
     
-    if($item->createEmployee()){
+    if($item->createWorkorder()){
         echo 'Employee created successfully.';
     } else{
         echo 'Employee could not be created.';
