@@ -25,23 +25,23 @@
 ------------
 
 ### Work Orders
-- Get all work orders  
+- Get all work orders (Admin)  
     **URL**: /api/work_orders/all.php  
     **Method**: GET  
 
-- Get work orders by Status  
+- Get work orders by Status (Admin)  
     **URL**: /api/work_orders/status.php/?status='open'  
     **Method**: GET  
 
-- Get work orders by Assignee    
+- Get work orders by Assignee (Assignee)     
     **URL**: /api/work_orders/assignee.php/?assignee=3  
     **Method**: GET  
 
-- Get specify work order  
+- Get specify work order (Admin)  
     **URL**: /api/work_orders/single.php/?id=1  
     **Method**: GET  
 
-- Create order  
+- Create order (Admin)  
     **URL:** /api/work_orders/create.php  
     **Method:** POST  
     ```json
@@ -64,7 +64,7 @@
     "assignee" : 3
     }
     ```
-- Update order  
+- Update order (Admin)  
     **URL:** /api/work_orders/update.php  
     **Method:** POST  
     ```json
@@ -89,14 +89,14 @@
     }
     ```
    
-- Delete specify work order  
+- Delete specify work order (Admin)  
     **URL**: /api/work_orders/delete.php/?id=3  
     **Method**: GET  
 
 ------------
 
 ### Users
-- User settings update  
+- User settings update (All users)  
     **URL**: /api/users/settings.php  
     **Method**: POST  
     ```json
@@ -109,7 +109,7 @@
         "dob" : "1992-09-02"
     }
     ```
-- User password change  
+- User password change (All Users)  
     **URL**: /api/users/change_password.php  
     **Method**: POST  
     ```json
@@ -120,7 +120,7 @@
     }
     ```
 
-- User status change  
+- User status change (Admin)  
     **URL**: /api/users/status.php  
     **Method**: POST  
     ```json

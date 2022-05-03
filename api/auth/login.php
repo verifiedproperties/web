@@ -48,7 +48,8 @@ if (!empty($email) && !empty($password)) {
                     "id" => $row['id'],
                     "firstname" => $row['first_name'],
                     "lastname" => $row['last_name'],
-                    "email" => $row['email']
+                    "email" => $row['email'],
+                    "role" => $row['role']
             ));
 
             http_response_code(200);
