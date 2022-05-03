@@ -114,6 +114,12 @@ if (isset($_SESSION['username'])) { // Run the rollowing script if SESSION alrea
               unset($_SESSION['success']);
             }
           ?>
+          <?php
+            if(isset($_SESSION['loggedout'])&&$_SESSION['loggedout']){
+              echo "<div class=\"alert alert-success\">{$_SESSION['loggedout']}</div>";
+              unset($_SESSION['loggedout']);
+            }
+          ?>
           <!-- Form -->
           <form method="POST" autocomplete="off">
 
