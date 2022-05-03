@@ -62,7 +62,7 @@
     }
     ```
 - User password change
-    **URL**: /api/users/change_password.php 
+    **URL**: /api/users/change_password.php  
     **Method**: POST  
     ```json
     {
@@ -73,7 +73,7 @@
     ```
 
 - User status change
-    **URL**: /api/users/status.php 
+    **URL**: /api/users/status.php  
     **Method**: POST  
     ```json
     {
