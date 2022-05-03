@@ -44,9 +44,15 @@
             $result = mysqli_query($this->conn, $sql);
             $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
             return $rows;       
-        }        
-        // UPDATE
-         
+        }      
+
+        // Get orders by Status
+        public function getStatusorders($status){
+            $sql = "SELECT `work-orders`.*, users.first_name, users.last_name FROM `work-orders` LEFT JOIN users ON `work-orders`.assignee = users.id WHERE `work-orders`.status = $status";
+            $result = mysqli_query($this->conn, $sql);
+            $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            return $rows;       
+        }            
         // DELETE
         function deleteWorkorder(){
             $sqlQuery = "DELETE FROM " . $this->db_table . " WHERE id = ?";
@@ -54,7 +60,7 @@
         
             $this->id=htmlspecialchars(strip_tags($this->id));
         
-            $stmt->bindParam(1, $this->id);
+            $stmt->bind_param(1, $this->id);
         
             if($stmt->execute()){
                 return true;
