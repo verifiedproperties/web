@@ -27,38 +27,26 @@
                 
                 $user_id = json_encode($decoded->data->id);
                 // Access is granted. Add code of the operation here 
-                $checkadmin = new Permission($db);
-                
-                $row =  $checkadmin->checkAdmin($user_id);
-                if($row == 1){
-                    $data = json_decode(file_get_contents("php://input"));
+                $user_id = filter_var($user_id, FILTER_SANITIZE_NUMBER_INT);
+                $item = new Workorder($db);
+                $assignee = isset($_GET['assignee']) ? $_GET['assignee'] : die();
 
-                    $id = $data->user_id;
-                    $status = $data->status;
+                if($assignee == $user_id){
                     
-                    if (!empty($id) && !empty($status)) {
-                        $stmt = $db->prepare("UPDATE users SET status = ? WHERE id = ?");
-                        $stmt->bind_param("ss", $status, $id);
-                        $result = $stmt->execute();
-                    
-                        if (false == $result) {
-                            http_response_code(400);
-                            echo json_encode(array("message" => "Unable to change user status."));
-                        } else {
-                            
-                            http_response_code(200);
-                            echo json_encode(array("message" => "User status is changed to ".$status." successfully!"));
+                    $rows = $item->getAssigneeorders($assignee);
 
-                        }
-                    } else {
-                        http_response_code(400);
-                        echo json_encode(array("message" => "Something is missing!"));
+                    if($rows){
+                        echo json_encode($rows);
+                    }else{
+                        http_response_code(404);
+                        echo json_encode(
+                            array("message" => "No record found.")
+                        );
                     }
-
                 }else{
                     http_response_code(401);
                     echo json_encode(array(
-                        "message" => "Access denied. Only Admin can do this action."
+                        "message" => "Access denied. You can access only your orders."
                     )); 
                 }
         
@@ -76,6 +64,6 @@
         echo json_encode(array(
             "message" => "Access denied."
         ));
-    }  
-   
+    }
+    
 ?>
