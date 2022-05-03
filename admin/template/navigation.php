@@ -62,6 +62,11 @@
             <i class="fe fe-feather"></i> Work Orders
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="network">
+            <i class="fe fe-users"></i> Network Members
+          </a>
+        </li>
         <a class="nav-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
           <i class="fe fe-headphones"></i> Support
         </a>
