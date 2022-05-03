@@ -249,7 +249,7 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
                     <!-- Image -->
                     <a href="profile-posts.html" class="avatar avatar-xl card-avatar">
-                      <img src="assets/img/default-profile-photo.png" class="avatar-img rounded-circle" alt="...">
+                      <img src="assets/img/default-profile-photo.svg" class="avatar-img rounded-circle" alt="...">
                     </a>
 
                     <!-- Body -->
