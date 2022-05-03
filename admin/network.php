@@ -13,7 +13,7 @@ $pageheader = "Network Members";
 include 'template/head.php';
 
 // Fetching all active users from datbase
-$sql = "SELECT first_name, last_name, email, phone FROM `users` WHERE `status` = 'active' ORDER BY `id` DESC";
+$sql = "SELECT first_name, last_name, email, phone FROM `users` WHERE `status` = 'active' AND `role` = '0' ORDER BY `id` DESC";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
