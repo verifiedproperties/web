@@ -9,8 +9,8 @@
     $database = new Database();
     $db = $database->getConnection();
     $item = new Workorder($db);
-    $status = isset($_GET['status']) ? $_GET['status'] : die();
-     $rows = $item->getStatusorders($status);
+    $assignee = isset($_GET['assignee']) ? $_GET['assignee'] : die();
+     $rows = $item->getAssigneeorders($assignee);
 
     if($rows){
         echo json_encode($rows);

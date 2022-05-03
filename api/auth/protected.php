@@ -26,7 +26,7 @@ $arr = explode(" ", $authHeader);
 ));*/
 
 $jwt = $arr[1];
-
+ 
 if($jwt){
     try {
         $decoded = JWT::decode($jwt, $secret_key, array('HS256'));

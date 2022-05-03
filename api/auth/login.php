@@ -36,8 +36,8 @@ if (!empty($email) && !empty($password)) {
             $issuer_claim = "localhost"; // this can be the servername
             $audience_claim = "127.0.0.1";
             $issuedat_claim = time(); // issued at
-            $notbefore_claim = $issuedat_claim + 10; //not before in seconds
-            $expire_claim = $issuedat_claim + 60; // expire time in seconds
+            $notbefore_claim = $issuedat_claim + 300; //not before in seconds
+            $expire_claim = $issuedat_claim + 600; // expire time in seconds
             $token = array(
                 "iss" => $issuer_claim,
                 "aud" => $audience_claim,
