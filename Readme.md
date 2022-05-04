@@ -2,7 +2,7 @@
 ### Authentication
 - Login  
 	**URL:** /api/auth/login.php  
-	**Method:** GET  
+	**Method:** POST    
 	```json
     {
     "email": "devleeqiang@gmail.com",
