@@ -31,10 +31,8 @@
                 
                 $row =  $checkadmin->checkAdmin($user_id);
                 if($row == 1){
-                    $data = json_decode(file_get_contents("php://input"));
-
-                    $id = $data->user_id;
-                    $status = $data->status;
+                    $id = isset($_POST['user_id']) ? $_POST['user_id'] : die();;
+                    $status = isset($_POST['status']) ? $_POST['status'] : die();;
                     
                     if (!empty($id) && !empty($status)) {
                         $stmt = $db->prepare("UPDATE users SET status = ? WHERE id = ?");
@@ -48,7 +46,6 @@
                             
                             http_response_code(200);
                             echo json_encode(array("message" => "User status is changed to ".$status." successfully!"));
-
                         }
                     } else {
                         http_response_code(400);

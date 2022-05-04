@@ -61,7 +61,18 @@
     "con" : "1234567890",
     "service" : "Software development",
     "access_code" : "1234560",
-    "assignee" : 3
+    "assignee" : 3,
+    "files[]" : "*file upload here"
+    }
+    ```
+
+- Attached File uploads only (Admin)  
+    **URL:** /api/work_orders/attachedment.php  
+    **Method:** POST  
+    ```json
+    {
+    "files[]" : "*file upload here",
+    "workorder_id" : "8",
     }
     ```
 - Update order (Admin)  

@@ -15,14 +15,16 @@ $password = '';
 $database = new Database();
 $conn = $database->getConnection();
 
-$data = json_decode(file_get_contents("php://input"));
+// $data = json_decode(file_get_contents("php://input"));
+// $email = $data->email;
+// $password = $data->password;
 
-$email = $data->email;
-$password = $data->password;
+$email = isset($_POST['email']) ? $_POST['email'] : die();
+$password = isset($_POST['password']) ? $_POST['password'] : die();
+
 $table_name = 'users';
 
 if (!empty($email) && !empty($password)) { 
-
     $query = "SELECT * FROM `users` WHERE `email` = '$email' LIMIT 1";
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);

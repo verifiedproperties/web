@@ -7,7 +7,7 @@
     use \Firebase\JWT\JWT;
     use Firebase\JWT\Key;
     \Firebase\JWT\JWT::$leeway = 600;
-    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Origin: POST");
     header("Content-Type: application/json; charset=UTF-8");
     header("Access-Control-Allow-Methods: *");
     header("Access-Control-Max-Age: 3600");
@@ -16,11 +16,9 @@
     $database = new Database();
     $db = $database->getConnection();
  
-    $data = json_decode(file_get_contents("php://input"));
-
-    $id = $data->user_id;
-    $password = $data->password;
-    $confirm_password = $data->confirm_password;
+    $id = isset($_POST['user_id']) ? $_POST['user_id'] : die();;
+    $password = isset($_POST['password']) ? $_POST['password'] : die();;
+    $confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : die();;
     
     $headers = getallheaders();
     if(array_key_exists("Authorization",$headers)){

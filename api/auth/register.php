@@ -16,12 +16,11 @@ $conn = null;
 $database = new Database();
 $conn = $database->getConnection();
 
-$data = json_decode(file_get_contents("php://input"));
  
-$first_name = $data->first_name;
-$last_name = $data->last_name;
-$email = $data->email;
-$password = $data->password;
+$first_name = isset($_POST['first_name']) ? $_POST['first_name'] : die();;
+$last_name = isset($_POST['last_name']) ? $_POST['last_name'] : die();;
+$email = isset($_POST['email']) ? $_POST['email'] : die();;
+$password = isset($_POST['password']) ? $_POST['password'] : die();;
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 $table_name = 'users';
 $email_check = mysqli_query($conn, "SELECT id FROM users WHERE email = '".$email."'"); // Checks to see if the email provided is already in the database

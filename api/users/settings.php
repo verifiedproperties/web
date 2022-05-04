@@ -16,14 +16,12 @@
     $database = new Database();
     $db = $database->getConnection();
  
-    $data = json_decode(file_get_contents("php://input"));
-
-    $id = $data->user_id;
-    $first_name = $data->first_name;
-    $last_name = $data->last_name;
-    $email = $data->email;
-    $phone_number = $data->phone_number;
-    $dob = $data->dob;
+    $id = isset($_POST['user_id']) ? $_POST['user_id'] : die();;
+    $first_name = isset($_POST['first_name']) ? $_POST['first_name'] : die();;
+    $last_name = isset($_POST['last_name']) ? $_POST['last_name'] : die();;
+    $email = isset($_POST['email']) ? $_POST['email'] : die();;
+    $phone_number = isset($_POST['phone_number']) ? $_POST['phone_number'] : die();;
+    $dob = isset($_POST['dob']) ? $_POST['dob'] : die();;
     
     $headers = getallheaders();
     if(array_key_exists("Authorization",$headers)){
