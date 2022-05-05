@@ -46,7 +46,7 @@ if (!empty($first_name) && !empty($last_name) && !empty($phone_number) && !empty
 }
 
 // Fetching user profile
-$query = "SELECT * FROM users WHERE email = '$username'";
+$query = "SELECT * FROM users WHERE email = '$username' LIMIT 1";
 $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
