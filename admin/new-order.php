@@ -14,7 +14,7 @@ $pageheader = "Create a new order";
 include 'template/head.php';
 
 $street_address = $query_error = $secondary_address = $city = $state = $zip = $county = $country = $owner = $start_date =
-$due_date = $instructions = $client_name = $con = $service = $access_code = $emptyFields = null;
+$due_date = $instructions = $client_name = $con = $service = $access_code = null;
 
 if (isset($_POST['create-order'])) {
   $street_address = $_POST['street_address'];
@@ -90,7 +90,7 @@ if (isset($_POST['create-order'])) {
       ob_end_flush();
     }
   } else {
-    $emptyFields = "Something is missing! When typing address, make sure to select one of the suggested addresses by Google.";
+    $_SESSION['emptyFields'] = "<div class='alert alert-warning text-white'>One or more required fields are empty, please try again!</div>";
   }
 }
 ?>
@@ -192,9 +192,16 @@ function initMap() {
             </div>
           </div>
           <form class="row g-3" action="" method="post" enctype="multipart/form-data">
+            <!-- Errors -->
             <div class="col-12">
-              <p class="text-danger"><?php echo $emptyFields; ?></p>
+              <?php
+                if (isset($_SESSION['emptyFields'])) {
+                  echo $_SESSION['emptyFields'];
+                  unset($_SESSION['emptyFields']);
+                }
+              ?>
             </div>
+            <!-- End errors -->
             <div class="col-12">
               <label class="form-label"><img class="sb-title-icon" src="https://fonts.gstatic.com/s/i/googlematerialicons/location_pin/v5/24px.svg" alt="">Address*</label>
               <small class="form-text text-muted">You must choose a selection from Google Maps.</small>
