@@ -111,18 +111,20 @@ if (isset($_POST['close-account'])) {
         <form method="post">
           <!-- Errors -->
           <div class="row">
-            <?php
-            if (isset($_SESSION['changes-saved'])) {
-              echo $_SESSION['changes-saved'];
-              unset($_SESSION['changes-saved']);
-            } if (isset($_SESSION['emptyFields'])) {
-              echo $_SESSION['emptyFields'];
-              unset($_SESSION['emptyFields']);
-            } if (isset($_SESSION['password_err'])) {
-              echo $_SESSION['password_err'];
-              unset($_SESSION['password_err']);
-            }
-            ?>
+            <div class="col-12">
+              <?php
+              if (isset($_SESSION['changes-saved'])) {
+                echo $_SESSION['changes-saved'];
+                unset($_SESSION['changes-saved']);
+              } if (isset($_SESSION['emptyFields'])) {
+                echo $_SESSION['emptyFields'];
+                unset($_SESSION['emptyFields']);
+              } if (isset($_SESSION['password_err'])) {
+                echo $_SESSION['password_err'];
+                unset($_SESSION['password_err']);
+              }
+              ?>
+            </div>
           </div>
           <div class="row">
             <div class="col-6 col-md-6">
