@@ -1,4 +1,5 @@
 <?php
+ob_start();
 // ==========================================
 // Date Created:   4/3//2022
 // Developer: Richard Rodgers
@@ -14,7 +15,7 @@ if (isset($_POST['submitt'])) {
   $fname = $_POST['fname'];
 
   header('Location: dashboard', true, 302);
-  exit();
+  ob_end_flush();
 }
 
 ?>
