@@ -17,10 +17,12 @@
     $db = $database->getConnection();
 
     $headers = getallheaders();
+ 
+ 
     if(array_key_exists("Authorization",$headers)){
         $arr = explode(" ", $headers["Authorization"]);
         $jwt = $arr[1];
-        
+      
         if($jwt){
             try {
                 $decoded = JWT::decode($jwt, new Key($secret_key, 'HS256'));
