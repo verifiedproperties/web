@@ -2,6 +2,8 @@ RewriteEngine On
 Redirect /index.html /login
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 
 #Alternate default index page
 DirectoryIndex login.php
