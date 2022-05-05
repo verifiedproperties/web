@@ -58,7 +58,6 @@ if (isset($_POST['close-account'])) {
   if (!$result) {
     echo("Unable to close account: " . mysqli_error($conn));
   } else {
-    $_SESSION['account-closed'] = "As per your request, this account is scheduled to be deleted. For assistance call 513-433-1133."
     header('Location: ../logout.php');
   }
 }
