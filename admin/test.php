@@ -13,7 +13,7 @@ include 'template/head.php';
 if (isset($_POST['submitt'])) {
   $fname = $_POST['fname'];
 
-  header('Location: dashboard');
+  header('Location: dashboard', true, 302);
   exit();
 }
 
