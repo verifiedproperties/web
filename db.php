@@ -7,7 +7,7 @@
 // Database credentials
 $server = "localhost";
 $dbusername = "root";
-$dbpassword = "";
+$dbpassword = "root";
 $dbname = "verified";
 
 // Creating connection

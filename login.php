@@ -23,7 +23,7 @@ if (isset($_SESSION['username'])) { // Run the rollowing script if SESSION alrea
     if ($user['role'] == "1") { // If user role is 'Admin', they shall be taken to the admin dashboard.
       header('Location: admin/dashboard');
     } elseif ($user['role'] == "2") { // Else if the user role is 'Client', obsiously they will be taken to the client interface.
-      header('Location: client/index');
+      header('Location: users/index');
     }
   }
 } elseif (isset($_POST['login'])) { // Run this script if session does not exist.
