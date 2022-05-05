@@ -1,4 +1,5 @@
 <?php
+ob_start();
 // ==========================================
 // Date Created:   3/27/2022
 // Developer: Richard Rodgers
@@ -86,6 +87,7 @@ if (isset($_POST['create-order'])) {
       }
       $_SESSION['success'] = "Your order has been created!".$attachments_error;
       header('Location: open-orders');
+      ob_end_flush();
     }
   } else {
     $emptyFields = "Something is missing! When typing address, make sure to select one of the suggested addresses by Google.";
