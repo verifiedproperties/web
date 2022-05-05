@@ -58,7 +58,8 @@ if (isset($_POST['close-account'])) {
   if (!$result) {
     echo("Unable to close account: " . mysqli_error($conn));
   } else {
-    header('Location: ../logout.php');
+    header('Location: ../logout.php', true, 301);
+    exit();
   }
 }
 ?>
