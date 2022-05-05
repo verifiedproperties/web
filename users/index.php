@@ -21,5 +21,5 @@ if ($role['role'] != '2') {
   header('Location: ../login');
 }
 
-echo "<h1>Welcome to the Client Area! Your role id is: </h1>", $role['role'];
+echo "<h1>Welcome to the User interface Your role id is: </h1>", $role['role'];
 echo "<br><a href='../logout.php'>Logout</a>";
