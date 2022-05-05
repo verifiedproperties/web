@@ -49,7 +49,7 @@ if (isset($_SESSION['username'])) { // Run the rollowing script if SESSION alrea
           header('Location: admin/dashboard');
         } elseif ($row['role'] == '2') {
           $_SESSION['username'] = $email;
-          header('Location: client/index');
+          header('Location: users/index');
         }
       } if ($row['status'] == "pending") {
         $account_pending = "<div class='alert alert-warning text-white'>Sorry! Your account is pending, please try again later.</div>";
