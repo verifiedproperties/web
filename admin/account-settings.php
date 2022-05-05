@@ -13,7 +13,6 @@ $pagename = "Account Settings";
 $pageheader = "Create a new order";
 include 'template/head.php';
 
-$password_err = $emptyFields = $changes_saved = null;
 $username = $_SESSION['username']; // Assigning the logged in user's username to a variable
 
 // Updating user profile
@@ -35,14 +34,14 @@ if (!empty($first_name) && !empty($last_name) && !empty($phone_number) && !empty
     if (!$result) {
       echo("Unable to save changes: " . mysqli_error($conn));
     } else {
-      $changes_saved = "<div class='alert alert-success'>Changes saved!</div>";
+      $_SESSION['changes-saved'] = "<div class='alert alert-success'>Changes saved!</div>";
     }
   } else {
-    $password_err = "<div class='alert alert-danger'>Your passwords don't match.</div>";
+    $_SESSION['password_err'] = "<div class='alert alert-danger'>Your passwords don't match.</div>";
   }
 
 } else {
-  echo "All fields are required!";
+  $_SESSION['emptyFields'] = "<div class='alert alert-warning text-white'>All fields are required!</div>";
   }
 }
 
@@ -70,10 +69,6 @@ if (isset($_POST['close-account'])) {
 
 <!-- MAIN CONTENT -->
 <div class="main-content">
-
-
-
-
   <div class="container-fluid">
     <div class="row justify-content-center">
       <div class="col-12 col-lg-10 col-xl-8">
@@ -114,9 +109,21 @@ if (isset($_POST['close-account'])) {
         <!-- Form -->
         <?php foreach ($row as $detail) {?>
         <form method="post">
-          <?php echo $changes_saved; ?>
-          <?php echo $password_err; ?>
-
+          <!-- Errors -->
+          <div class="row">
+            <?php
+            if (isset($_SESSION['changes-saved'])) {
+              echo $_SESSION['changes-saved'];
+              unset($_SESSION['changes-saved']);
+            } if (isset($_SESSION['emptyFields'])) {
+              echo $_SESSION['emptyFields'];
+              unset($_SESSION['emptyFields']);
+            } if (isset($_SESSION['password_err'])) {
+              echo $_SESSION['password_err'];
+              unset($_SESSION['password_err']);
+            }
+            ?>
+          </div>
           <div class="row">
             <div class="col-6 col-md-6">
 
