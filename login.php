@@ -54,7 +54,7 @@ if (isset($_SESSION['username'])) { // Run the rollowing script if SESSION alrea
       } if ($row['status'] == "pending") {
         $account_pending = "<div class='alert alert-warning text-white'>Sorry! Your account is pending, please try again later.</div>";
       } if ($row['status'] == "suspended") {
-        $suspended_err = "<div class='alert alert-danger'>Your account has been suspended. For more information please contact us at 513-318-5632.</div>";
+        $suspended_err = "<div class='alert alert-danger'>Your account has been suspended. For more information please contact us at 513-433-1133.</div>";
       } if ($row['status'] == "closed") {
         $account_closed = "<div class='alert alert-danger'>As per your request, this account is scheduled to be deleted. For assistance call 513-318-5632.</div>";
       }
