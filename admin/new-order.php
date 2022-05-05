@@ -272,6 +272,9 @@ function initMap() {
             <div class="col-12 pb-5">
               <button type="submit" class="btn btn-primary w-100" name="create-order">Create order</button>
             </div>
+            <div class="col-12 mb-4 text-center">
+              <a href="open-orders">Cancel</a>
+            </div>
           </form>
         </div>
       </div>
