@@ -1,4 +1,5 @@
 <?php
+ob_start()
 // ==========================================
 // Date Created:   4/3//2022
 // Developer: Richard Rodgers
@@ -58,8 +59,8 @@ if (isset($_POST['close-account'])) {
   if (!$result) {
     echo("Unable to close account: " . mysqli_error($conn));
   } else {
-    header('Location: ../logout.php', true, 301);
-    exit();
+    header('Location: ../logout.php');
+    ob_end_flush();
   }
 }
 ?>
