@@ -93,7 +93,7 @@ if ($result = mysqli_query($conn, $pending_accounts)) {
         <div class="col-12">
           <?php
             if ($accounts_pending >= 1) {
-              echo "<div class='alert alert-warning text-white'><i class='fe fe-users'></i> There are <a href='pending-accounts' class='text-white'>$accounts_pending</a> account(s) pending activation!</div>";
+              echo "<a href='pending-accounts'><div class='alert alert-warning text-white'><i class='fe fe-users'></i> There are $accounts_pending account(s) pending activation!</div></a>";
             }
           ?>
         </div>
