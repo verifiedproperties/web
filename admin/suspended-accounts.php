@@ -12,8 +12,19 @@ $pagename = "Network";
 $pageheader = "Suspended Members";
 include 'template/head.php';
 
+// Reinstating suspended account
+if (isset($_POST['reinstate-account'])) {
+  $userid = $_POST['userid'];
+  $name = $_POST['name'];
+  $sql = "UPDATE `users` SET `status` = 'active' WHERE `id` = '$userid'";
+  if ($result = mysqli_query($conn, $sql)) {
+    $_SESSION['account-reinstated'] = "<div class='alert alert-success'>The account belonging to $name has been reinstated.</div>";
+    header('Location: suspended-accounts');
+  }
+}
+
 // Fetching pending accounts (users) only.
-$sql = "SELECT first_name, last_name, email, phone FROM `users` WHERE `status` = 'suspended' AND `role` = '2' ORDER BY `id` DESC";
+$sql = "SELECT id, first_name, last_name, email, phone FROM `users` WHERE `status` = 'suspended' AND `role` = '2' ORDER BY `id` DESC";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
@@ -76,7 +87,16 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
             </div>
           </div>
         </div>
-
+        <div class="row">
+          <div class="col-12">
+            <?php
+              if (isset($_SESSION['account-reinstated'])) {
+                echo $_SESSION['account-reinstated'];
+                unset($_SESSION['account-reinstated']);
+              }
+            ?>
+          </div>
+        </div>
         <!-- Contact Cards -->
         <div class="row">
           <!-- Cards -->
@@ -230,15 +250,11 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                             <i class="fe fe-more-vertical"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-end">
-                            <a href="#!" class="dropdown-item">
-                              Action
-                            </a>
-                            <a href="#!" class="dropdown-item">
-                              Another action
-                            </a>
-                            <a href="#!" class="dropdown-item">
-                              Something else here
-                            </a>
+                            <form method="post">
+                              <input type="text" name="name" value="<?php echo $user['first_name'], " ", $user['last_name']; ?>">
+                              <input type="text" name="userid" value="<?php echo $user['id']; ?>">
+                              <button type="submit" class="dropdown-item" name="reinstate-account">Reinstate Account</button>
+                            </form>
                           </div>
                         </div>
 
