@@ -18,7 +18,7 @@ if (isset($_POST['suspend-account'])) {
   $name = $_POST['name'];
   $query = "UPDATE `users` SET `status` = 'suspended' WHERE `id` = '$userid'";
   if ($result = mysqli_query($conn, $query)) {
-    $_SESSION['user-suspended'] = "<div class='alert alert-success'>Your suspended $name from the platform.</div>";
+    $_SESSION['user-suspended'] = "<div class='alert alert-success'>You suspended $name from the platform.</div>";
     header('Location: network');
   }
 }
