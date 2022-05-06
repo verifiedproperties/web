@@ -289,11 +289,6 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                         <a class="item-name" href="profile-posts.html"><?php echo $user['first_name'], " ", $user['last_name']; ?></a>
                       </h2>
 
-                      <!-- Text -->
-                      <p class="small text-muted mb-3">
-                        <span class="item-title">Designer</span> at <span class="item-company">Verified</span>
-                      </p>
-
                       <!-- Buttons -->
                       <div class="btn-group">
                         <a class="btn btn-sm btn-white" href="<?php echo "tel:", $user['phone']; ?>">
