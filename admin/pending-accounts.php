@@ -253,7 +253,7 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                             <form method="post">
                               <input type="hidden" name="name" value="<?php echo $user['first_name'], " ", $user['last_name']; ?>">
                               <input type="hidden" name="userid" value="<?php echo $user['id']; ?>">
-                              <button type="submit" name="approve">Approve</button>
+                              <button type="submit" class="dropdown-item" name="approve">Approve</button>
                             </form>
                           </div>
                         </div>
