@@ -20,7 +20,6 @@ if (isset($_POST['suspend-account'])) {
   if ($result = mysqli_query($conn, $query)) {
     $_SESSION['user-suspended'] = "<div class='alert alert-success'>Your suspended $name from the platform.</div>";
     header('Location: network');
-    die();
   }
 }
 
@@ -32,7 +31,6 @@ if (isset($_POST['delete-account'])) {
   if ($result = mysqli_query($conn, $query)) {
     $_SESSION['account-deleted'] = "<div class='alert alert-danger'>You deleted $name's account. This action cannot be undone.</div>";
     header('Location: network');
-    die();
   }
 }
 
