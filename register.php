@@ -1,7 +1,7 @@
 <?php
 // ==========================================
 // Date Created:   3/24/2022
-// Developer: Richard Rodgerss
+// Developer: Richard Rodgers
 // ==========================================
 $dba = "Verified";
 $pagename = "Join";
