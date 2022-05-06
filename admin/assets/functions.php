@@ -65,7 +65,7 @@ function PendingUsers($conn) {
 
 // Getting total count of open orders
 function OpenOrders($conn) {
-  $sql = "SELECT `id` FROM `work-orders` WHERE `status` = 'open'";
+  $sql = "SELECT `id` FROM `work-orders` WHERE `status` = 'open' AND `status` = 'rejected'";
   if ($result = mysqli_query($conn, $sql)) {
     // Assigns total count of open orders to the 'TotalOpenOrders' varibale.
     $TotalOpenOrders = mysqli_num_rows($result);
