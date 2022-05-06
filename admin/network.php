@@ -322,22 +322,6 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                           </div>
                         </div> <!-- / .row -->
                       </div>
-                      <div class="list-group-item">
-                        <div class="row">
-                          <div class="col">
-
-                            <!-- Text -->
-                            <small>Score</small>
-
-                          </div>
-                          <div class="col-auto">
-
-                            <!-- Badge -->
-                            <span class="item-score badge bg-danger-soft">1/10</span>
-
-                          </div>
-                        </div> <!-- / .row -->
-                      </div>
                     </div>
 
                   </div>
