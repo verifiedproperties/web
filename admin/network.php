@@ -12,7 +12,32 @@ $pagename = "Network";
 $pageheader = "Active Members";
 include 'template/head.php';
 
-$sql = "SELECT first_name, last_name, email, phone FROM `users` WHERE `status` = 'active' AND `role` = '2' ORDER BY `id` DESC";
+// The following script will suspend the user
+if (isset($_POST['suspend-account'])) {
+  $userid = $_POST['userid'];
+  $name = $_POST['name'];
+  $query = "UPDATE `users` SET `status` = 'suspended' WHERE `id` = '$userid'";
+  if ($result = mysqli_query($conn, $query)) {
+    $_SESSION['user-suspended'] = "<div class='alert alert-success'>Your suspended $name from the platform.</div>";
+    header('Location: network');
+    die();
+  }
+}
+
+// Delete account
+if (isset($_POST['delete-account'])) {
+  $userid = $_POST['userid'];
+  $name = $_POST['name'];
+  $query = "DELETE FROM `users` WHERE `id` = '$userid'";
+  if ($result = mysqli_query($conn, $query)) {
+    $_SESSION['account-deleted'] = "<div class='alert alert-danger'>You deleted $name's account. This action cannot be undone.</div>";
+    header('Location: network');
+    die();
+  }
+}
+
+// Fetching active users from database
+$sql = "SELECT id, first_name, last_name, email, phone FROM `users` WHERE `status` = 'active' AND `role` = '2' ORDER BY `id` DESC";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
@@ -70,9 +95,21 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     </a>
                   </li>
                 </ul>
-
               </div>
             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <?php
+              if (isset($_SESSION['user-suspended'])) {
+                echo $_SESSION['user-suspended'];
+                unset($_SESSION['user-suspended']);
+              } if (isset($_SESSION['account-deleted'])) {
+                echo $_SESSION['account-deleted'];
+                unset($_SESSION['account-deleted']);
+              }
+            ?>
           </div>
         </div>
 
@@ -229,15 +266,12 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                             <i class="fe fe-more-vertical"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-end">
-                            <a href="#!" class="dropdown-item">
-                              Action
-                            </a>
-                            <a href="#!" class="dropdown-item">
-                              Another action
-                            </a>
-                            <a href="#!" class="dropdown-item">
-                              Something else here
-                            </a>
+                            <form method="post">
+                              <input type="hidden" name="userid" value="<?php echo $user['id']; ?>">
+                              <input type="hidden" name="name" value="<?php echo $user['first_name'], " ", $user['last_name']; ?>">
+                              <button type="submit" class="dropdown-item" name="suspend-account">Suspend</button>
+                              <button type="submit" class="dropdown-item" name="delete-account">Delete Account</button>
+                            </form>
                           </div>
                         </div>
 
