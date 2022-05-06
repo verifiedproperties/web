@@ -12,27 +12,6 @@ $pagename = "Dashboard";
 $pageheader = null;
 include 'template/head.php';
 
-// Getting total count of pending pending orders
-$pending = "SELECT `id` FROM `work-orders` WHERE `status` = 'pending'";
-if ($result = mysqli_query($conn, $pending)) {
-  // Getting total count of pending orders
-  $pending_orders = mysqli_num_rows($result);
-}
-
-// Getting total count of completed orders
-$completed = "SELECT `id` FROM `work-orders` WHERE `status` = 'approved'";
-if ($result = mysqli_query($conn, $completed)) {
-  // Assigns count to the 'completed_orders' variable
-  $completed_orders = mysqli_num_rows($result);
-}
-
-// Getting total count of 'rejected' orders
-$rejected = "SELECT `id` FROM `work-orders` WHERE `status` = 'rejected'";
-if ($result = mysqli_query($conn, $rejected)) {
-  // Assigns count to the 'under_review_orders' variable
-  $rejected_orders = mysqli_num_rows($result);
-}
-
 // Getting total count of "pending" accounts
 $pending_accounts = "SELECT `id` FROM `users` WHERE `status` = 'pending'";
 if ($result = mysqli_query($conn, $pending_accounts)) {
