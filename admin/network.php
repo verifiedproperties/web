@@ -44,13 +44,6 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 </h1>
 
               </div>
-              <div class="col-auto">
-                <!-- Buttons -->
-                <a href="#!" class="btn btn-primary ms-2">
-                  Add User
-                </a>
-
-              </div>
             </div> <!-- / .row -->
             <div class="row align-items-center">
               <div class="col">
