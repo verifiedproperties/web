@@ -12,8 +12,19 @@ $pagename = "Network";
 $pageheader = "Pending Members";
 include 'template/head.php';
 
+// Approving pending registrations
+if (isset($_POST['approve'])) {
+  $name = $_POST['name'];
+  $userid = $_POST['userid'];
+  $sql = "UPDATE `users` SET `status` = 'active' WHERE `id` = '$userid'";
+  if ($result = mysqli_query($conn, $sql)) {
+    $_SESSION['account-approved'] = "<div class='alert alert-success'>The account for $name has been approved.</div>";
+    header('Location: pending-accounts');
+  }
+}
+
 // Fetching pending accounts (users) only.
-$sql = "SELECT first_name, last_name, email, phone FROM `users` WHERE `status` = 'pending' AND `role` = '2' ORDER BY `id` DESC";
+$sql = "SELECT id, first_name, last_name, email, phone FROM `users` WHERE `status` = 'pending' AND `role` = '2' ORDER BY `id` DESC";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
@@ -76,7 +87,16 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
             </div>
           </div>
         </div>
-
+        <div class="row">
+          <div class="col-12">
+            <?php
+              if (isset($_SESSION['account-approved'])) {
+                echo $_SESSION['account-approved'];
+                unset($_SESSION['account-approved']);
+              }
+            ?>
+          </div>
+        </div>
         <!-- Contact Cards -->
         <div class="row">
           <!-- Cards -->
@@ -230,15 +250,11 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                             <i class="fe fe-more-vertical"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-end">
-                            <a href="#!" class="dropdown-item">
-                              Action
-                            </a>
-                            <a href="#!" class="dropdown-item">
-                              Another action
-                            </a>
-                            <a href="#!" class="dropdown-item">
-                              Something else here
-                            </a>
+                            <form method="post">
+                              <input type="hidden" name="name" value="<?php echo $user['first_name'], " ", $user['last_name']; ?>">
+                              <input type="hidden" name="userid" value="<?php echo $user['id']; ?>">
+                              <button type="submit" name="approve">Approve</button>
+                            </form>
                           </div>
                         </div>
 
