@@ -101,7 +101,7 @@
 
       <!-- Heading -->
       <h6 class="navbar-heading">
-        Documentation
+        Verified Resources
       </h6>
 
       <!-- Navigation -->
