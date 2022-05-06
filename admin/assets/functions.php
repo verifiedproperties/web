@@ -63,12 +63,42 @@ function PendingUsers($conn) {
   }
 }
 
-// Getting total acount of open orders
+// Getting total count of open orders
 function OpenOrders($conn) {
   $sql = "SELECT `id` FROM `work-orders` WHERE `status` = 'open'";
   if ($result = mysqli_query($conn, $sql)) {
     // Assigns total count of open orders to the 'TotalOpenOrders' varibale.
     $TotalOpenOrders = mysqli_num_rows($result);
     echo $TotalOpenOrders;
+  }
+}
+
+// Getting total count of pending orders
+function PendingOrders($conn) {
+  $sql = "SELECT `id` FROM `work-orders` WHERE `status` = 'pending'";
+  if ($result = mysqli_query($conn, $sql)) {
+    // Assigns total count of pending orders to the 'TotalPendingOrders' varibale.
+    $TotalPendingOrders = mysqli_num_rows($result);
+    echo $TotalPendingOrders;
+  }
+}
+
+// Getting total count of rejected orders
+function RejectedOrders($conn) {
+  $sql = "SELECT `id` FROM `work-orders` WHERE `status` = 'rejected'";
+  if ($result = mysqli_query($conn, $sql)) {
+    // Assigns total count of rejected orders to the 'TotalRejectedOrders' varibale.
+    $TotalRejectedOrders = mysqli_num_rows($result);
+    echo $TotalRejectedOrders;
+  }
+}
+
+// Getting total count of completed orders
+function CompletedOrders($conn) {
+  $sql = "SELECT `id` FROM `work-orders` WHERE `status` = 'completed'";
+  if ($result = mysqli_query($conn, $sql)) {
+    // Assigns total count of completed orders to the 'TotalCompletedOrders' varibale.
+    $TotalCompletedOrders = mysqli_num_rows($result);
+    echo $TotalCompletedOrders;
   }
 }

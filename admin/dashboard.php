@@ -136,7 +136,7 @@ if ($result = mysqli_query($conn, $pending_accounts)) {
 
                   <!-- Heading -->
                   <span class="h2 mb-0">
-                    <?php echo $pending_orders; ?>
+                    <?php PendingOrders($conn); ?>
                   </span>
 
                 </div>
@@ -166,7 +166,7 @@ if ($result = mysqli_query($conn, $pending_accounts)) {
 
                   <!-- Heading -->
                   <span class="h2 mb-0">
-                    <?php echo $rejected_orders; ?>
+                    <?php RejectedOrders($conn); ?>
                   </span>
 
                 </div>
@@ -190,7 +190,7 @@ if ($result = mysqli_query($conn, $pending_accounts)) {
 
                   <!-- Heading -->
                   <span class="h2 mb-0">
-                    <?php echo $completed_orders; ?>
+                    <?php CompletedOrders($conn); ?>
                   </span>
 
                 </div>
