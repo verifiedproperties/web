@@ -53,8 +53,7 @@ if ($result = mysqli_query($conn, $completedquery)) {
 }
 
 // Fetching open orders
-// $sql = "SELECT * FROM `work-orders` WHERE status = 'open' ORDER BY date_created DESC";
-$sql = "SELECT `work-orders`.*, users.first_name, users.last_name FROM `work-orders` LEFT JOIN users ON `work-orders`.assignee = users.id WHERE `work-orders`.status = 'open' ORDER BY date_created DESC";
+$sql = "SELECT `work-orders`.*, users.first_name, users.last_name FROM `work-orders` LEFT JOIN users ON `work-orders`.assignee = users.id WHERE `work-orders`.status = 'open' OR `work-orders` .status = 'rejected' ORDER BY date_created DESC";
 $result = mysqli_query($conn, $sql);
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
