@@ -23,6 +23,17 @@ if (isset($_POST['approve'])) {
   }
 }
 
+// Rejecting registrations
+if (isset($_POST['reject'])) {
+  $name = $_POST['name'];
+  $userid = $_POST['userid'];
+  $sql = "UPDATE `users` SET `status` = 'rejected' WHERE `id` = '$userid'";
+  if ($result = mysqli_query($conn, $sql)) {
+    $_SESSION['account-rejected'] = "<div class='alert alert-warning text-white'>The account for $name has been rejected.</div>";
+    header('Location: pending-accounts');
+  }
+}
+
 // Fetching pending accounts (users) only.
 $sql = "SELECT id, first_name, last_name, email, phone FROM `users` WHERE `status` = 'pending' AND `role` = '2' ORDER BY `id` DESC";
 $result = mysqli_query($conn, $sql);
@@ -93,6 +104,9 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
               if (isset($_SESSION['account-approved'])) {
                 echo $_SESSION['account-approved'];
                 unset($_SESSION['account-approved']);
+              } if (isset($_SESSION['account-rejected'])) {
+                echo $_SESSION['account-rejected'];
+                unset($_SESSION['account-rejected']);
               }
             ?>
           </div>
@@ -254,6 +268,7 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                               <input type="hidden" name="name" value="<?php echo $user['first_name'], " ", $user['last_name']; ?>">
                               <input type="hidden" name="userid" value="<?php echo $user['id']; ?>">
                               <button type="submit" class="dropdown-item" name="approve">Approve</button>
+                              <button type="submit" class="dropdown-item" name="reject">Reject Registration</button>
                             </form>
                           </div>
                         </div>
