@@ -95,7 +95,7 @@ function RejectedOrders($conn) {
 
 // Getting total count of completed orders
 function CompletedOrders($conn) {
-  $sql = "SELECT `id` FROM `work-orders` WHERE `status` = 'completed'";
+  $sql = "SELECT `id` FROM `work-orders` WHERE `status` = 'approved'";
   if ($result = mysqli_query($conn, $sql)) {
     // Assigns total count of completed orders to the 'TotalCompletedOrders' varibale.
     $TotalCompletedOrders = mysqli_num_rows($result);
