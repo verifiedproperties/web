@@ -251,8 +251,8 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                           </a>
                           <div class="dropdown-menu dropdown-menu-end">
                             <form method="post">
-                              <input type="text" name="name" value="<?php echo $user['first_name'], " ", $user['last_name']; ?>">
-                              <input type="text" name="userid" value="<?php echo $user['id']; ?>">
+                              <input type="hidden" name="name" value="<?php echo $user['first_name'], " ", $user['last_name']; ?>">
+                              <input type="hidden" name="userid" value="<?php echo $user['id']; ?>">
                               <button type="submit" class="dropdown-item" name="reinstate-account">Reinstate Account</button>
                             </form>
                           </div>
