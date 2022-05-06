@@ -295,12 +295,14 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                       </p>
 
                       <!-- Buttons -->
-                      <a class="btn btn-sm btn-white" href="<?php echo "tel:", $user['phone']; ?>">
-                        <i class="fe fe-phone me-1"></i> Call
-                      </a>
-                      <a class="btn btn-sm btn-white" href="<?php echo "mailto:", $user['email']; ?>">
-                        <i class="fe fe-mail me-1"></i> Email
-                      </a>
+                      <div class="btn-group">
+                        <a class="btn btn-sm btn-white" href="<?php echo "tel:", $user['phone']; ?>">
+                          <i class="fe fe-phone me-1"></i> Call
+                        </a>
+                        <a class="btn btn-sm btn-white" href="<?php echo "mailto:", $user['email']; ?>">
+                          <i class="fe fe-mail me-1"></i> Email
+                        </a>
+                      </div>
 
                     </div>
 
