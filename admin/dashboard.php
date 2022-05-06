@@ -88,7 +88,7 @@ if ($result = mysqli_query($conn, $pending_accounts)) {
     </div> <!-- / .header -->
 
     <!-- CARDS -->
-    <div class="container-fluid">
+    <div class="container">
       <div class="row">
         <div class="col-12">
           <?php
