@@ -110,7 +110,7 @@ if ($result = mysqli_query($conn, $pending_accounts)) {
 
                   <!-- Title -->
                   <h6 class="text-uppercase text-muted mb-2">
-                    Pending acceptance
+                    Pending
                   </h6>
 
                   <!-- Heading -->
