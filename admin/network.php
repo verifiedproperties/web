@@ -267,8 +267,8 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                             <form method="post">
                               <input type="hidden" name="userid" value="<?php echo $user['id']; ?>">
                               <input type="hidden" name="name" value="<?php echo $user['first_name'], " ", $user['last_name']; ?>">
-                              <button type="submit" class="dropdown-item" name="suspend-account">Suspend</button>
-                              <button type="submit" class="dropdown-item" name="delete-account">Delete Account</button>
+                              <button type="submit" class="dropdown-item" name="suspend-account" onclick="return confirm('Are you sure?')">Suspend</button>
+                              <button type="submit" class="dropdown-item" name="delete-account" onclick="return confirm('Are you sure?')">Delete Account</button>
                             </form>
                           </div>
                         </div>
