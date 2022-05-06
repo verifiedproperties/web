@@ -239,7 +239,7 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <!-- Body -->
             <div class="list row">
               <?php foreach ($row as $user) { ?>
-              <div class="col-12 col-md-6 col-xl-4">
+              <div class="col-6 col-md-6 col-xl-4">
 
                 <!-- Card -->
                 <div class="card">
