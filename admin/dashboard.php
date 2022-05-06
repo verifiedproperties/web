@@ -12,13 +12,6 @@ $pagename = "Dashboard";
 $pageheader = null;
 include 'template/head.php';
 
-// Getting count of open orders
-$sql = "SELECT `id` FROM `work-orders` WHERE `status` = 'open'";
-if ($result = mysqli_query($conn, $sql)) {
-  // Return total count of open orders
-  $open_orders = mysqli_num_rows($result);
-}
-
 // Getting total count of pending pending orders
 $pending = "SELECT `id` FROM `work-orders` WHERE `status` = 'pending'";
 if ($result = mysqli_query($conn, $pending)) {
@@ -114,7 +107,7 @@ if ($result = mysqli_query($conn, $pending_accounts)) {
 
                   <!-- Heading -->
                   <span class="h2 mb-0">
-                    <?php echo $open_orders; ?>
+                    <?php OpenOrders($conn); ?>
                   </span>
                 </div>
                 <div class="col-auto">
