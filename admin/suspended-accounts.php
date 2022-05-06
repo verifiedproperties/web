@@ -9,10 +9,11 @@ if (!isset($_SESSION['username'])) {
   header('Location: ../login');
 }
 $pagename = "Network";
-$pageheader = "Active Members";
+$pageheader = "Suspended Members";
 include 'template/head.php';
 
-$sql = "SELECT first_name, last_name, email, phone FROM `users` WHERE `status` = 'active' AND `role` = '2' ORDER BY `id` DESC";
+// Fetching pending accounts (users) only.
+$sql = "SELECT first_name, last_name, email, phone FROM `users` WHERE `status` = 'suspended' AND `role` = '2' ORDER BY `id` DESC";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
@@ -50,7 +51,7 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <!-- Nav -->
                 <ul class="nav nav-tabs nav-overflow header-tabs">
                   <li class="nav-item">
-                    <a href="network" class="nav-link text-nowrap active">
+                    <a href="network" class="nav-link text-nowrap">
                       Active <span class="badge rounded-pill bg-secondary-soft"><?php ActiveUsers($conn); ?></span>
                     </a>
                   </li>
@@ -60,7 +61,7 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="suspended-accounts" class="nav-link text-nowrap">
+                    <a href="suspended-accounts" class="nav-link text-nowrap active">
                       Suspended <span class="badge rounded-pill bg-secondary-soft"><?php SuspendedUsers($conn); ?></span>
                     </a>
                   </li>

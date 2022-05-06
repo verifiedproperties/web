@@ -27,7 +27,38 @@ function roleCheck($conn) {
 
 }
 
-// Sets a null value to all varibles in new-order.php
-function nullValues() {
-  $street_address = null;
+// Getting total count of active accounts (users) only.
+function ActiveUsers($conn) {
+  $query = "SELECT `id` FROM `users` WHERE `role` = '2' AND `status` = 'active'";
+  if ($result = mysqli_query($conn, $query)) {
+    $TotalActiveUsers = mysqli_num_rows($result);
+    echo $TotalActiveUsers;
+  }
+}
+
+// Getting total count of inactive accounts (users) only.
+function InactiveUsers($conn) {
+  $query = "SELECT `id` FROM `users` WHERE `role` = '2' AND `status` = 'inactive'";
+  if ($result = mysqli_query($conn, $query)) {
+    $TotalInactiveUsers = mysqli_num_rows($result);
+    echo $TotalInactiveUsers;
+  }
+}
+
+// Getting Total count of suspended accounts (users) only.
+function SuspendedUsers($conn) {
+  $query = "SELECT `id` FROM `users` WHERE `role` = '2' AND `status` = 'suspended'";
+  if ($result = mysqli_query($conn, $query)) {
+    $TotalSuspendedUsers = mysqli_num_rows($result);
+    echo $TotalSuspendedUsers;
+  }
+}
+
+// Getting total count of pending accounts (users) only.
+function PendingUsers($conn) {
+  $query = "SELECT `id` FROM `users` WHERE `role` = '2' AND `status` = 'pending'";
+  if ($result = mysqli_query($conn, $query)) {
+    $TotalPendingUsers = mysqli_num_rows($result);
+    echo $TotalPendingUsers;
+  }
 }
