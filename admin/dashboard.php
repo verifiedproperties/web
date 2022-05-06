@@ -36,8 +36,15 @@ if ($result = mysqli_query($conn, $completed)) {
 // Getting total count of 'rejected' orders
 $rejected = "SELECT `id` FROM `work-orders` WHERE `status` = 'rejected'";
 if ($result = mysqli_query($conn, $rejected)) {
-  // Assigns count to the u'nder_review_orders' variable
+  // Assigns count to the 'under_review_orders' variable
   $rejected_orders = mysqli_num_rows($result);
+}
+
+// Getting total count of "pending" accounts
+$pending_accounts = "SELECT `id` FROM `users` WHERE `status` = 'pending'";
+if ($result = mysqli_query($conn, $pending_accounts)) {
+  // Assigns count to the '$accounts_pending' veriable
+  $accounts_pending = mysqli_num_rows($result);
 }
 
 ?>
@@ -82,6 +89,15 @@ if ($result = mysqli_query($conn, $rejected)) {
 
     <!-- CARDS -->
     <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <?php
+            if ($accounts_pending >= 1) {
+              echo "<div class='alert alert-warning text-white'><i class='fe fe-users'></i> There are <a href='/web/admin/network' class='text-white'>$accounts_pending</a> account(s) pending activation!</div>";
+            }
+          ?>
+        </div>
+      </div>
       <div class="row">
         <div class="col-6 col-lg-6 col-xl">
 
