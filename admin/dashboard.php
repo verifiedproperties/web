@@ -55,7 +55,7 @@ if ($result = mysqli_query($conn, $pending_accounts)) {
   <div class="main-content">
     <!-- HEADER -->
     <div class="header">
-      <div class="container-fluid">
+      <div class="container">
 
         <!-- Body -->
         <div class="header-body">
