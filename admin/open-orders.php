@@ -39,7 +39,7 @@ if ($result = mysqli_query($conn, $query)) {
 }
 
 // Getting total count of open orders
-$openquery = "SELECT `id` FROM `work-orders` WHERE `status` = 'open'";
+$openquery = "SELECT `id` FROM `work-orders` WHERE `status` = 'open' OR `status` = 'rejected'";
 if ($result = mysqli_query($conn, $openquery)) {
   // Assigns total number of pending orders to -> '$pending_orders' variable
   $open_orders = mysqli_num_rows($result);
