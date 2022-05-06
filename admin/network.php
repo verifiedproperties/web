@@ -317,7 +317,7 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                           <div class="col-auto">
 
                             <!-- Text -->
-                            <small>Butler County, Ohio</small>
+                            <small>Butler, OH</small>
 
                           </div>
                         </div> <!-- / .row -->
