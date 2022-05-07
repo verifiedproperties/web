@@ -62,6 +62,11 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="services">
+            <i class="fe fe-star"></i> Services
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="open-orders">
             <i class="fe fe-feather"></i> Work Orders
           </a>
