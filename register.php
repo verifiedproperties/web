@@ -51,7 +51,7 @@ if (isset($_POST['register'])) {
     <link rel="shortcut icon" href="admin/assets/favicon/favicon.svg" type="image/x-icon"
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="assets/theme.bundle.css" />
+    <link rel="stylesheet" href="assets/css/theme.bundle.css" />
 
     <!-- Title -->
     <title><?php echo $pagename, " - ", $dba; ?></title>
@@ -116,7 +116,7 @@ if (isset($_POST['register'])) {
         <div class="col-12 col-md-7 col-lg-6 col-xl-8 d-none d-lg-block">
 
           <!-- Image -->
-          <div class="bg-cover h-100 min-vh-100 mt-n1 me-n3" style="background-image: url(assets/img/auth-side-cover.jpg);"></div>
+          <div class="bg-cover h-100 min-vh-100 mt-n1 me-n3" style="background-image: url(assets/img/files/login-cover.jpg);"></div>
 
         </div>
       </div> <!-- / .row -->
