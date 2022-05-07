@@ -258,12 +258,20 @@ function initMap() {
               <input type="text" class="form-control" name="access_code" value="<?php echo $access_code; ?>">
             </div>
             <div class="col-6">
-              <label class="form-label">Start date</label>
-              <input type="text" class="form-control" name="start_date" placeholder="Select a start date" value="<?php echo $start_date; ?>" data-flatpickr>
+              <label class="form-label">Start date*</label>
+              <input type="text" class="form-control" name="start_date" placeholder="Choose start date" value="<?php if ($start_date == null) {
+                echo date("Y-m-d");
+              } else {
+                echo $start_date;
+              } ?>" data-flatpickr>
             </div>
             <div class="col-6">
               <label class="form-label">Due date*</label>
-              <input type="text" class="form-control" name="due_date" placeholder="Select due date" value="<?php echo $due_date; ?>" data-flatpickr>
+              <input type="text" class="form-control" name="due_date" placeholder="Select due date" value="<?php if ($due_date == null) {
+                echo date('Y-m-d', strtotime('+3 days'));
+              } else {
+                echo $due_date;
+              } ?>" data-flatpickr>
             </div>
             <div class="col-12">
               <label class="form-label">Instructions</label>
