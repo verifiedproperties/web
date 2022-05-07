@@ -27,7 +27,7 @@ if (isset($_POST['cancel-order'])) {
 }
 
 // Fetching users
-$usersquery = "SELECT * FROM users";
+$usersquery = "SELECT * FROM `users` WHERE `role` = '2'";
 $result = mysqli_query($conn, $usersquery);
 $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
