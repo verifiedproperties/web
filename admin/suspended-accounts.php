@@ -67,11 +67,6 @@ $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="inactive-accounts" class="nav-link text-nowrap">
-                      Inactive <span class="badge rounded-pill bg-secondary-soft"><?php InactiveUsers($conn); ?></span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
                     <a href="suspended-accounts" class="nav-link text-nowrap active">
                       Suspended <span class="badge rounded-pill bg-secondary-soft"><?php SuspendedUsers($conn); ?></span>
                     </a>
