@@ -57,13 +57,18 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="network">
+            <i class="fe fe-share-2"></i> Network
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="open-orders">
             <i class="fe fe-feather"></i> Work Orders
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="network">
-            <i class="fe fe-users"></i> Network Members
+          <a class="nav-link" href="staff">
+            <i class="fe fe-users"></i> Staff Members
           </a>
         </li>
         <a class="nav-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
