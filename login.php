@@ -76,7 +76,7 @@ if (isset($_SESSION['username'])) { // Run the rollowing script if SESSION alrea
     <meta name="description" content="Create and review orders by signing in." />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="admin/assets/favicon/favicon.svg" type="image/x-icon"
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="assets/theme.bundle.css" />

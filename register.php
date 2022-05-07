@@ -48,7 +48,7 @@ if (isset($_POST['register'])) {
     <meta name="description" content="Verified Properties Software" />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="admin/assets/favicon/favicon.svg" type="image/x-icon"
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="assets/theme.bundle.css" />
