@@ -61,11 +61,23 @@
             <i class="fe fe-share-2"></i> Network
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="services">
-            <i class="fe fe-star"></i> Services
-          </a>
-        </li>
+        <a class="nav-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+          <i class="fe fe-star"></i> Services
+        </a>
+        <div class="collapse " id="sidebarDashboards">
+          <ul class="nav nav-sm flex-column">
+            <li class="nav-item">
+              <a href="services" class="nav-link ">
+                Services
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="services-categories" class="nav-link ">
+                Categories
+              </a>
+            </li>
+          </ul>
+        </div>
         <li class="nav-item">
           <a class="nav-link" href="open-orders">
             <i class="fe fe-feather"></i> Work Orders
