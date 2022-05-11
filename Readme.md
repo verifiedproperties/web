@@ -30,7 +30,7 @@
     ```
  
 ### Login
-- URL: /api/auth/login.php   
+- URL: ```/api/auth/login.php```  
 - Method: POST  
     ```json
     {
