@@ -1,19 +1,26 @@
 ## API Guide
-### Authentication
-- Login  
-	**URL:** /api/auth/login.php  
-	**Method:** POST    
-	```json
-    {
-    "email": "devleeqiang@gmail.com",
-    "password" : "Slack0206!"
-    }
-    ```
 
-- Register  
-    **URL:** /api/auth/register.php  
-    **Method:** POST  
-    ```json
+### User APIs
+1. User can register (Done)
+2. User can login/logout (Done)
+3. User can reset password (Done)
+4. User can view all assigned orders (Done)
+5. User can view order details 
+6. User can take photos
+7. User can delete photos
+8. User can share photos
+9. User can complete order
+10. User can view order attachments
+11. User can leave comments before completing work order
+12. User can upload work orders
+13. User can update profile from the app
+14. User can view completed orders. (Date completed, date approved, full address, order type).
+
+
+### Register
+    - URL: /api/auth/login.php  
+    - Method: POST  
+    - ```json
     {
         "first_name" : "James",
         "last_name" : "Paris",
@@ -21,9 +28,16 @@
         "password" : "123456"
     }
     ```
-
-------------
-
+ 
+### Login
+    - URL: /api/auth/login.php   
+    - Method: POST  
+	- ```json
+    {
+    "email": "devleeqiang@gmail.com",
+    "password" : "Slack0206!"
+    }
+    ```
 ### Work Orders
 - Get all work orders (Admin)  
     **URL**: /api/work_orders/all.php  
