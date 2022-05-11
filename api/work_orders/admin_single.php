@@ -29,28 +29,28 @@
                 
                 $user_id = json_encode($decoded->data->id);
                 // Access is granted. Add code of the operation here 
-                $user_id = filter_var($user_id, FILTER_SANITIZE_NUMBER_INT);
-             
-                $item = new Workorder($db);
-                $id = isset($_GET['id']) ? $_GET['id'] : die();
-                $row = $item->getWorkorder($id);
-                if($row){
-                    if($row[0]['assignee'] == $user_id){
-                        echo json_encode($row);
+                $checkadmin = new Permission($db);
+                
+                $row =  $checkadmin->checkAdmin($user_id);
+                if($row == 1){
+                    $item = new Workorder($db);
+                    $id = isset($_GET['id']) ? $_GET['id'] : die();
+                    $rows = $item->getWorkorder($id);
+
+                    if($rows){
+                        echo json_encode($rows);
                     }else{
                         http_response_code(404);
                         echo json_encode(
-                            array("message" => "This work order has not been assigned to you.")
+                            array("message" => "No record found.")
                         );
                     }
-                    
-                }else{  
-                    http_response_code(404);
-                    echo json_encode(
-                        array("message" => "No record found.")
-                    );
+                }else{
+                    http_response_code(401);
+                    echo json_encode(array(
+                        "message" => "Access denied. Only Admin can do this action."
+                    )); 
                 }
-               
         
             }catch (Exception $e){
         
