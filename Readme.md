@@ -39,7 +39,7 @@
     }
     ```
 
-### Reset Password
+### Reset Password ✔
 - URL ```/api/users/change_password.php```  
 - Method ```POST```  
     ```json
@@ -50,12 +50,12 @@
     }
     ```
 
-### Get all assigned orders
+### Get all assigned orders ✔
 - URL ```/api/work_orders/assignee.php/?assignee=4```
 - Method ```GET```
 
-### Get order details
-- URL ```/api/work_orders/details.php/?id=1```  
+### Get order details ✔
+- URL ```/api/work_orders/single.php/?id=1```  
 - Method ```GET```  
 
 ### Take photos for order
@@ -68,7 +68,7 @@
     }
     ```
 
-### Delete photos for order
+### Delete photos for order 
 - URL ```/api/work_orders/delete_photos.php```  
 - Method ```POST```  
     ```json
@@ -86,7 +86,7 @@
     }
     ```
     
-### Update Profile
+### Update Profile ✔
 - URL ```/api/users/settings.php```  
 - Method ```POST```  
     ```json
