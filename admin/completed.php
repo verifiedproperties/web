@@ -14,27 +14,6 @@ include 'template/head.php';
 
 $emptyFields = $order_canceled = null;
 
-// Getting total count of pending orders
-$query = "SELECT `id` FROM `work-orders` WHERE `status` = 'pending'";
-if ($result = mysqli_query($conn, $query)) {
-  // Assigns total number of pending orders to -> '$pending_orders' variable
-  $pending_orders = mysqli_num_rows($result);
-}
-
-// Getting total count of open orders
-$openquery = "SELECT `id` FROM `work-orders` WHERE `status` = 'open'";
-if ($result = mysqli_query($conn, $openquery)) {
-  // Assigns total number of pending orders to -> '$pending_orders' variable
-  $open_orders = mysqli_num_rows($result);
-}
-
-// Getting total count of completed orders
-$completedquery = "SELECT `id` FROM `work-orders` WHERE `status` = 'approved'";
-if ($result = mysqli_query($conn, $completedquery)) {
-  // Assigns total number of completed orders to -> '$completed_orders' variable
-  $completed_orders = mysqli_num_rows($result);
-}
-
 // Applying filters
 if (isset($_POST['apply-filter'])) {
   $from_date = $_POST['from_date'];
@@ -45,7 +24,7 @@ if (isset($_POST['apply-filter'])) {
   $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 } else { // Fetches unfiltered completed results
 
-  $sql = "SELECT * FROM `work-orders` WHERE status = 'approved' ORDER BY date_created DESC";
+  $sql = "SELECT * FROM `work-orders` WHERE status = '4' ORDER BY date_created DESC";
   $result = mysqli_query($conn, $sql);
   $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
@@ -93,18 +72,18 @@ if (isset($_POST['apply-filter'])) {
                 <!-- Nav -->
                 <ul class="nav nav-tabs nav-overflow header-tabs">
                   <li class="nav-item">
-                    <a href="open-orders" class="nav-link text-nowrap">
-                      Open <span class="badge rounded-pill bg-secondary-soft"><?php echo $open_orders; ?></span>
+                    <a href="#!" class="nav-link text-nowrap">
+                      Open <span class="badge rounded-pill bg-secondary-soft"><?php OpenOrders($conn); ?></span>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="pending" class="nav-link text-nowrap">
-                      Pending <span class="badge rounded-pill bg-secondary-soft"><?php echo $pending_orders; ?></span>
+                      Pending <span class="badge rounded-pill bg-secondary-soft"><?php PendingOrders($conn); ?></span>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#!" class="nav-link text-nowrap active">
-                      Completed <span class="badge rounded-pill bg-secondary-soft"><?php echo $completed_orders; ?></span>
+                    <a href="completed" class="nav-link text-nowrap active">
+                      Completed <span class="badge rounded-pill bg-secondary-soft"><?php CompletedOrders($conn); ?></span>
                     </a>
                   </li>
                 </ul>

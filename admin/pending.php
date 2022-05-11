@@ -14,11 +14,11 @@ include 'template/head.php';
 
 $emptyFields = $order_approved = $order_rejected = null;
 
-// Approving single orders by updating the orders tatus to "approved"
+// Approving single orders by updating the orders tatus to "4"
 if (isset($_POST['approve'])) {
   $order_id = $_POST['order_id'];
   $order_address = $_POST['order_address'];
-  $sql = "UPDATE `work-orders` SET `status` = 'approved' WHERE `id` = '$order_id'";
+  $sql = "UPDATE `work-orders` SET `status` = '4' WHERE `id` = '$order_id'";
   if (mysqli_query($conn, $sql)) {
     $order_approved = "<div class='alert alert-success'>You approved the order at $order_address.</div>";
   } else {
@@ -30,33 +30,12 @@ if (isset($_POST['approve'])) {
 if (isset($_POST['reject'])) {
   $order_id = $_POST['order_id'];
   $order_address = $_POST['order_address'];
-  $sql = "UPDATE `work-orders` SET `status` = 'rejected' WHERE `id` = '$order_id'";
+  $sql = "UPDATE `work-orders` SET `status` = '3' WHERE `id` = '$order_id'";
   if (mysqli_query($conn, $sql)) {
     $order_rejected = "<div class='alert alert-success'>The order at $order_address has been rejected.</div>";
   } else {
     header('Location: pending');
   }
-}
-
-// Getting total count of pending orders
-$query = "SELECT `id` FROM `work-orders` WHERE `status` = 'pending'";
-if ($result = mysqli_query($conn, $query)) {
-  // Assigns total number of pending orders to -> '$pending_orders' variable
-  $pending_orders = mysqli_num_rows($result);
-}
-
-// Getting total count of open orders
-$openquery = "SELECT `id` FROM `work-orders` WHERE `status` = 'open'";
-if ($result = mysqli_query($conn, $openquery)) {
-  // Assigns total number of pending orders to -> '$pending_orders' variable
-  $open_orders = mysqli_num_rows($result);
-}
-
-// Getting total count of completed orders
-$completedquery = "SELECT `id` FROM `work-orders` WHERE `status` = 'approved'";
-if ($result = mysqli_query($conn, $completedquery)) {
-  // Assigns total number of completed orders to -> '$completed_orders' variable
-  $completed_orders = mysqli_num_rows($result);
 }
 
 // Fetching orders from database
@@ -108,18 +87,18 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <!-- Nav -->
                 <ul class="nav nav-tabs nav-overflow header-tabs">
                   <li class="nav-item">
-                    <a href="open-orders" class="nav-link text-nowrap">
-                      Open <span class="badge rounded-pill bg-secondary-soft"><?php echo $open_orders; ?></span>
+                    <a href="#!" class="nav-link text-nowrap">
+                      Open <span class="badge rounded-pill bg-secondary-soft"><?php OpenOrders($conn); ?></span>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#!" class="nav-link text-nowrap active">
-                      Pending <span class="badge rounded-pill bg-secondary-soft"><?php echo $pending_orders; ?></span>
+                    <a href="pending" class="nav-link text-nowrap active">
+                      Pending <span class="badge rounded-pill bg-secondary-soft"><?php PendingOrders($conn); ?></span>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="completed" class="nav-link text-nowrap">
-                      Completed <span class="badge rounded-pill bg-secondary-soft"><?php echo $completed_orders; ?></span>
+                      Completed <span class="badge rounded-pill bg-secondary-soft"><?php CompletedOrders($conn); ?></span>
                     </a>
                   </li>
                 </ul>
