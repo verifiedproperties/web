@@ -18,8 +18,8 @@
 
 
 ### Register
-- URL: /api/auth/login.php  
-- Method: POST  
+- URL ```/api/auth/register.php```  
+- Method ```POST```  
     ```json
     {
         "first_name" : "James",
@@ -30,14 +30,67 @@
     ```
  
 ### Login
-- URL: ```/api/auth/login.php```  
-- Method: POST  
+- URL ```/api/auth/login.php```  
+- Method ```POST```  
     ```json
     {
     "email": "devleeqiang@gmail.com",
     "password" : "Slack0206!"
     }
     ```
+
+### Reset Password
+- URL ```/api/users/change_password.php```  
+- Method ```POST```  
+    ```json
+    {
+        "user_id" : 3,
+        "password" : "123456",
+        "confirm_password" : "123456"
+    }
+    ```
+
+### Get all assigned orders
+- URL ```/api/work_orders/assignee.php/?assignee=4```
+- Method ```GET```
+
+### Get order details
+- URL ```/api/work_orders/details.php/?id=1```  
+- Method ```GET```  
+
+### Take photos for order
+- URL ```/api/work_orders/take_photos.php```  
+- Method ```POST```  
+    ```json
+    {
+    "files[]" : "*file upload here",
+    "workorder_id" : "8",
+    }
+    ```
+
+### Delete photos for order
+- URL ```/api/work_orders/delete_photos.php```  
+- Method ```POST```  
+    ```json
+    {
+    "workorder_id" : "8",
+    }
+    ```
+    
+### Complete order
+- URL ```/api/work_orders/status.php```
+- Method ```GET```  
+    ```json
+    {
+    "status" : "completed",
+    }
+    ```
+
+
+
+
+## Old version
+
 ### Work Orders
 - Get all work orders (Admin)  
     **URL**: /api/work_orders/all.php  
@@ -134,16 +187,7 @@
         "dob" : "1992-09-02"
     }
     ```
-- User password change (All Users)  
-    **URL**: /api/users/change_password.php  
-    **Method**: POST  
-    ```json
-    {
-        "user_id" : 3,
-        "password" : "123456",
-        "confirm_password" : "123456"
-    }
-    ```
+ 
 
 - User status change (Admin)  
     **URL**: /api/users/status.php  
