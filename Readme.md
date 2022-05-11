@@ -17,7 +17,7 @@
 14. User can view completed orders. (Date completed, date approved, full address, order type).
 
 
-### Register
+### Register ✔
 - URL ```/api/auth/register.php```  
 - Method ```POST```  
     ```json
@@ -29,7 +29,7 @@
     }
     ```
  
-### Login
+### Login ✔
 - URL ```/api/auth/login.php```  
 - Method ```POST```  
     ```json
@@ -146,7 +146,6 @@
 
 ## Old version
 
-### Work Orders
 - Get all work orders (Admin)  
     **URL**: /api/work_orders/all.php  
     **Method**: GET  
