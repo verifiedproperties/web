@@ -1,10 +1,10 @@
 ## API Guide
 
 ### User APIs
-1. User can register (Done)
-2. User can login/logout (Done)
-3. User can reset password (Done)
-4. User can view all assigned orders (Done)
+1. User can register  
+2. User can login/logout  
+3. User can reset password  
+4. User can view all assigned orders  
 5. User can view order details 
 6. User can take photos
 7. User can delete photos
@@ -18,9 +18,9 @@
 
 
 ### Register
-    - URL: /api/auth/login.php  
-    - Method: POST  
-    - ```json
+- URL: /api/auth/login.php  
+- Method: POST  
+    ```json
     {
         "first_name" : "James",
         "last_name" : "Paris",
@@ -30,9 +30,9 @@
     ```
  
 ### Login
-    - URL: /api/auth/login.php   
-    - Method: POST  
-	- ```json
+- URL: /api/auth/login.php   
+- Method: POST  
+    ```json
     {
     "email": "devleeqiang@gmail.com",
     "password" : "Slack0206!"
