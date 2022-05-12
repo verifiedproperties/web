@@ -77,14 +77,9 @@
     }
     ```
 
-### Complete order
-- URL ```/api/work_orders/status.php```
+### Make order Completed
+- URL ```/api/work_orders/change_status.php/?id=2```
 - Method ```GET```  
-    ```json
-    {
-    "status" : "completed",
-    }
-    ```
     
 ### Update Profile ✔
 - URL ```/api/users/settings.php```  
