@@ -25,30 +25,41 @@
             try {
                 $decoded = JWT::decode($jwt, new Key($secret_key, 'HS256'));
                 $user_id = json_encode($decoded->data->id);
-                // Access is granted. Add code of the operation here 
                 $user_id = filter_var($user_id, FILTER_SANITIZE_NUMBER_INT);
-                $item = new Workorder($db);
-                $assignee = isset($_GET['assignee']) ? $_GET['assignee'] : die();
-                
-                if($assignee == $user_id){
-                    
-                    $rows = $item->getAssigneeorders($assignee);
 
-                    if($rows){
-                        echo json_encode($rows);
+                $item = new Workorder($db);
+                $id = isset($_GET['id']) ? $_GET['id'] : die();
+                $order_id = isset($_GET['order_id']) ? $_GET['order_id'] : die();
+                $row = $item->getWorkorder($order_id);
+                if($row){
+                    if($row[0]['assignee'] == $user_id){
+                        $rows = $item->deleteAttachedment($id);
+                        if($rows){
+                            http_response_code(200);
+                            echo json_encode(
+                                array("message" => "Attachedment deleted.")
+                            );
+                        } else{
+                            http_response_code(404);
+                            echo json_encode(
+                                array("message" => "No record found.")
+                            );
+                        }
                     }else{
                         http_response_code(404);
                         echo json_encode(
-                            array("message" => "No record found.")
+                            array("message" => "This work order has not been assigned to you.")
                         );
                     }
-                }else{
-                    http_response_code(401);
-                    echo json_encode(array(
-                        "message" => "Access denied. You can access only your orders."
-                    )); 
+                    
+                }else{  
+                    http_response_code(404);
+                    echo json_encode(
+                        array("message" => "No record found.")
+                    );
                 }
-        
+
+               
             }catch (Exception $e){
         
                 http_response_code(401);
@@ -65,4 +76,5 @@
         ));
     }
     
+   
 ?>

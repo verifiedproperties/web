@@ -30,12 +30,13 @@
                 $id = isset($_GET['id']) ? $_GET['id'] : die();
                 $item = new Workorder($db);
                 $row = $item->getWorkorder($id);
-
+                $today = date('Y-m-d H:i:s');
                 if ($row) {
                     if($row[0]['assignee'] == $user_id){
                         $id=htmlspecialchars(strip_tags($id));                       
-                        $stmt = $db->prepare("UPDATE `work-orders` SET status = 4 WHERE id = ?");
-                        $stmt->bind_param("s", $id);
+                        $stmt = $db->prepare("UPDATE `work-orders` SET status = 4, date_completed = ? WHERE id = ?");
+                        echo json_encode($db->error_list);
+                        $stmt->bind_param("ss",$today,$id);
                         $result = $stmt->execute();
                     
                         if (false == $result) {

@@ -30,6 +30,7 @@
                 $item = new Workorder($db);
                 $rows = $item->getCompletedorders($user_id);
                 if($rows){
+                    http_response_code(200);
                     echo json_encode($rows);
                 }else{
                     http_response_code(404);
@@ -37,9 +38,6 @@
                         array("message" => "No record found.")
                     );
                 }
-                
-                
-        
             }catch (Exception $e){
         
                 http_response_code(401);

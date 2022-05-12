@@ -36,6 +36,7 @@
                 $row = $item->getWorkorder($id);
                 if($row){
                     if($row[0]['assignee'] == $user_id){
+                        http_response_code(200);
                         echo json_encode($row);
                     }else{
                         http_response_code(404);

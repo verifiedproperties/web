@@ -1,21 +1,7 @@
 ## API Guide
 
 ### User APIs
-1. User can register  
-2. User can login/logout  
-3. User can reset password  
-4. User can view all assigned orders  
-5. User can view order details 
-6. User can take photos
-7. User can delete photos
-8. User can share photos
-9. User can complete order
-10. User can view order attachments
-11. User can leave comments before completing work order
-12. User can upload work orders
-13. User can update profile from the app
-14. User can view completed orders. (Date completed, date approved, full address, order type).
-
+------------------------------------
 
 ### Register ✔
 - URL ```/api/auth/register.php```  
@@ -58,8 +44,8 @@
 - URL ```/api/work_orders/details.php/?id=1```  
 - Method ```GET```  
 
-### Take photos for order
-- URL ```/api/work_orders/take_photos.php```  
+## Add Work order photos ✔
+- URL ```/api/work_orders/add_attachedment.php```  
 - Method ```POST```  
     ```json
     {
@@ -68,14 +54,13 @@
     }
     ```
 
-### Delete photos for order
-- URL ```/api/work_orders/delete_photos.php```  
-- Method ```POST```  
-    ```json
-    {
-    "workorder_id" : "8",
-    }
-    ```
+### Delete specific order photo ✔
+- URL ```/api/work_orders/delete_attachedment.php/?id=2?order_id=2```  
+- Method ```Get```  
+
+### Delete All photos for order ✔
+- URL ```/api/work_orders/delete_attachedments.php/?order_id=2```  
+- Method ```GET```  
 
 ### Make Work order status Completed  ✔
 - URL ```/api/work_orders/change_status.php/?id=2```
@@ -94,7 +79,7 @@
         "dob" : "1992-09-02"
     }
     ```
-### Get order Attachedments
+### Get order Attachedments ✔
 - URL ```/api/work_orders/attachedments.php/?order_id=2```  
 - Method  ```GET```  
 
@@ -136,17 +121,4 @@
 - URL ```/api/work_orders/completed_orders.php```  
 - Method  ```GET```  
 
-
-## Old version
- 
-
-- Attached File uploads only (Admin)  
-    **URL:** /api/work_orders/attachedment.php  
-    **Method:** POST  
-    ```json
-    {
-    "files[]" : "*file upload here",
-    "workorder_id" : "8",
-    }
-    ```
  
