@@ -40,7 +40,7 @@
         
         // READ single
         public function getWorkorder($id){
-            $sql = "SELECT `work-orders`.*, users.first_name, users.last_name FROM `work-orders` LEFT JOIN users ON `work-orders`.assignee = users.id WHERE `work-orders`.id = $id";
+            $sql = "SELECT `work-orders`.* FROM `work-orders` LEFT JOIN users ON `work-orders`.assignee = users.id WHERE `work-orders`.id = $id";
             $result = mysqli_query($this->conn, $sql);
             $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
             return $rows;       
@@ -75,7 +75,7 @@
         // Get orders by assignee
         public function getAssigneeorders($assignee){
             $assignee=htmlspecialchars(strip_tags($assignee));
-            $sql = "SELECT `work-orders`.*, users.first_name, users.last_name FROM `work-orders` LEFT JOIN users ON `work-orders`.assignee = users.id WHERE `work-orders`.assignee = $assignee";
+            $sql = "SELECT `work-orders`.* FROM `work-orders` LEFT JOIN users ON `work-orders`.assignee = users.id WHERE `work-orders`.assignee = $assignee";
             $result = mysqli_query($this->conn, $sql);
             $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
             return $rows;       
