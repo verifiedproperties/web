@@ -61,10 +61,10 @@
             <i class="fe fe-share-2"></i> Network
           </a>
         </li>
-        <a class="nav-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+        <a class="nav-link" href="#services" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
           <i class="fe fe-star"></i> Services
         </a>
-        <div class="collapse " id="sidebarDashboards">
+        <div class="collapse " id="services">
           <ul class="nav nav-sm flex-column">
             <li class="nav-item">
               <a href="services" class="nav-link ">
@@ -88,10 +88,10 @@
             <i class="fe fe-users"></i> Staff Members
           </a>
         </li>
-        <a class="nav-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+        <a class="nav-link" href="#support" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
           <i class="fe fe-headphones"></i> Support
         </a>
-        <div class="collapse " id="sidebarDashboards">
+        <div class="collapse " id="support">
           <ul class="nav nav-sm flex-column">
             <li class="nav-item">
               <a href="./tickets" class="nav-link ">
