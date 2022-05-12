@@ -53,6 +53,13 @@
             $result = mysqli_query($this->conn, $sql);
             $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
             return $rows;       
+        }
+
+        public function getCompletedorders($user_id){
+            $sql = "SELECT `work-orders`.date_completed, `work-orders`.date_approved, `work-orders`.street_address,`work-orders`.secondary_address,`work-orders`.service FROM `work-orders` LEFT JOIN users ON `work-orders`.assignee = users.id WHERE `work-orders`.assignee = $user_id AND `work-orders`.status = 4";
+            $result = mysqli_query($this->conn, $sql);
+            $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            return $rows;       
         }       
         
         // Get orders by assignee

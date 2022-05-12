@@ -55,7 +55,7 @@
 - Method ```GET```
 
 ### Get order details ✔
-- URL ```/api/work_orders/single.php/?id=1```  
+- URL ```/api/work_orders/details.php/?id=1```  
 - Method ```GET```  
 
 ### Take photos for order
@@ -68,7 +68,7 @@
     }
     ```
 
-### Delete photos for order 
+### Delete photos for order
 - URL ```/api/work_orders/delete_photos.php```  
 - Method ```POST```  
     ```json
@@ -77,7 +77,7 @@
     }
     ```
 
-### Make order Completed
+### Make Work order status Completed  ✔
 - URL ```/api/work_orders/change_status.php/?id=2```
 - Method ```GET```  
     
@@ -98,7 +98,7 @@
 - URL ```/api/work_orders/attachedments.php/?order_id=2```  
 - Method  ```GET```  
 
-### Upload work order
+### Upload work order ✔  
 - URL ```/api/work_orders/upload.php```  
 - Method ```POST```  
     ```json
@@ -118,7 +118,6 @@
     "con" : "1234567890",
     "service" : "Software development",
     "access_code" : "1234560",
-    "assignee" : 3,
     "files[]" : "*file upload here"
     }
     ```
@@ -133,50 +132,13 @@
     }
     ```
 
-
-### Get completed orders  
-- URL ```/api/work_orders/status.php/?status='completed'```  
+### Get Completed orders ✔
+- URL ```/api/work_orders/completed_orders.php```  
 - Method  ```GET```  
 
 
 ## Old version
-
-- Get all work orders (Admin)  
-    **URL**: /api/work_orders/all.php  
-    **Method**: GET  
-
-- Get work orders by Status (Admin)  
-    **URL**: /api/work_orders/status.php/?status='open'  
-    **Method**: GET  
-
-- Get specify work order (Admin)  
-    **URL**: /api/work_orders/single.php/?id=1  
-    **Method**: GET  
-
-- Create order (Admin)  
-    **URL:** /api/work_orders/create.php  
-    **Method:** POST  
-    ```json
-    {
-    "street_address" : "Doral Lane 1100",
-    "secondary_address" : "",
-    "city" : "Texas",
-    "state" : "Houston",
-    "zip" : "77073",
-    "county" : "",
-    "country" : "United State",
-    "owner" : "James Camacho",
-    "start_date" : "2022-05-04",
-    "due_date" : "2022-05-09",
-    "instructions" : "Great instructions are described",
-    "client_name" : "Max Morono",
-    "con" : "1234567890",
-    "service" : "Software development",
-    "access_code" : "1234560",
-    "assignee" : 3,
-    "files[]" : "*file upload here"
-    }
-    ```
+ 
 
 - Attached File uploads only (Admin)  
     **URL:** /api/work_orders/attachedment.php  
@@ -185,47 +147,6 @@
     {
     "files[]" : "*file upload here",
     "workorder_id" : "8",
-    }
-    ```
-- Update order (Admin)  
-    **URL:** /api/work_orders/update.php  
-    **Method:** POST  
-    ```json
-    {
-    "id" : 4,
-    "street_address" : "Doral Lane 1100",
-    "secondary_address" : "",
-    "city" : "Texas",
-    "state" : "Houston",
-    "zip" : "77073",
-    "county" : "",
-    "country" : "United State",
-    "owner" : "James Camacho",
-    "start_date" : "2022-05-04",
-    "due_date" : "2022-05-09",
-    "instructions" : "Great instructions are described",
-    "client_name" : "Max Morono",
-    "con" : "1234567890",
-    "service" : "Software development",
-    "access_code" : "1234560",
-    "assignee" : 3
-    }
-    ```
-   
-- Delete specify work order (Admin)  
-    **URL**: /api/work_orders/delete.php/?id=3  
-    **Method**: GET  
-
-------------
-
-### Users
-- User status change (Admin)  
-    **URL**: /api/users/status.php  
-    **Method**: POST  
-    ```json
-    {
-        "user_id" : 3,
-        "status" : "active"
     }
     ```
  
