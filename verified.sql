@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 11, 2022 at 07:41 PM
+-- Generation Time: May 13, 2022 at 11:43 AM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 
@@ -47,6 +47,15 @@ CREATE TABLE `categories` (
   `updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `created`, `updated`) VALUES
+(1, 'Real State', '2022-05-12 09:11:32', '2022-05-12 09:11:32'),
+(2, 'Vehicle Inspections', '2022-05-12 09:11:32', '2022-05-12 09:11:32'),
+(3, 'Commercial Real State', '2022-05-12 09:11:32', '2022-05-12 09:11:32');
+
 -- --------------------------------------------------------
 
 --
@@ -58,7 +67,7 @@ CREATE TABLE `services` (
   `title` varchar(45) DEFAULT NULL,
   `turnaround` varchar(255) NOT NULL,
   `price` decimal(5,2) NOT NULL,
-  `Description` varchar(400) NOT NULL,
+  `description` varchar(400) NOT NULL,
   `category` varchar(45) NOT NULL,
   `created` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -82,6 +91,13 @@ CREATE TABLE `users` (
   `status` varchar(45) NOT NULL DEFAULT 'pending',
   `role` varchar(45) NOT NULL DEFAULT '2'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `phone`, `dob`, `password`, `joined`, `status`, `role`) VALUES
+(1, 'Richard', 'Rodgers', 'richard@verifiedproperties.com', NULL, NULL, '$2y$10$9If/QM6u0KPnN73D2qTnYe2rsUF7sTrzPywWHU2/avjgao2meGL3G', '2022-05-11 15:46:30', 'active', '1');
 
 -- --------------------------------------------------------
 
@@ -111,8 +127,16 @@ CREATE TABLE `work-orders` (
   `approved_by` varchar(255) DEFAULT NULL,
   `date_completed` datetime DEFAULT NULL,
   `date_approved` datetime DEFAULT NULL,
-  `access_code` varchar(55) DEFAULT NULL
+  `access_code` varchar(55) DEFAULT NULL,
+  `comments` varchar(400) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `work-orders`
+--
+
+INSERT INTO `work-orders` (`id`, `client_name`, `con`, `street_address`, `secondary_address`, `city`, `state`, `zip`, `county`, `country`, `owner`, `start_date`, `due_date`, `instructions`, `status`, `service`, `date_created`, `assignee`, `approved_by`, `date_completed`, `date_approved`, `access_code`, `comments`) VALUES
+(1, 'Verified', '', '2105 Central Avenue', '', 'Middletown', 'Ohio', '45044', 'Butler', 'United States', '', '2022-05-11 00:00:00', '2022-05-14', '', 5, 'Interior/Exterior', '2022-05-11 15:49:06', NULL, NULL, NULL, NULL, '', NULL);
 
 --
 -- Indexes for dumped tables
@@ -164,7 +188,7 @@ ALTER TABLE `attachments`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `services`
@@ -176,13 +200,13 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `work-orders`
 --
 ALTER TABLE `work-orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
