@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 13, 2022 at 11:43 AM
+-- Generation Time: May 13, 2022 at 11:51 AM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 
@@ -128,14 +128,14 @@ CREATE TABLE `work-orders` (
   `date_completed` datetime DEFAULT NULL,
   `date_approved` datetime DEFAULT NULL,
   `access_code` varchar(55) DEFAULT NULL,
-  `comments` varchar(400) DEFAULT NULL
+  `comment` varchar(400) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `work-orders`
 --
 
-INSERT INTO `work-orders` (`id`, `client_name`, `con`, `street_address`, `secondary_address`, `city`, `state`, `zip`, `county`, `country`, `owner`, `start_date`, `due_date`, `instructions`, `status`, `service`, `date_created`, `assignee`, `approved_by`, `date_completed`, `date_approved`, `access_code`, `comments`) VALUES
+INSERT INTO `work-orders` (`id`, `client_name`, `con`, `street_address`, `secondary_address`, `city`, `state`, `zip`, `county`, `country`, `owner`, `start_date`, `due_date`, `instructions`, `status`, `service`, `date_created`, `assignee`, `approved_by`, `date_completed`, `date_approved`, `access_code`, `comment`) VALUES
 (1, 'Verified', '', '2105 Central Avenue', '', 'Middletown', 'Ohio', '45044', 'Butler', 'United States', '', '2022-05-11 00:00:00', '2022-05-14', '', 5, 'Interior/Exterior', '2022-05-11 15:49:06', NULL, NULL, NULL, NULL, '', NULL);
 
 --
