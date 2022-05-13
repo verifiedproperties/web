@@ -13,7 +13,7 @@ $pagename = "New Order";
 $pageheader = "Create a new order";
 include 'template/head.php';
 
-$street_address = $query_error = $secondary_address = $city = $state = $zip = $county = $country = $owner = $start_date =
+$street_address = $query_error = $secondary_address = $city = $state = $zip = $county = $country = $owner = $photos_required = $start_date =
 $due_date = $instructions = $client_name = $con = $service = $access_code = null;
 
 if (isset($_POST['create-order'])) {
@@ -25,6 +25,7 @@ if (isset($_POST['create-order'])) {
   $county = $_POST['county'];
   $country = $_POST['country'];
   $owner = $_POST['owner_name'];
+  $photos_required = $_POST['photos_required'];
   $start_date = $_POST['start_date'];
   $due_date = $_POST['due_date'];
   $instructions = $_POST['instructions'];
@@ -32,9 +33,9 @@ if (isset($_POST['create-order'])) {
   $con = $_POST['con'];
   $service = $_POST['service'];
   $access_code = $_POST['access_code'];
-  if (!empty($street_address) && !empty($city) && !empty($state) && !empty($zip) && !empty($client_name) && !empty($due_date) && !empty($service)) {
-    $stmt = $conn->prepare("INSERT INTO `work-orders` (client_name, con, street_address, secondary_address, city, state, zip, county, country, owner, start_date, due_date, instructions, service, access_code) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $stmt->bind_param('sssssssssssssss', $client_name, $con, $street_address, $secondary_address, $city, $state, $zip, $county, $country, $owner, $start_date, $due_date, $instructions, $service, $access_code);
+  if (!empty($street_address) && !empty($city) && !empty($state) && !empty($zip) && !empty($client_name) && !empty($due_date) && !empty($service) && !empty($photos_required)) {
+    $stmt = $conn->prepare("INSERT INTO `work-orders` (client_name, con, street_address, secondary_address, city, state, zip, county, country, owner, start_date, due_date, instructions, service, access_code, photos_required) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $stmt->bind_param('sssssssssssssssi', $client_name, $con, $street_address, $secondary_address, $city, $state, $zip, $county, $country, $owner, $start_date, $due_date, $instructions, $service, $access_code, $photos_required);
     $result = $stmt->execute();
 
     if (false == $result) {
@@ -231,9 +232,17 @@ function initMap() {
               <label class="form-label">Country*</label>
               <input type="text" class="form-control" name="country" id="country" value="<?php echo $country; ?>">
             </div>
-            <div class="col-12">
+            <div class="col-6">
               <label class="form-label">Owner's name</label>
               <input type="text" class="form-control" name="owner_name" placeholder="Owner's name" value="<?php echo $owner; ?>">
+            </div>
+            <div class="col-6">
+              <label class="form-label">Photos required*</label>
+              <input type="number" name="photos_required" class="form-control" value="<?php if ($photos_required == null) {
+                echo "0";
+              } else {
+                echo $owner;
+              } ?>">
             </div>
             <div class="col-6">
               <label class="form-label">Client name*</label>
