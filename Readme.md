@@ -122,5 +122,5 @@
 - Method  ```GET```  
 
 ### Notification for assignee ✔
-- URL ```/api/work_orders/noticiation.php```  
+- URL ```/api/work_orders/notification.php```  
 - Method  ```GET```
