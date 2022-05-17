@@ -121,4 +121,6 @@
 - URL ```/api/work_orders/completed_orders.php```  
 - Method  ```GET```  
 
- 
+### Notification for assignee ✔
+- URL ```/api/work_orders/noticiation.php```  
+- Method  ```GET```

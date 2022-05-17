@@ -79,6 +79,15 @@
             $result = mysqli_query($this->conn, $sql);
             $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
             return $rows;       
+        }  
+        
+        // Get notifications by assignee
+         public function getNotification($assignee){
+            $assignee=htmlspecialchars(strip_tags($assignee));
+            $sql = "SELECT * FROM `work-orders` WHERE assignee = $assignee AND notification = 0";
+            $result = mysqli_query($this->conn, $sql);
+            $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            return $rows;       
         }   
 
         // DELETE Work Order
