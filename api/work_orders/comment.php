@@ -12,7 +12,7 @@
     header("Access-Control-Allow-Methods: *");
     header("Access-Control-Max-Age: 3600");
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-    
+
     $database = new Database();
     $db = $database->getConnection();
 
@@ -20,7 +20,7 @@
     if(array_key_exists("Authorization",$headers)){
         $arr = explode(" ", $headers["Authorization"]);
         $jwt = $arr[1];
-        
+
         if($jwt){
             try {
                 $decoded = JWT::decode($jwt, new Key($secret_key, 'HS256'));
@@ -33,34 +33,34 @@
                 $row = $item->getWorkorder($order_id);
                 if ($row) {
                     if($row[0]['assignee'] == $user_id){
-                        $order_id=htmlspecialchars(strip_tags($order_id));                       
+                        $order_id=htmlspecialchars(strip_tags($order_id));
                         $stmt = $db->prepare("UPDATE `work-orders` SET comment = ? WHERE id = ?");
                         echo json_encode($db->error_list);
                         $stmt->bind_param("ss",$comment,$order_id);
                         $result = $stmt->execute();
-                    
+
                         if (false == $result) {
                             http_response_code(400);
-                            echo json_encode(array("message" => "Unable to comment to this work order."));
+                            echo json_encode(array("message" => "Unable to save comment!"));
                         } else {
                             http_response_code(200);
-                            echo json_encode(array("message" => "Commented successfully!"));
+                            echo json_encode(array("message" => "Comment saved!"));
                         }
                     }else{
                         http_response_code(404);
                         echo json_encode(
-                            array("message" => "This work order has not been assigned to you.")
+                            array("message" => "This work order is not assigned to you.")
                         );
                     }
                 } else {
                     http_response_code(400);
-                    echo json_encode(array("message" => "No record found."));
+                    echo json_encode(array("message" => "No records found."));
                 }
 
-     
-        
+
+
             }catch (Exception $e){
-        
+
                 http_response_code(401);
                 echo json_encode(array(
                     "message" => "Access denied.",
@@ -73,6 +73,6 @@
         echo json_encode(array(
             "message" => "Access denied."
         ));
-    }  
-   
+    }
+
 ?>
