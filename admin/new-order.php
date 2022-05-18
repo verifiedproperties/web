@@ -241,7 +241,7 @@ function initMap() {
               <input type="number" name="photos_required" class="form-control" value="<?php if ($photos_required == null) {
                 echo "0";
               } else {
-                echo $owner;
+                echo $photos_required;
               } ?>">
             </div>
             <div class="col-6">
