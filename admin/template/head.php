@@ -1,7 +1,7 @@
 <?php
 $dba = "Verified";
-$adminsiteurl = $_SERVER['DOCUMENT_ROOT'].'/web/admin/';
-$siteurl = $_SERVER['DOCUMENT_ROOT'].'/web/';
+$adminsiteurl = $_SERVER['DOCUMENT_ROOT'].'/app/admin/';
+$siteurl = $_SERVER['DOCUMENT_ROOT'].'/app/';
 
 $baseurl = 'https://'.$_SERVER['HTTP_HOST'].'/web/admin/';
 
