@@ -91,8 +91,7 @@ if (isset($_POST['create-order'])) {
       ob_end_flush();
     }
   } else {
-    //$_SESSION['emptyFields'] = "<div class='alert alert-warning text-white'>One or more required fields are empty, please try again!</div>";
-    $query_error = "Failed to create order: " . mysqli_error($conn);
+    $_SESSION['emptyFields'] = "<div class='alert alert-warning text-white'>One or more required fields are empty, please try again!</div>";
   }
 }
 ?>
