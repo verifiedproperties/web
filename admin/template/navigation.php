@@ -67,7 +67,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="forms/forms.php">
+          <a class="nav-link" href="forms/forms">
             <i class="fe fe-layers"></i> Forms
           </a>
         </li>
