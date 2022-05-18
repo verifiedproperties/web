@@ -3,7 +3,7 @@ $dba = "Verified";
 $adminsiteurl = $_SERVER['DOCUMENT_ROOT'].'/web/admin/';
 $siteurl = $_SERVER['DOCUMENT_ROOT'].'/web/';
 
-$baseurl = 'http://'.$_SERVER['HTTP_HOST'].'/web/admin/';
+$baseurl = 'https://'.$_SERVER['HTTP_HOST'].'/web/admin/';
 
 include $adminsiteurl.'assets/functions.php';
 roleCheck($conn);
