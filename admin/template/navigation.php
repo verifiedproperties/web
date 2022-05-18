@@ -57,8 +57,18 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="open-orders">
+            <i class="fe fe-feather"></i> Work Orders
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="network">
             <i class="fe fe-share-2"></i> Network
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="forms/forms.php">
+            <i class="fe fe-layers"></i> Forms
           </a>
         </li>
         <a class="nav-link" href="#services" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
@@ -78,11 +88,6 @@
             </li>
           </ul>
         </div>
-        <li class="nav-item">
-          <a class="nav-link" href="open-orders">
-            <i class="fe fe-feather"></i> Work Orders
-          </a>
-        </li>
         <li class="nav-item">
           <a class="nav-link" href="staff">
             <i class="fe fe-users"></i> Staff Members
