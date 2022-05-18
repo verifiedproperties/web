@@ -238,11 +238,7 @@ function initMap() {
             </div>
             <div class="col-6">
               <label class="form-label">Photos required*</label>
-              <input type="number" name="photos_required" class="form-control" value="<?php if ($photos_required == null) {
-                echo "0";
-              } else {
-                echo $photos_required;
-              } ?>">
+              <input type="number" name="photos_required" class="form-control" value="<?php echo $photos_required; ?>">
             </div>
             <div class="col-6">
               <label class="form-label">Client name*</label>
