@@ -33,7 +33,7 @@ if (isset($_POST['create-order'])) {
   $con = $_POST['con'];
   $service = $_POST['service'];
   $access_code = $_POST['access_code'];
-  if (!empty($street_address) && !empty($city) && !empty($state) && !empty($zip) && !empty($client_name) && !empty($due_date) && !empty($service) && !empty($photos_required)) {
+  if (!empty($street_address) && !empty($city) && !empty($state) && !empty($zip) && !empty($client_name) && !empty($due_date) && !empty($service)) {
     $stmt = $conn->prepare("INSERT INTO `work-orders` (client_name, con, street_address, secondary_address, city, state, zip, county, country, owner, start_date, due_date, instructions, service, access_code, photos_required) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     $stmt->bind_param('sssssssssssssssi', $client_name, $con, $street_address, $secondary_address, $city, $state, $zip, $county, $country, $owner, $start_date, $due_date, $instructions, $service, $access_code, $photos_required);
     $result = $stmt->execute();
