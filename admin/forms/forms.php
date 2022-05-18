@@ -16,4 +16,4 @@ include '../template/head.php';
 <?php include '../template/offcanvas.php'; ?>
 <?php include '../template/navigation.php'; ?>
 
-<?php include 'template/footer.php'; ?>
+<?php include '../template/footer.php'; ?>
