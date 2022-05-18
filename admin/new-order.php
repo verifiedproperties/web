@@ -237,7 +237,7 @@ function initMap() {
               <input type="text" class="form-control" name="owner_name" placeholder="Owner's name" value="<?php echo $owner; ?>">
             </div>
             <div class="col-6">
-              <label class="form-label">Photos required*</label>
+              <label class="form-label">Photos required</label>
               <input type="number" name="photos_required" class="form-control" value="<?php echo $photos_required; ?>">
             </div>
             <div class="col-6">
