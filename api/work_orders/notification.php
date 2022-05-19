@@ -12,7 +12,7 @@
     header("Access-Control-Allow-Methods: *");
     header("Access-Control-Max-Age: 3600");
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-    
+
     $database = new Database();
     $db = $database->getConnection();
 
@@ -20,7 +20,7 @@
     if(array_key_exists("Authorization",$headers)){
         $arr = explode(" ", $headers["Authorization"]);
         $jwt = $arr[1];
-        
+
         if($jwt){
             try {
                 $decoded = JWT::decode($jwt, new Key($secret_key, 'HS256'));
@@ -30,7 +30,7 @@
                 $item = new Workorder($db);
                 $rows = $item->getNotification($user_id);
                 if ($rows) {
-                     
+
                     $stmt = $db->prepare("UPDATE `work-orders` SET notification = 1 WHERE assignee = ? AND notification = 0");
                     // echo json_encode($db->error_list);
                     $stmt->bind_param("s", $user_id);
@@ -38,7 +38,7 @@
                     $count = count($rows);
                     if (false == $result) {
                         http_response_code(400);
-                        echo json_encode(array("message" => "Unable to change work order status."));
+                        echo json_encode(array("message" => "Unable to get notification."));
                     } else {
                         http_response_code(200);
                         echo json_encode(array(
@@ -46,16 +46,16 @@
                             "notifications" => $rows
                         ));
                     }
-                     
+
                 } else {
                     http_response_code(400);
                     echo json_encode(array("message" => "No record found."));
                 }
 
-     
-        
+
+
             }catch (Exception $e){
-        
+
                 http_response_code(401);
                 echo json_encode(array(
                     "message" => "Access denied.",
@@ -68,6 +68,6 @@
         echo json_encode(array(
             "message" => "Access denied."
         ));
-    }  
-   
+    }
+
 ?>
