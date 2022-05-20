@@ -34,7 +34,7 @@
                 if ($row) {
                     if($row[0]['assignee'] == $user_id){
                         $id=htmlspecialchars(strip_tags($id));
-                        $stmt = $db->prepare("UPDATE `work-orders` SET status = 3, date_completed = ? WHERE id = ?");
+                        $stmt = $db->prepare("UPDATE `work-orders` SET status = 2, date_completed = ? WHERE id = ?");
                         echo json_encode($db->error_list);
                         $stmt->bind_param("ss",$today,$id);
                         $result = $stmt->execute();
