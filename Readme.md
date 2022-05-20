@@ -14,7 +14,7 @@
         "password" : "123456"
     }
     ```
- 
+
 ### Login ✔
 - URL ```/api/auth/login.php```  
 - Method ```POST```  
@@ -65,7 +65,7 @@
 ### Make Work order status Completed  ✔
 - URL ```/api/work_orders/change_status.php/?id=2```
 - Method ```GET```  
-    
+
 ### Update Profile ✔
 - URL ```/api/users/settings.php```  
 - Method ```POST```  
@@ -79,8 +79,8 @@
         "dob" : "1992-09-02"
     }
     ```
-### Get order Attachedments ✔
-- URL ```/api/work_orders/attachedments.php/?order_id=2```  
+### Get order Attachments ✔
+- URL ```/api/work_orders/attachments.php/?order_id=2```  
 - Method  ```GET```  
 
 ### Upload work order ✔  
