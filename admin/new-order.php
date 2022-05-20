@@ -237,7 +237,7 @@ function initMap() {
             </div>
             <div class="col-6">
               <label class="form-label">Client pay*</label>
-              <input type="text" name="client_pay" class="form-control" placeholder="$0.00" data-inputmask="'alias': 'currency', 'numericInput': 'true', 'prefix': '$'">
+              <input type="text" name="client_pay" class="form-control" placeholder="$0.00" data-inputmask="'alias': 'currency', 'numericInput': 'true', 'prefix': ''">
             </div>
             <div class="col-6">
               <label class="form-label">Payable</label>
