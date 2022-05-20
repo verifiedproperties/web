@@ -14,7 +14,7 @@ $pageheader = "Create a new order";
 include 'template/head.php';
 
 $street_address = $query_error = $secondary_address = $city = $state = $zip = $county = $country = $owner = $photos_required = $start_date =
-$due_date = $instructions = $client_name = $con = $service = $access_code = null;
+$due_date = $instructions = $client_name = $con = $service = $access_code = $client_pay = $payable = null;
 
 if (isset($_POST['create-order'])) {
   $street_address = $_POST['street_address'];
@@ -236,11 +236,11 @@ function initMap() {
             </div>
             <div class="col-6">
               <label class="form-label">Client pay*</label>
-              <input type="text" name="client_pay" class="form-control" placeholder="0.00" data-inputmask="'alias': 'currency', 'numericInput': 'true', 'prefix': ''">
+              <input type="number" name="client_pay" class="form-control" value="<?php echo $client_pay; ?>">
             </div>
             <div class="col-6">
               <label class="form-label">Payable</label>
-              <input type="text" name="payable" class="form-control" placeholder="0.00" data-inputmask="'alias': 'currency', 'numericInput': 'true', 'prefix': ''">
+              <input type="number" name="payable" class="form-control" value="<?php echo $payable; ?>">
             </div>
             <div class="col-6">
               <label class="form-label">Owner's name</label>
