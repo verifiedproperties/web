@@ -106,4 +106,9 @@ function CompletedOrders($conn) {
 // Getting total count of canceled orders
 function CanceledOrders($conn) {
   $sql = "SELECT * FROM `work-orders` WHERE `status` = '5'";
+  if ($result = mysqli_query($conn, $sql)) {
+    // Assigns total count of canceled orders to the '$TotalCanceledOrders' variable.
+    $TotalCanceledOrders = mysqli_num_rows($result);
+    echo $TotalCanceledOrders;
+  }
 }
