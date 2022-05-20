@@ -39,7 +39,7 @@ if (isset($_POST['reject'])) {
 }
 
 // Fetching orders from database
-$sql = "SELECT * FROM `work-orders` WHERE status = 'pending' ORDER BY date_completed DESC";
+$sql = "SELECT * FROM `work-orders` WHERE status = '2' ORDER BY date_completed DESC";
 $result = mysqli_query($conn, $sql);
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
