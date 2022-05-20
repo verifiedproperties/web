@@ -249,7 +249,7 @@ function initMap() {
             <div class="col-6">
               <label class="form-label">Photos required</label>
               <input type="number" name="photos_required" class="form-control" value="<?php if ($payable == null) {
-                echo "0.00"
+                echo "0.00";
               } else {
                 echo $payable;
               }; ?>">
