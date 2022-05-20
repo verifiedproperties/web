@@ -37,14 +37,14 @@
             return $rows;
         }
         // CREATE
-        
+
         // READ single
         public function getWorkorder($id){
             $sql = "SELECT `work-orders`.* FROM `work-orders` LEFT JOIN users ON `work-orders`.assignee = users.id WHERE `work-orders`.id = $id";
             $result = mysqli_query($this->conn, $sql);
             $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            return $rows;       
-        }      
+            return $rows;
+        }
 
         // Get orders by Status
         public function getStatusorders($status){
@@ -52,16 +52,16 @@
             $sql = "SELECT `work-orders`.*, users.first_name, users.last_name FROM `work-orders` LEFT JOIN users ON `work-orders`.assignee = users.id WHERE `work-orders`.status = $status";
             $result = mysqli_query($this->conn, $sql);
             $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            return $rows;       
+            return $rows;
         }
 
         // Get completed work orders by Assingee
         public function getCompletedorders($user_id){
-            $sql = "SELECT `work-orders`.date_completed, `work-orders`.date_approved, `work-orders`.street_address,`work-orders`.secondary_address,`work-orders`.service FROM `work-orders` LEFT JOIN users ON `work-orders`.assignee = users.id WHERE `work-orders`.assignee = $user_id AND `work-orders`.status = 4";
+            $sql = "SELECT `work-orders`.date_completed, `work-orders`.date_approved, `work-orders`.street_address,`work-orders`.secondary_address,`work-orders`.city,`work-orders`.service FROM `work-orders` LEFT JOIN users ON `work-orders`.assignee = users.id WHERE `work-orders`.assignee = $user_id AND `work-orders`.status = 4";
             $result = mysqli_query($this->conn, $sql);
             $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            return $rows;       
-        }       
+            return $rows;
+        }
 
         // Get attachedments by order ID
         public function getAttachments($order_id){
@@ -69,34 +69,34 @@
             $sql = "SELECT `file`, `created_at` FROM `attachments` WHERE workorder_id = $order_id";
             $result = mysqli_query($this->conn, $sql);
             $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            return $rows;       
+            return $rows;
         }
-        
+
         // Get orders by assignee
         public function getAssigneeorders($assignee){
             $assignee=htmlspecialchars(strip_tags($assignee));
             $sql = "SELECT `work-orders`.* FROM `work-orders` LEFT JOIN users ON `work-orders`.assignee = users.id WHERE `work-orders`.assignee = $assignee";
             $result = mysqli_query($this->conn, $sql);
             $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            return $rows;       
-        }  
-        
+            return $rows;
+        }
+
         // Get notifications by assignee
          public function getNotification($assignee){
             $assignee=htmlspecialchars(strip_tags($assignee));
             $sql = "SELECT * FROM `work-orders` WHERE assignee = $assignee AND notification = 0";
             $result = mysqli_query($this->conn, $sql);
             $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            return $rows;       
-        }   
+            return $rows;
+        }
 
         // DELETE Work Order
         function deleteWorkorder($id){
             $id=htmlspecialchars(strip_tags($id));
             // $sqlQuery = "DELETE FROM " . $this->db_table . " WHERE id = ?";
-            $stmt = $this->conn->prepare("DELETE FROM  `work-orders` WHERE ID = ?");    
+            $stmt = $this->conn->prepare("DELETE FROM  `work-orders` WHERE ID = ?");
             $stmt->bind_param("s", $id);
-        
+
             if($stmt->execute()){
                 return true;
             }
@@ -106,9 +106,9 @@
         // Delete Attachedment
         function deleteAttachedment($id){
             $id=htmlspecialchars(strip_tags($id));
-            $stmt = $this->conn->prepare("DELETE FROM  `attachments` WHERE ID = ?");    
+            $stmt = $this->conn->prepare("DELETE FROM  `attachments` WHERE ID = ?");
             $stmt->bind_param("s", $id);
-        
+
             $sql = "SELECT * FROM `attachments` WHERE ID = $id";
             $result = mysqli_query($this->conn, $sql);
             $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -140,6 +140,6 @@
             return false;
         }
 
-        
+
     }
 ?>
