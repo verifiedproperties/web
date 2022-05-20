@@ -240,7 +240,11 @@ function initMap() {
             </div>
             <div class="col-6">
               <label class="form-label">Payable</label>
-              <input type="number" name="payable" class="form-control" value="<?php echo $payable; ?>">
+              <input type="number" name="payable" class="form-control" value="<?php if ($payable == null) {
+                echo "0.00";
+              } else {
+                echo $payable;
+              } ?>">
             </div>
             <div class="col-6">
               <label class="form-label">Owner's name</label>
@@ -248,11 +252,7 @@ function initMap() {
             </div>
             <div class="col-6">
               <label class="form-label">Photos required</label>
-              <input type="number" name="photos_required" class="form-control" value="<?php if ($payable == null) {
-                echo "0.00";
-              } else {
-                echo $payable;
-              }; ?>">
+              <input type="number" name="photos_required" class="form-control" value="<?php echo $photos_required; ?>">
             </div>
             <div class="col-6">
               <label class="form-label">Client name*</label>
