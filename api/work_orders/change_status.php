@@ -12,7 +12,7 @@
     header("Access-Control-Allow-Methods: *");
     header("Access-Control-Max-Age: 3600");
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-    
+
     $database = new Database();
     $db = $database->getConnection();
 
@@ -20,7 +20,7 @@
     if(array_key_exists("Authorization",$headers)){
         $arr = explode(" ", $headers["Authorization"]);
         $jwt = $arr[1];
-        
+
         if($jwt){
             try {
                 $decoded = JWT::decode($jwt, new Key($secret_key, 'HS256'));
@@ -33,18 +33,18 @@
                 $today = date('Y-m-d H:i:s');
                 if ($row) {
                     if($row[0]['assignee'] == $user_id){
-                        $id=htmlspecialchars(strip_tags($id));                       
-                        $stmt = $db->prepare("UPDATE `work-orders` SET status = 4, date_completed = ? WHERE id = ?");
+                        $id=htmlspecialchars(strip_tags($id));
+                        $stmt = $db->prepare("UPDATE `work-orders` SET status = 3, date_completed = ? WHERE id = ?");
                         echo json_encode($db->error_list);
                         $stmt->bind_param("ss",$today,$id);
                         $result = $stmt->execute();
-                    
+
                         if (false == $result) {
                             http_response_code(400);
                             echo json_encode(array("message" => "Unable to change work order status."));
                         } else {
                             http_response_code(200);
-                            echo json_encode(array("message" => "User status is changed to completed successfully!"));
+                            echo json_encode(array("message" => "Order completed!"));
                         }
                     }else{
                         http_response_code(404);
@@ -57,10 +57,10 @@
                     echo json_encode(array("message" => "No record found."));
                 }
 
-     
-        
+
+
             }catch (Exception $e){
-        
+
                 http_response_code(401);
                 echo json_encode(array(
                     "message" => "Access denied.",
@@ -73,6 +73,6 @@
         echo json_encode(array(
             "message" => "Access denied."
         ));
-    }  
-   
+    }
+
 ?>
