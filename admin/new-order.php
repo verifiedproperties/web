@@ -241,7 +241,7 @@ function initMap() {
             <div class="col-6">
               <label class="form-label">Payable</label>
               <input type="number" name="payable" class="form-control" value="<?php if ($payable == null) {
-                echo "0.00";
+                echo "6.00";
               } else {
                 echo $payable;
               } ?>">
