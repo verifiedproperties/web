@@ -86,6 +86,11 @@ if (isset($_POST['apply-filter'])) {
                       Completed <span class="badge rounded-pill bg-secondary-soft"><?php CompletedOrders($conn); ?></span>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="canceled" class="nav-link text-nowrap active">
+                      Canceled <span class="badge rounded-pill bg-secondary-soft"><?php CanceledOrders($conn); ?></span>
+                    </a>
+                  </li>
                 </ul>
 
               </div>
