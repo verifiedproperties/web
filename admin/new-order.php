@@ -41,6 +41,7 @@ if (isset($_POST['create-order'])) {
     $result = $stmt->execute();
 
     if (false == $result) {
+      echo $client_pay;
       $query_error = "Failed to create order: " . mysqli_error($conn);
     } else {
       $workorder_id = $conn->insert_id;
