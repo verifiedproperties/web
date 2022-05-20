@@ -19,6 +19,9 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 ?>
 
+<?php include 'template/offcanvas.php'; ?>
+<?php include 'template/navigation.php'; ?>
+
 <!-- MAIN CONTENT -->
 <div class="main-content">
 
