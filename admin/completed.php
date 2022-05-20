@@ -87,7 +87,7 @@ if (isset($_POST['apply-filter'])) {
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="canceled" class="nav-link text-nowrap active">
+                    <a href="canceled" class="nav-link text-nowrap">
                       Canceled <span class="badge rounded-pill bg-secondary-soft"><?php CanceledOrders($conn); ?></span>
                     </a>
                   </li>
