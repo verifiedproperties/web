@@ -90,7 +90,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <a href="open-orders" class="nav-link text-nowrap">
                       Open <span class="badge rounded-pill bg-secondary-soft"><?php OpenOrders($conn); ?></span>
                     </a>
-                  </li>
+                  </li
                   <li class="nav-item">
                     <a href="pending" class="nav-link text-nowrap active">
                       Pending <span class="badge rounded-pill bg-secondary-soft"><?php PendingOrders($conn); ?></span>
