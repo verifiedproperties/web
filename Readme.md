@@ -45,7 +45,7 @@
 - Method ```GET```  
 
 ## Add Work order photos ✔
-- URL ```/api/work_orders/add_attachedment.php```  
+- URL ```/api/work_orders/add_attachment.php```  
 - Method ```POST```  
     ```json
     {
@@ -55,11 +55,11 @@
     ```
 
 ### Delete specific order photo ✔
-- URL ```/api/work_orders/delete_attachedment.php/?id=2?order_id=2```  
+- URL ```/api/work_orders/delete_attachment.php/?id=2?order_id=2```  
 - Method ```Get```  
 
 ### Delete All photos for order ✔
-- URL ```/api/work_orders/delete_attachedments.php/?order_id=2```  
+- URL ```/api/work_orders/delete_attachments.php/?order_id=2```  
 - Method ```GET```  
 
 ### Make Work order status Completed  ✔
