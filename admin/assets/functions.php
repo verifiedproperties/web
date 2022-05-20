@@ -102,3 +102,8 @@ function CompletedOrders($conn) {
     echo $TotalCompletedOrders;
   }
 }
+
+// Getting total count of canceled orders
+function CanceledOrders($conn) {
+  $sql = "SELECT * FROM `work-orders` WHERE `status` = '5'"
+}

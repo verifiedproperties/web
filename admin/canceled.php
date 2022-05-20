@@ -1,6 +1,6 @@
 <?php
 // ==========================================
-// Date Created:   4/12/2022
+// Date Created:   5/20/2022
 // Developer: Richard Rodgers
 // ==========================================
 include '../db.php';
@@ -8,45 +8,16 @@ session_start();
 if (!isset($_SESSION['username'])) {
   header('Location: ../login');
 }
-$pagename = "Pending";
-$pageheader = "Create a new order";
+$pagename = "Canceled";
+$pageheader = "";
 include 'template/head.php';
 
-$emptyFields = $order_approved = $order_rejected = null;
-
-// Approving single orders by updating the orders tatus to "4"
-if (isset($_POST['approve'])) {
-  $order_id = $_POST['order_id'];
-  $order_address = $_POST['order_address'];
-  $sql = "UPDATE `work-orders` SET `status` = '4' WHERE `id` = '$order_id'";
-  if (mysqli_query($conn, $sql)) {
-    $order_approved = "<div class='alert alert-success'>You approved the order at $order_address.</div>";
-  } else {
-    header('Location: pending');
-  }
-}
-
-// Rejecting single orders by updating the orders tatus to "rejected"
-if (isset($_POST['reject'])) {
-  $order_id = $_POST['order_id'];
-  $order_address = $_POST['order_address'];
-  $sql = "UPDATE `work-orders` SET `status` = '3' WHERE `id` = '$order_id'";
-  if (mysqli_query($conn, $sql)) {
-    $order_rejected = "<div class='alert alert-success'>The order at $order_address has been rejected.</div>";
-  } else {
-    header('Location: pending');
-  }
-}
-
 // Fetching orders from database
-$sql = "SELECT * FROM `work-orders` WHERE status = '2' ORDER BY date_completed DESC";
+$sql = "SELECT * FROM `work-orders` WHERE status = '5' ORDER BY date_completed DESC";
 $result = mysqli_query($conn, $sql);
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 ?>
-
-<?php include 'template/offcanvas.php'; ?>
-<?php include 'template/navigation.php'; ?>
 
 <!-- MAIN CONTENT -->
 <div class="main-content">
@@ -92,7 +63,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="pending" class="nav-link text-nowrap active">
+                    <a href="pending" class="nav-link text-nowrap">
                       Pending <span class="badge rounded-pill bg-secondary-soft"><?php PendingOrders($conn); ?></span>
                     </a>
                   </li>
@@ -102,7 +73,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="canceled" class="nav-link text-nowrap">
+                    <a href="canceled" class="nav-link text-nowrap active">
                       Canceled <span class="badge rounded-pill bg-secondary-soft"><?php CanceledOrders($conn); ?></span>
                     </a>
                   </li>
