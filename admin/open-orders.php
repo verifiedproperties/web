@@ -79,10 +79,10 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <!-- Nav -->
                 <ul class="nav nav-tabs nav-overflow header-tabs">
                   <li class="nav-item">
-                    <a href="#!" class="nav-link text-nowrap active">
+                    <a href="open-orders" class="nav-link text-nowrap active">
                       Open <span class="badge rounded-pill bg-secondary-soft"><?php OpenOrders($conn); ?></span>
                     </a>
-                  </li>
+                  </li
                   <li class="nav-item">
                     <a href="pending" class="nav-link text-nowrap">
                       Pending <span class="badge rounded-pill bg-secondary-soft"><?php PendingOrders($conn); ?></span>

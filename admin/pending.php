@@ -87,7 +87,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <!-- Nav -->
                 <ul class="nav nav-tabs nav-overflow header-tabs">
                   <li class="nav-item">
-                    <a href="#!" class="nav-link text-nowrap">
+                    <a href="open-orders" class="nav-link text-nowrap">
                       Open <span class="badge rounded-pill bg-secondary-soft"><?php OpenOrders($conn); ?></span>
                     </a>
                   </li>
@@ -99,11 +99,6 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                   <li class="nav-item">
                     <a href="completed" class="nav-link text-nowrap">
                       Completed <span class="badge rounded-pill bg-secondary-soft"><?php CompletedOrders($conn); ?></span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="canceled" class="nav-link text-nowrap">
-                      Canceled <span class="badge rounded-pill bg-secondary-soft"><?php CanceledOrders($conn); ?></span>
                     </a>
                   </li>
                   <li class="nav-item">

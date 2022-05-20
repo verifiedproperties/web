@@ -72,10 +72,10 @@ if (isset($_POST['apply-filter'])) {
                 <!-- Nav -->
                 <ul class="nav nav-tabs nav-overflow header-tabs">
                   <li class="nav-item">
-                    <a href="#!" class="nav-link text-nowrap">
+                    <a href="open-orders" class="nav-link text-nowrap">
                       Open <span class="badge rounded-pill bg-secondary-soft"><?php OpenOrders($conn); ?></span>
                     </a>
-                  </li>
+                  </li
                   <li class="nav-item">
                     <a href="pending" class="nav-link text-nowrap">
                       Pending <span class="badge rounded-pill bg-secondary-soft"><?php PendingOrders($conn); ?></span>
