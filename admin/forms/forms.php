@@ -48,7 +48,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
               <div class="col-auto">
 
                 <!-- Buttons -->
-                <a href="new-order" class="btn btn-secondary ms-2" data-bs-toggle="modal" data-bs-target="#new-form">
+                <a href="new-order" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#new-form">
                   <span class="fe fe-plus"></span>New Form
                 </a>
 
@@ -206,15 +206,6 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                   <thead>
                     <tr>
                       <th>
-
-                        <!-- Checkbox -->
-                        <div class="form-check mb-n2">
-                          <input class="form-check-input list-checkbox-all" type="checkbox" id="listCheckboxAll">
-                          <label class="form-check-label" for="listCheckboxAll"></label>
-                        </div>
-
-                      </th>
-                      <th>
                         <a class="list-sort text-muted" data-sort="item-client" href="#">Id</a>
                       </th>
                       <th>
@@ -230,19 +221,8 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     </tr>
                   </thead>
                   <tbody class="list">
-                    <?php foreach ($rows as $row) {
-                      $ids[] = $row['id'];
-                      ?>
+                    <?php foreach ($rows as $row) { ?>
                     <tr>
-                      <td>
-
-                        <!-- Checkbox -->
-                        <div class="form-check">
-                          <input class="form-check-input list-checkbox" type="checkbox" id="listCheckboxOne" value="<?=$row['id']?>">
-                          <label class="form-check-label" for="listCheckboxOne"></label>
-                        </div>
-
-                      </td>
                       <td><?php echo htmlspecialchars($row['id']); ?></td>
                       <td>
 
