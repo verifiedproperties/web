@@ -285,42 +285,6 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     </a>
                   </li>
                 </ul>
-
-                <!-- Alert -->
-                <div class="list-alert alert alert-dark alert-dismissible border fade" role="alert">
-
-                  <!-- Content -->
-                  <div class="row align-items-center">
-                    <div class="col">
-
-                      <!-- Checkbox -->
-                      <div class="form-check">
-                        <input class="form-check-input" id="listAlertCheckbox" type="checkbox" checked disabled>
-                        <label class="form-check-label text-white" for="listAlertCheckbox">
-                          <span class="list-alert-count">0</span> Order(s)
-                        </label>
-                      </div>
-
-                    </div>
-                    <div class="col-auto me-n3">
-
-                      <!-- Button -->
-                      <button class="btn btn-sm btn-white-20" data-bs-toggle="modal" data-bs-target="#modalMembers">
-                        Assign
-                      </button>
-
-                      <!-- Button -->
-                      <button class="btn btn-sm btn-white-20">
-                        Cancel
-                      </button>
-
-                    </div>
-                  </div> <!-- / .row -->
-
-                  <!-- Close -->
-                  <button type="button" class="list-alert-close btn-close" aria-label="Close"></button>
-
-                </div>
               </div>
             </div>
           </div>
