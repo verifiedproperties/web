@@ -32,7 +32,7 @@ if (isset($_POST['create-form'])) {
     if (false == $result) {
       $query_error = "Failed to create order: " . mysqli_error($conn);
     } else {
-      $_SESSION['form-created'] = "Your form has been created successfully.";
+      $_SESSION['form-created'] = "<div class='alert alert-success'>Your form has been created successfully.</div>";
       header("Location: forms");
     }
   } else {
@@ -81,7 +81,12 @@ if (isset($_POST['create-form'])) {
         </div>
         <div class="row">
           <div class="col-12">
-            <!-- Add alerts here.. -->
+            <?php
+              if (isset($_SESSION['form-created'])) {
+                echo $_SESSION['form-created'];
+                unset($_SESSION['form-created']);
+              }
+            ?>
           </div>
         </div>
 
