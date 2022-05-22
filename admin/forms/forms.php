@@ -194,15 +194,6 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     </div>
 
                   </div>
-                  <div class="col-auto me-n3" id="csvbuttoncontainer">
-
-                  </div>
-
-                  <div class="col-auto me-n3" id="csvImportcontainer">
-                      <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#importCsv">
-                        <i class="fe fe-upload"></i> Import
-                      </button>
-                  </div>
                 </div> <!-- / .row -->
               </div>
               <div class="table-responsive">
@@ -285,7 +276,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 </table>
               </div>
               <?php if (mysqli_num_rows($result) <= 0) {
-                echo "<p class='text-center mt-4 mb-4'>You don't have any existing forms, create one to gret started.</p>";
+                echo "<p class='text-center mt-4 mb-4'>There are no forms to display.</p>";
               } ?>
               <div class="card-footer d-flex justify-content-between">
 
