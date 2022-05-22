@@ -285,7 +285,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 </table>
               </div>
               <?php if (mysqli_num_rows($result) <= 0) {
-                echo "<p class='text-center mt-4 mb-4'>There are no work orders to display.</p>";
+                echo "<p class='text-center mt-4 mb-4'>You don't have any existing forms, create one to gret started.</p>";
               } ?>
               <div class="card-footer d-flex justify-content-between">
 
