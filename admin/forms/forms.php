@@ -12,11 +12,6 @@ $pagename = "Forms";
 $pageheader = "";
 include '../template/head.php';
 
-// Fetching forms
-$query = "SELECT * FROM forms";
-$result = mysqli_query($conn, $query);
-$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
 // Insert new form
 if (isset($_POST['create-form'])) {
   $form_name = $_POST['form_name'];
@@ -39,6 +34,11 @@ if (isset($_POST['create-form'])) {
     echo "You form contains errors! Please try agan.";
   }
 }
+
+// Fetching forms
+$query = "SELECT * FROM forms";
+$result = mysqli_query($conn, $query);
+$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
 <?php include '../template/offcanvas.php'; ?>
