@@ -350,15 +350,20 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <h5 class="modal-title">New form</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Modal body text goes here.</p>
+        <form method="post" class="row g-3">
+          <div class="col-12">
+            <label class="form-label">Form name</label>
+            <input type="text" name="form_name" class="form-control" placeholder="Choose a name for your new form">
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Crate form</button>
       </div>
     </div>
   </div>
