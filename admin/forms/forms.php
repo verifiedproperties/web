@@ -359,6 +359,10 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <label class="form-label">Form name</label>
             <input type="text" name="form_name" class="form-control" placeholder="Choose a name for your new form">
           </div>
+          <div class="col-12">
+            <label class="form-label">Instructions</label>
+            <textarea name="instructions" class="form-control" rows="3"></textarea>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
