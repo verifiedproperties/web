@@ -251,6 +251,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                               <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($row['id']); ?>">
                               <button type="submit" name="cancel-order" class="dropdown-item">Delete</button>
                             </form>
+                            <button type="button" name="add-questions" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#add-questions">Add Questions</button>
                           </div>
                         </div>
 
@@ -316,6 +317,27 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <label class="form-label">Instructions</label>
             <textarea name="instructions" class="form-control" rows="3" required></textarea>
           </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary" name="create-form" form="new-form-form">Create form</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add questions modal window -->
+<div class="modal" id="add-questions" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add question(s)</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="proccess.php" method="post" class="row g-3" id="new-questions">
+
         </form>
       </div>
       <div class="modal-footer">
