@@ -1,3 +1,9 @@
+<?php
+$adminsiteurl = $_SERVER['DOCUMENT_ROOT'].'/app/admin/';
+$siteurl = $_SERVER['DOCUMENT_ROOT'].'/app/';
+$baseurl = 'https://'.$_SERVER['HTTP_HOST'].'/app/admin/';
+?>
+
 <!-- NAVIGATION -->
 <nav class="navbar navbar-vertical fixed-start navbar-expand-md navbar-light" id="sidebar">
   <div class="container-fluid">
@@ -9,7 +15,7 @@
 
     <!-- Brand -->
     <a class="navbar-brand" href="./dashboard">
-      <img src="./assets/img/logo.svg" class="navbar-brand-img mx-auto" alt="Verified Logo">
+      <img src="<?=$baseurl?>assets/img/logo.svg" class="navbar-brand-img mx-auto" alt="Verified Logo">
     </a>
 
     <!-- User (xs) -->

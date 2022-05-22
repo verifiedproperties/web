@@ -13,6 +13,9 @@ $pageheader = "Create a new order";
 include '../template/head.php';
 ?>
 
+<?php include '../template/offcanvas.php'; ?>
+<?php include '../template/navigation.php'; ?>
+
     <!-- MAIN CONTENT -->
     <div class="main-content">
       <div class="container-lg">
