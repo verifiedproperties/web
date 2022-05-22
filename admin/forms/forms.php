@@ -355,13 +355,17 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
       </div>
       <div class="modal-body">
         <form method="post" class="row g-3">
-          <div class="col-12">
+          <div class="col-6">
             <label class="form-label">Form name</label>
-            <input type="text" name="form_name" class="form-control" placeholder="Choose a name for your new form">
+            <input type="text" name="form_name" class="form-control" placeholder="Choose a name for your new form" required>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Photos required</label>
+            <input type="number" name="photos_required" class="form-control">
           </div>
           <div class="col-12">
             <label class="form-label">Instructions</label>
-            <textarea name="instructions" class="form-control" rows="3"></textarea>
+            <textarea name="instructions" class="form-control" rows="3" required></textarea>
           </div>
         </form>
       </div>
