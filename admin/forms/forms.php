@@ -375,7 +375,7 @@ if (isset($_POST['create-form'])) {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary" name="create-form" form="new-form">Crate form</button>
+        <button type="submit" class="btn btn-primary" name="create-form" form="new-form">Create form</button>
       </div>
     </div>
   </div>
