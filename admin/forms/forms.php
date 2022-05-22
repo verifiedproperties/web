@@ -16,6 +16,10 @@ include '../template/head.php';
 $query = "SELECT * FROM forms";
 $result = mysqli_query($conn, $query);
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+if (isset($_POST['create-form'])) {
+  echo "it worked!";
+}
 ?>
 
 <?php include '../template/offcanvas.php'; ?>
@@ -354,7 +358,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="post" class="row g-3">
+        <form method="post" class="row g-3" id="new-form">
           <div class="col-8">
             <label class="form-label">Form name</label>
             <input type="text" name="form_name" class="form-control" placeholder="Choose a name for your new form" required>
@@ -371,7 +375,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary">Crate form</button>
+        <button type="submit" class="btn btn-primary" name="create-form" form="new-form">Crate form</button>
       </div>
     </div>
   </div>
