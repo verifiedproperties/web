@@ -226,6 +226,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                       <th>
                         <a class="list-sort text-muted" data-sort="item-service" href="#">Updated</a>
                       </th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody class="list">
