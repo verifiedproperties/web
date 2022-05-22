@@ -14,7 +14,7 @@ $baseurl = 'https://'.$_SERVER['HTTP_HOST'].'/app/admin/';
     </button>
 
     <!-- Brand -->
-    <a class="navbar-brand" href="./dashboard">
+    <a class="navbar-brand" href="<?=$baseurl?>dashboard">
       <img src="<?=$baseurl?>assets/img/logo.svg" class="navbar-brand-img mx-auto" alt="Verified Logo">
     </a>
 
@@ -27,15 +27,15 @@ $baseurl = 'https://'.$_SERVER['HTTP_HOST'].'/app/admin/';
         <!-- Toggle -->
         <a href="#" id="sidebarIcon" class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <div class="avatar avatar-sm avatar-online">
-            <img src="assets/img/avatars/profiles/avatar-1.jpg" class="avatar-img rounded-circle" alt="...">
+            <img src="<?=$baseurl?>assets/img/avatars/profiles/avatar-1.jpg" class="avatar-img rounded-circle" alt="...">
           </div>
         </a>
 
         <!-- Menu -->
         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="sidebarIcon">
-          <a href="./account-settings" class="dropdown-item">Settings</a>
+          <a href="<?=$baseurl?>account-settings" class="dropdown-item">Settings</a>
           <hr class="dropdown-divider">
-          <a href="../logout" class="dropdown-item">Logout</a>
+          <a href="<?=$siteurl?>logout" class="dropdown-item">Logout</a>
         </div>
 
       </div>
@@ -58,22 +58,22 @@ $baseurl = 'https://'.$_SERVER['HTTP_HOST'].'/app/admin/';
       <!-- Navigation -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="dashboard">
+          <a class="nav-link" href="<?=$adminsiteurl?>dashboard">
             <i class="fe fe-home"></i> Dashboard
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="open-orders">
+          <a class="nav-link" href="<?=$adminsiteurl?>open-orders">
             <i class="fe fe-feather"></i> Work Orders
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="network">
+          <a class="nav-link" href="<?=$adminsiteurl?>network">
             <i class="fe fe-share-2"></i> Network
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="forms/forms">
+          <a class="nav-link" href="<?=$adminsiteurl?>forms/forms">
             <i class="fe fe-layers"></i> Forms
           </a>
         </li>
@@ -83,19 +83,19 @@ $baseurl = 'https://'.$_SERVER['HTTP_HOST'].'/app/admin/';
         <div class="collapse " id="services">
           <ul class="nav nav-sm flex-column">
             <li class="nav-item">
-              <a href="services" class="nav-link ">
+              <a href="<?=$adminsiteurl?>services" class="nav-link ">
                 Services
               </a>
             </li>
             <li class="nav-item">
-              <a href="services-categories" class="nav-link ">
+              <a href="<?=$adminsiteurl?>services-categories" class="nav-link ">
                 Categories
               </a>
             </li>
           </ul>
         </div>
         <li class="nav-item">
-          <a class="nav-link" href="staff">
+          <a class="nav-link" href="<?=$adminsiteurl?>staff">
             <i class="fe fe-users"></i> Staff Members
           </a>
         </li>
@@ -139,7 +139,7 @@ $baseurl = 'https://'.$_SERVER['HTTP_HOST'].'/app/admin/';
       <!-- Navigation -->
       <ul class="navbar-nav mb-md-4">
         <li class="nav-item">
-          <a class="nav-link " href="assets/import-template.csv">
+          <a class="nav-link " href="<?=$adminsiteurl?>assets/import-template.csv">
             <i class="fe fe-download"></i> Import Template
           </a>
         </li>
