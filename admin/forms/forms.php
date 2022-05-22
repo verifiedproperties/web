@@ -1,6 +1,6 @@
 <?php
 // ==========================================
-// Date Created:   4/18//2022
+// Date Created:   4/18/2022
 // Developer: Richard Rodgers
 // ==========================================
 include '../../db.php';
@@ -11,29 +11,6 @@ if (!isset($_SESSION['username'])) {
 $pagename = "Forms";
 $pageheader = "";
 include '../template/head.php';
-
-// Insert new form
-if (isset($_POST['create-form'])) {
-  $form_name = $_POST['form_name'];
-  $photos_required = $_POST['photos_required'];
-  $instructions = $_POST['instructions'];
-
-  if (!empty($form_name) && !empty($photos_required) && !empty($instructions)) {
-    // If all fields are not emtpy, the following script will run to insert the form in the db.
-    $stmt = $conn->prepare("INSERT INTO `forms` (name, photos_required, instructions) VALUES(?,?,?)");
-    $stmt->bind_param("sis", $form_name, $photos_required, $instructions);
-    $result = $stmt->execute();
-
-    if (false == $result) {
-      $query_error = "Failed to create order: " . mysqli_error($conn);
-    } else {
-      $_SESSION['form-created'] = "<div class='alert alert-success'>Your form has been created successfully.</div>";
-      header("Location: forms");
-    }
-  } else {
-    echo "You form contains errors! Please try agan.";
-  }
-}
 
 // Fetching forms
 $query = "SELECT * FROM forms";
@@ -382,7 +359,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="post" class="row g-3" id="new-form-form">
+        <form action="save-form.php" method="post" class="row g-3" id="new-form-form">
           <div class="col-8">
             <label class="form-label">Form name</label>
             <input type="text" name="form_name" class="form-control" placeholder="Choose a name for your new form" required>
