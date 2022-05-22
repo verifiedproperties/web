@@ -17,6 +17,7 @@ $query = "SELECT * FROM forms";
 $result = mysqli_query($conn, $query);
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+// Insert new form
 if (isset($_POST['create-form'])) {
   echo "it worked!";
 }
@@ -358,7 +359,7 @@ if (isset($_POST['create-form'])) {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="post" class="row g-3" id="new-form">
+        <form method="post" class="row g-3" id="new-form-form">
           <div class="col-8">
             <label class="form-label">Form name</label>
             <input type="text" name="form_name" class="form-control" placeholder="Choose a name for your new form" required>
@@ -375,7 +376,7 @@ if (isset($_POST['create-form'])) {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary" name="create-form" form="new-form">Create form</button>
+        <button type="submit" class="btn btn-primary" name="create-form" form="new-form-form">Create form</button>
       </div>
     </div>
   </div>
