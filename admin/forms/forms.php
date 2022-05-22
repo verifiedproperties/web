@@ -269,9 +269,8 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                           <div class="dropdown-menu dropdown-menu-end">
                             <form method="post">
                               <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($row['id']); ?>">
-                              <button type="submit" name="cancel-order" class="dropdown-item">Cancel</button>
+                              <button type="submit" name="cancel-order" class="dropdown-item">Delete</button>
                             </form>
-                            <button type="button" class="dropdown-item" onclick="showAttachments('<?=$row['id']?>')" data-bs-toggle="modal" data-bs-target="#showAttachments">Show Attachments</button>
                           </div>
                         </div>
 
