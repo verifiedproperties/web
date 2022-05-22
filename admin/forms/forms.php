@@ -337,7 +337,26 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
       </div>
       <div class="modal-body">
         <form action="proccess.php" method="post" class="row g-3" id="new-questions">
-
+          <div class="col-12">
+            <label class="form-label">Question 1</label>
+            <input type="text" name="question_one" class="form-control">
+          </div>
+          <div class="col-12">
+            <label class="form-label">Question 2</label>
+            <input type="text" name="question_two" class="form-control">
+          </div>
+          <div class="col-12">
+            <label class="form-label">Question 3</label>
+            <input type="text" name="question_three" class="form-control">
+          </div>
+          <div class="col-12">
+            <label class="form-label">Question 4</label>
+            <input type="text" name="question_four" class="form-control">
+          </div>
+          <div class="col-12">
+            <label class="form-label">Question 5</label>
+            <input type="text" name="question_five" class="form-control">
+          </div>
         </form>
       </div>
       <div class="modal-footer">
