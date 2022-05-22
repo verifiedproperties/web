@@ -342,6 +342,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <input type="text" name="question_one" class="form-control">
           </div>
           <div class="col-6">
+            <label class="form-label"></label>
             <select class="form-select" name="answer_type">
               <option value="">Radio</option>
               <option value="">Multiple Choice</option>
