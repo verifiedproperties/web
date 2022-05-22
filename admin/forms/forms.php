@@ -304,7 +304,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="save-form.php" method="post" class="row g-3" id="new-form-form">
+        <form action="proccess.php" method="post" class="row g-3" id="new-form-form">
           <div class="col-8">
             <label class="form-label">Form name</label>
             <input type="text" name="form_name" class="form-control" placeholder="Choose a name for your new form" required>
