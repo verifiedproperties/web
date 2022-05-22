@@ -355,11 +355,11 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
       </div>
       <div class="modal-body">
         <form method="post" class="row g-3">
-          <div class="col-6">
+          <div class="col-8">
             <label class="form-label">Form name</label>
             <input type="text" name="form_name" class="form-control" placeholder="Choose a name for your new form" required>
           </div>
-          <div class="col-6">
+          <div class="col-4">
             <label class="form-label">Photos required</label>
             <input type="number" name="photos_required" class="form-control">
           </div>
