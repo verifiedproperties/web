@@ -48,7 +48,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
               <div class="col-auto">
 
                 <!-- Buttons -->
-                <a href="new-order" class="btn btn-secondary ms-2">
+                <a href="new-order" class="btn btn-secondary ms-2" data-bs-toggle="modal" data-bs-target="#new-form">
                   <span class="fe fe-plus"></span>New Form
                 </a>
 
@@ -343,7 +343,25 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
       </div>
     </div>
   </div>
-
 </div> <!-- / .main-content -->
+
+<!-- New form modal window -->
+<div class="modal" id="new-form" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <?php include '../template/footer.php'; ?>
