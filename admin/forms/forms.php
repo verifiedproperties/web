@@ -361,7 +361,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
           </div>
           <div class="col-4">
             <label class="form-label">Photos required</label>
-            <input type="number" name="photos_required" class="form-control">
+            <input type="number" name="photos_required" class="form-control" required>
           </div>
           <div class="col-12">
             <label class="form-label">Instructions</label>
