@@ -62,6 +62,9 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
               if (isset($_SESSION['form-created'])) {
                 echo $_SESSION['form-created'];
                 unset($_SESSION['form-created']);
+              } if (isset($_SESSION['questions-added'])) {
+                echo $_SESSION['questions-added'];
+                unset($_SESSION['questions-added']);
               }
             ?>
           </div>
@@ -248,7 +251,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                           </a>
                           <div class="dropdown-menu dropdown-menu-end">
                             <form method="post">
-                              <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($row['id']); ?>">
+                              <input type="text" name="order_id" value="<?php echo htmlspecialchars($row['id']); ?>">
                               <button type="submit" name="cancel-order" class="dropdown-item">Delete</button>
                             </form>
                             <button type="button" name="add-questions" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#add-questions">Add Questions</button>
@@ -342,7 +345,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <input type="text" name="question_one" class="form-control">
           </div>
           <div class="col-6">
-            <label class="form-label">Anser Type</label>
+            <label class="form-label">Answer Type</label>
             <select class="form-select" name="answer_type">
               <option value="">Radio</option>
               <option value="">Multiple Choice</option>
@@ -365,11 +368,12 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <label class="form-label">Question 5</label>
             <input type="text" name="question_five" class="form-control">
           </div>
+          <input type="text" name="form_id" class="form-control" value="">
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary" name="create-form" form="new-form-form">Create form</button>
+        <button type="submit" class="btn btn-primary" name="add-questions" form="new-questions">Add questions</button>
       </div>
     </div>
   </div>
