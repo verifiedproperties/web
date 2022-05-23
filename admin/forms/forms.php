@@ -251,7 +251,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                           </a>
                           <div class="dropdown-menu dropdown-menu-end">
                             <form method="post">
-                              <input type="text" name="order_id" value="<?php echo htmlspecialchars($row['id']); ?>">
+                              <input type="text" name="order_id" value="<?php $form_id = "htmlspecialchars($row['id']);" echo htmlspecialchars($row['id']); ?>">
                               <button type="submit" name="cancel-order" class="dropdown-item">Delete</button>
                             </form>
                             <button type="button" name="add-questions" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#add-questions">Add Questions</button>
