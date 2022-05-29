@@ -1,6 +1,6 @@
 <?php
 // ==========================================
-// Date Created:   4/18/2022
+// Date Created:   5/26/2022
 // Developer: Richard Rodgers
 // ==========================================
 include '../../db.php';
@@ -8,20 +8,22 @@ session_start();
 if (!isset($_SESSION['username'])) {
   header('Location: ../../login');
 }
-$pagename = "Forms";
-$pageheader = "";
+$pagename = "Answers";
+$pageheader = null;
 include '../template/head.php';
 
-$test = "Testing..";
+$question_id = $_GET['question_id'];
 
-// Fetching forms
-$query = "SELECT * FROM forms";
+$query = "SELECT * FROM `answers` WHERE `question_id` = '$question_id'";
 $result = mysqli_query($conn, $query);
-$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+if (false == $result) {
+  echo "Unable completed your request" . mysqli_error($conn);
+}
 ?>
 
 <?php include '../template/offcanvas.php'; ?>
-<?php include '../template/navigation.php'; ?>
+<?php //include '../template/navigation.php'; ?>
 
 <!-- MAIN CONTENT -->
 <div class="main-content">
@@ -50,8 +52,8 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
               <div class="col-auto">
 
                 <!-- Buttons -->
-                <a href="new-order" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#new-form">
-                  <span class="fe fe-plus"></span>New Form
+                <a href="new-order" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#add-answers">
+                  <span class="fe fe-plus"></span>Answers
                 </a>
 
               </div>
@@ -67,9 +69,6 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
               } if (isset($_SESSION['questions-added'])) {
                 echo $_SESSION['questions-added'];
                 unset($_SESSION['questions-added']);
-              } if (isset($_SESSION['form-deleted'])) {
-                echo $_SESSION['form-deleted'];
-                unset($_SESSION['form-deleted']);
               }
             ?>
           </div>
@@ -214,10 +213,10 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                   <thead>
                     <tr>
                       <th>
-                        <a class="list-sort text-muted" data-sort="item-client" href="#">Id</a>
+                        <a class="list-sort text-muted" data-sort="item-client" href="#">ID</a>
                       </th>
                       <th>
-                        <a class="list-sort text-muted" data-sort="item-location" href="#">Name</a>
+                        <a class="list-sort text-muted" data-sort="item-location" href="#">Answer</a>
                       </th>
                       <th>
                         <a class="list-sort text-muted" data-sort="item-county" href="#">Created</a>
@@ -225,18 +224,21 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                       <th>
                         <a class="list-sort text-muted" data-sort="item-service" href="#">Updated</a>
                       </th>
+                      <th>
+                        <a class="list-sort text-muted" data-sort="item-service" href="#">Question ID</a>
+                      </th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody class="list">
-                    <?php foreach ($rows as $row) { ?>
+                    <?php foreach ($row as $row) { ?>
                     <tr>
-                      <td><?php echo htmlspecialchars($row['id']); ?></td>
+                      <td><?php echo $row['id']; ?></td>
                       <td>
 
                         <!-- Text -->
                         <span class="item-stage">
-                          <?php echo htmlspecialchars($row['name']); ?>
+                          <?php echo htmlspecialchars($row['answer']); ?>
                         </span>
 
                       </td>
@@ -247,6 +249,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                         <span class="item-service"><?php echo date('M d, Y', strtotime($row['updated'])); ?></span>
 
                       </td>
+                      <td><?php echo htmlspecialchars($row['question_id']); ?></td>
                       <td class="text-end">
 
                         <!-- Dropdown -->
@@ -255,22 +258,19 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                             <i class="fe fe-more-vertical"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-end">
-                            <form method="post" action="process.php">
-                              <input type="hidden" name="form_id" value="<?php echo htmlspecialchars($row['id']); ?>">
-                              <button type="submit" name="delete_form" class="dropdown-item">Delete</button>
+                            <form method="post">
+                              <button type="submit" name="cancel-order" class="dropdown-item">Delete</button>
                             </form>
-                            <a href="form-details?form_id=<?php echo $row['id']; ?>" class="dropdown-item">Form Details</a>
+                            <a href="answers?question_id=" class="dropdown-item">Answers</a>
                           </div>
                         </div>
+
                       </td>
                     </tr>
                   </tbody>
-                  <?php } ?>
                 </table>
+              <?php  }?>
               </div>
-              <?php if (mysqli_num_rows($result) <= 0) {
-                echo "<p class='text-center mt-4 mb-4'>There are no forms to display.</p>";
-              } ?>
               <div class="card-footer d-flex justify-content-between">
 
                 <!-- Pagination (prev) -->
@@ -302,111 +302,37 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
   </div>
 </div> <!-- / .main-content -->
 
-<!-- New form modal window -->
-<div class="modal" id="new-form" tabindex="-1">
+<!-- Add answers modal window -->
+<div class="modal" id="add-answers" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">New form</h5>
+        <h5 class="modal-title">Add Answer(s)</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="process.php" method="post" class="row g-3" id="new-form-form">
-          <div class="col-8">
-            <label class="form-label">Form name</label>
-            <input type="text" name="form_name" class="form-control" placeholder="Choose a name for your new form" required>
-          </div>
-          <div class="col-4">
-            <label class="form-label">Photos required</label>
-            <input type="number" name="photos_required" class="form-control" required>
+        <form action="process.php" method="post" class="row g-3" id="new-answers">
+          <div class="col-12">
+            <input type="text" name="answer_one" class="form-control" placeholder="Answer 1">
           </div>
           <div class="col-12">
-            <label class="form-label">Instructions</label>
-            <textarea name="instructions" class="form-control" rows="3" required></textarea>
+            <input type="text" name="answer_two" class="form-control" placeholder="Answer 2">
           </div>
           <div class="col-12">
-            <input type="hidden" name="form_id" value="<?php echo $form_id ?>">
+            <input type="text" name="answer_three" class="form-control" placeholder="Answer 3">
           </div>
+          <div class="col-12">
+            <input type="text" name="answer_four" class="form-control" placeholder="Answer 4">
+          </div>
+          <div class="col-12">
+            <input type="text" name="answer_five" class="form-control" placeholder="Answer 5">
+          </div>
+          <input type="hidden" name="question_id" value="<?php echo $_GET['question_id']; ?>">
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary" name="create-form" form="new-form-form">Create form</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Add questions modal window -->
-<div class="modal" id="add-questions" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Add question(s)</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="proccess.php" method="post" class="row g-3" id="new-questions">
-          <div class="col-8">
-            <input type="text" name="question_one" class="form-control" placeholder="Question 1">
-          </div>
-          <div class="col-4">
-            <select class="form-select" name="question_one_answer_type">
-              <option value="" disabled selected hidden>Select type</option>
-              <option value="">Single Choice</option>
-              <option value="">Multiple Choice</option>
-              <option value="">Text Field</option>
-            </select>
-          </div>
-          <div class="col-8">
-            <input type="text" name="question_two" class="form-control" placeholder="Question 2">
-          </div>
-          <div class="col-4">
-            <select class="form-select" name="question_two_answer_type">
-              <option value="" disabled selected hidden>Select type</option>
-              <option value="">Single Choice</option>
-              <option value="">Multiple Choice</option>
-              <option value="">Text Field</option>
-            </select>
-          </div>
-          <div class="col-8">
-            <input type="text" name="question_three" class="form-control" placeholder="Question 3">
-          </div>
-          <div class="col-4">
-            <select class="form-select" name="question_three_answer_type">
-              <option value="" disabled selected hidden>Select type</option>
-              <option value="">Single Choice</option>
-              <option value="">Multiple Choice</option>
-              <option value="">Text Field</option>
-            </select>
-          </div>
-          <div class="col-8">
-            <input type="text" name="question_four" class="form-control" placeholder="Question 4">
-          </div>
-          <div class="col-4">
-            <select class="form-select" name="question_four_answer_type">
-              <option value="" disabled selected hidden>Select type</option>
-              <option value="">Single Choice</option>
-              <option value="">Multiple Choice</option>
-              <option value="">Text Field</option>
-            </select>
-          </div>
-          <div class="col-8">
-            <input type="text" name="question_five" class="form-control" placeholder="Question 5">
-          </div>
-          <div class="col-4">
-            <select class="form-select" name="question_five_answer_type">
-              <option value="" disabled selected hidden>Select type</option>
-              <option value="">Single Choice</option>
-              <option value="">Multiple Choice</option>
-              <option value="">Text Field</option>
-            </select>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary" name="add-questions" form="new-questions">Add questions</button>
+        <button type="submit" class="btn btn-primary" name="add-answers" form="new-answers">Create Answers</button>
       </div>
     </div>
   </div>
