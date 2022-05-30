@@ -31,7 +31,7 @@
         }
         // GET ALL
         public function getWorkorders(){
-            $sql = "SELECT `work-orders`.county, users.first_name, users.last_name FROM `work-orders` LEFT JOIN users ON `work-orders`.assignee = users.id ORDER BY date_created DESC";
+            $sql = "SELECT `work-orders`.*, users.first_name, users.last_name FROM `work-orders` LEFT JOIN users ON `work-orders`.assignee = users.id ORDER BY date_created DESC";
             $result = mysqli_query($this->conn, $sql);
             $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
             return $rows;
