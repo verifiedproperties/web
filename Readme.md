@@ -124,3 +124,7 @@
 ### Notification for assignee ✔
 - URL ```/api/work_orders/notification.php```  
 - Method  ```GET```
+
+### User details ✔
+- URL ```/api/work_orders/notification.php/?id=4```  
+- Method  ```GET```
