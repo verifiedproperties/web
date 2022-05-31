@@ -14,7 +14,7 @@ $pageheader = "Create a new order";
 include 'template/head.php';
 
 $street_address = $query_error = $secondary_address = $city = $state = $zip = $county = $country = $owner = $photos_required = $start_date =
-$due_date = $instructions = $client_name = $con = $service = $access_code = null;
+$due_date = $instructions = $client_name = $con = $service = $access_code = $client_pay = $payable = null;
 
 if (isset($_POST['create-order'])) {
   $street_address = $_POST['street_address'];
@@ -24,6 +24,8 @@ if (isset($_POST['create-order'])) {
   $zip = $_POST['zip'];
   $county = $_POST['county'];
   $country = $_POST['country'];
+  $client_pay = $_POST['client_pay'];
+  $payable = $_POST['payable'];
   $owner = $_POST['owner_name'];
   $photos_required = $_POST['photos_required'];
   $start_date = $_POST['start_date'];
@@ -33,9 +35,9 @@ if (isset($_POST['create-order'])) {
   $con = $_POST['con'];
   $service = $_POST['service'];
   $access_code = $_POST['access_code'];
-  if (!empty($street_address) && !empty($city) && !empty($state) && !empty($zip) && !empty($client_name) && !empty($due_date) && !empty($service)) {
-    $stmt = $conn->prepare("INSERT INTO `work-orders` (client_name, con, street_address, secondary_address, city, state, zip, county, country, owner, start_date, due_date, instructions, service, access_code, photos_required) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $stmt->bind_param('sssssssssssssssi', $client_name, $con, $street_address, $secondary_address, $city, $state, $zip, $county, $country, $owner, $start_date, $due_date, $instructions, $service, $access_code, $photos_required);
+  if (!empty($street_address) && !empty($city) && !empty($state) && !empty($zip) && !empty($client_name) && !empty($due_date) && !empty($service) && !empty($client_pay)) {
+    $stmt = $conn->prepare("INSERT INTO `work-orders` (client_name, con, street_address, secondary_address, city, state, zip, county, country, owner, start_date, due_date, instructions, service, access_code, photos_required, client_pay, payable) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $stmt->bind_param('sssssssssssssssiss', $client_name, $con, $street_address, $secondary_address, $city, $state, $zip, $county, $country, $owner, $start_date, $due_date, $instructions, $service, $access_code, $photos_required, $client_pay, $payable);
     $result = $stmt->execute();
 
     if (false == $result) {
@@ -163,7 +165,7 @@ function initMap() {
 }
 </script>
 <?php include 'template/offcanvas.php'; ?>
-<?php //include 'template/navigation.php'; ?>
+<?php include 'template/navigation.php'; ?>
 
   <!-- MAIN CONTENT -->
   <div class="main-content">
@@ -231,6 +233,18 @@ function initMap() {
             <div hidden class="col-12">
               <label class="form-label">Country*</label>
               <input type="text" class="form-control" name="country" id="country" value="<?php echo $country; ?>">
+            </div>
+            <div class="col-6">
+              <label class="form-label">Client pay*</label>
+              <input type="number" name="client_pay" class="form-control" value="<?php echo $client_pay; ?>">
+            </div>
+            <div class="col-6">
+              <label class="form-label">Payable</label>
+              <input type="number" name="payable" class="form-control" value="<?php if ($payable == null) {
+                echo "6.00";
+              } else {
+                echo $payable;
+              } ?>">
             </div>
             <div class="col-6">
               <label class="form-label">Owner's name</label>

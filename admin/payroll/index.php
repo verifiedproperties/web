@@ -1,6 +1,6 @@
 <?php
 // ==========================================
-// Date Created:   4/18/2022
+// Date Created:   5/29/2022
 // Developer: Richard Rodgers
 // ==========================================
 include '../../db.php';
@@ -8,16 +8,9 @@ session_start();
 if (!isset($_SESSION['username'])) {
   header('Location: ../../login');
 }
-$pagename = "Forms";
+$pagename = "Payroll";
 $pageheader = "";
 include '../template/head.php';
-
-$test = "Testing..";
-
-// Fetching forms
-$query = "SELECT * FROM forms";
-$result = mysqli_query($conn, $query);
-$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
 <?php include '../template/offcanvas.php'; ?>
@@ -47,31 +40,12 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 </h1>
 
               </div>
-              <div class="col-auto">
-
-                <!-- Buttons -->
-                <a href="new-order" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#new-form">
-                  <span class="fe fe-plus"></span>New Form
-                </a>
-
-              </div>
             </div> <!-- / .row -->
           </div>
         </div>
         <div class="row">
           <div class="col-12">
-            <?php
-              if (isset($_SESSION['form-created'])) {
-                echo $_SESSION['form-created'];
-                unset($_SESSION['form-created']);
-              } if (isset($_SESSION['questions-added'])) {
-                echo $_SESSION['questions-added'];
-                unset($_SESSION['questions-added']);
-              } if (isset($_SESSION['form-deleted'])) {
-                echo $_SESSION['form-deleted'];
-                unset($_SESSION['form-deleted']);
-              }
-            ?>
+            <!-- Errors goes in here -->
           </div>
         </div>
 
@@ -214,39 +188,22 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                   <thead>
                     <tr>
                       <th>
-                        <a class="list-sort text-muted" data-sort="item-client" href="#">Id</a>
+                        <a class="list-sort text-muted" data-sort="item-client" href="#">Name</a>
                       </th>
                       <th>
-                        <a class="list-sort text-muted" data-sort="item-location" href="#">Name</a>
+                        <a class="list-sort text-muted" data-sort="item-location" href="#">Order Count</a>
                       </th>
                       <th>
-                        <a class="list-sort text-muted" data-sort="item-county" href="#">Created</a>
-                      </th>
-                      <th>
-                        <a class="list-sort text-muted" data-sort="item-service" href="#">Updated</a>
+                        <a class="list-sort text-muted" data-sort="item-county" href="#">Payable</a>
                       </th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody class="list">
-                    <?php foreach ($rows as $row) { ?>
                     <tr>
-                      <td><?php echo htmlspecialchars($row['id']); ?></td>
-                      <td>
-
-                        <!-- Text -->
-                        <span class="item-stage">
-                          <?php echo htmlspecialchars($row['name']); ?>
-                        </span>
-
-                      </td>
-                      <td><?php echo date('M d, Y', strtotime($row['created'])); ?></td>
-                      <td>
-
-                        <!-- Text -->
-                        <span class="item-service"><?php echo date('M d, Y', strtotime($row['updated'])); ?></span>
-
-                      </td>
+                      <td>Richard Rodgers</td>
+                      <td>55</td>
+                      <td>$550.00</td>
                       <td class="text-end">
 
                         <!-- Dropdown -->
@@ -256,21 +213,17 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                           </a>
                           <div class="dropdown-menu dropdown-menu-end">
                             <form method="post" action="process.php">
-                              <input type="hidden" name="form_id" value="<?php echo htmlspecialchars($row['id']); ?>">
+                              <input type="hidden" name="form_id" value="">
                               <button type="submit" name="delete_form" class="dropdown-item">Delete</button>
                             </form>
-                            <a href="form-details?form_id=<?php echo $row['id']; ?>" class="dropdown-item">Form Details</a>
+                            <a href="form-details?form_id=" class="dropdown-item">Form Details</a>
                           </div>
                         </div>
                       </td>
                     </tr>
                   </tbody>
-                  <?php } ?>
                 </table>
               </div>
-              <?php if (mysqli_num_rows($result) <= 0) {
-                echo "<p class='text-center mt-4 mb-4'>There are no forms to display.</p>";
-              } ?>
               <div class="card-footer d-flex justify-content-between">
 
                 <!-- Pagination (prev) -->
@@ -301,115 +254,5 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
     </div>
   </div>
 </div> <!-- / .main-content -->
-
-<!-- New form modal window -->
-<div class="modal" id="new-form" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">New form</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="process.php" method="post" class="row g-3" id="new-form-form">
-          <div class="col-8">
-            <label class="form-label">Form name</label>
-            <input type="text" name="form_name" class="form-control" placeholder="Choose a name for your new form" required>
-          </div>
-          <div class="col-4">
-            <label class="form-label">Photos required</label>
-            <input type="number" name="photos_required" class="form-control" required>
-          </div>
-          <div class="col-12">
-            <label class="form-label">Instructions</label>
-            <textarea name="instructions" class="form-control" rows="3" required></textarea>
-          </div>
-          <div class="col-12">
-            <input type="hidden" name="form_id" value="<?php echo $form_id ?>">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary" name="create-form" form="new-form-form">Create form</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Add questions modal window -->
-<div class="modal" id="add-questions" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Add question(s)</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="proccess.php" method="post" class="row g-3" id="new-questions">
-          <div class="col-8">
-            <input type="text" name="question_one" class="form-control" placeholder="Question 1">
-          </div>
-          <div class="col-4">
-            <select class="form-select" name="question_one_answer_type">
-              <option value="" disabled selected hidden>Select type</option>
-              <option value="">Single Choice</option>
-              <option value="">Multiple Choice</option>
-              <option value="">Text Field</option>
-            </select>
-          </div>
-          <div class="col-8">
-            <input type="text" name="question_two" class="form-control" placeholder="Question 2">
-          </div>
-          <div class="col-4">
-            <select class="form-select" name="question_two_answer_type">
-              <option value="" disabled selected hidden>Select type</option>
-              <option value="">Single Choice</option>
-              <option value="">Multiple Choice</option>
-              <option value="">Text Field</option>
-            </select>
-          </div>
-          <div class="col-8">
-            <input type="text" name="question_three" class="form-control" placeholder="Question 3">
-          </div>
-          <div class="col-4">
-            <select class="form-select" name="question_three_answer_type">
-              <option value="" disabled selected hidden>Select type</option>
-              <option value="">Single Choice</option>
-              <option value="">Multiple Choice</option>
-              <option value="">Text Field</option>
-            </select>
-          </div>
-          <div class="col-8">
-            <input type="text" name="question_four" class="form-control" placeholder="Question 4">
-          </div>
-          <div class="col-4">
-            <select class="form-select" name="question_four_answer_type">
-              <option value="" disabled selected hidden>Select type</option>
-              <option value="">Single Choice</option>
-              <option value="">Multiple Choice</option>
-              <option value="">Text Field</option>
-            </select>
-          </div>
-          <div class="col-8">
-            <input type="text" name="question_five" class="form-control" placeholder="Question 5">
-          </div>
-          <div class="col-4">
-            <select class="form-select" name="question_five_answer_type">
-              <option value="" disabled selected hidden>Select type</option>
-              <option value="">Single Choice</option>
-              <option value="">Multiple Choice</option>
-              <option value="">Text Field</option>
-            </select>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary" name="add-questions" form="new-questions">Add questions</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <?php include '../template/footer.php'; ?>

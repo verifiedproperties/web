@@ -1,6 +1,6 @@
 <?php
 // ==========================================
-// Date Created:   4/13/2022
+// Date Created:   5/20/2022
 // Developer: Richard Rodgers
 // ==========================================
 include '../db.php';
@@ -8,26 +8,15 @@ session_start();
 if (!isset($_SESSION['username'])) {
   header('Location: ../login');
 }
-$pagename = "Completed";
-$pageheader = "Create a new order";
+$pagename = "Canceled";
+$pageheader = "";
 include 'template/head.php';
 
-$emptyFields = $order_canceled = null;
+// Fetching orders from database
+$sql = "SELECT * FROM `work-orders` WHERE status = '5' ORDER BY date_completed DESC";
+$result = mysqli_query($conn, $sql);
+$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-// Applying filters
-if (isset($_POST['apply-filter'])) {
-  $from_date = $_POST['from_date'];
-  $to_date = $_POST['to_date'];
-
-  $query = "SELECT * FROM `work-orders` WHERE `date_completed` BETWEEN '".$from_date."' AND '".$to_date."' ORDER BY `date_completed` DESC";
-  $result = mysqli_query($conn, $query);
-  $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-} else { // Fetches unfiltered completed results
-
-  $sql = "SELECT * FROM `work-orders` WHERE status = '4' ORDER BY date_created DESC";
-  $result = mysqli_query($conn, $sql);
-  $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-}
 ?>
 
 <?php include 'template/offcanvas.php'; ?>
@@ -82,12 +71,12 @@ if (isset($_POST['apply-filter'])) {
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="completed" class="nav-link text-nowrap active">
+                    <a href="completed" class="nav-link text-nowrap">
                       Completed <span class="badge rounded-pill bg-secondary-soft"><?php CompletedOrders($conn); ?></span>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="canceled" class="nav-link text-nowrap">
+                    <a href="canceled" class="nav-link text-nowrap active">
                       Canceled <span class="badge rounded-pill bg-secondary-soft"><?php CanceledOrders($conn); ?></span>
                     </a>
                   </li>
@@ -99,16 +88,8 @@ if (isset($_POST['apply-filter'])) {
         </div>
         <div class="row">
           <div class="col-12">
-            <?php echo $order_canceled; ?>
-            <?php if(isset($_SESSION['error'])&&$_SESSION['error']){
-              echo "<div class=\"alert alert-danger\">{$_SESSION['error']}</div>";
-              unset($_SESSION['error']);
-            }
-            if(isset($_SESSION['success'])&&$_SESSION['success']){
-              echo "<div class=\"alert alert-success\">{$_SESSION['success']}</div>";
-              unset($_SESSION['success']);
-            }
-            ?>
+            <?php echo $order_approved; ?>
+            <?php echo $order_rejected; ?>
           </div>
         </div>
 
@@ -163,7 +144,7 @@ if (isset($_POST['apply-filter'])) {
                       </button>
 
                       <!-- Menu -->
-                      <form class="dropdown-menu dropdown-menu-end dropdown-menu-card" method="post">
+                      <form class="dropdown-menu dropdown-menu-end dropdown-menu-card">
                         <div class="card-header">
 
                           <!-- Title -->
@@ -178,9 +159,7 @@ if (isset($_POST['apply-filter'])) {
 
                         </div>
                         <div class="card-body">
-                          <div class="row">
-                            <small class="mb-5">Filter by completed date</small>
-                          </div>
+
                           <!-- List group -->
                           <div class="list-group list-group-flush mt-n4 mb-4">
                             <div class="list-group-item">
@@ -188,11 +167,23 @@ if (isset($_POST['apply-filter'])) {
                                 <div class="col">
 
                                   <!-- Text -->
-                                  <small>From</small>
+                                  <small>Stage</small>
 
                                 </div>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control" name="from_date" placeholder="Select date" data-flatpickr>
+
+                                  <!-- Select -->
+                                  <select class="form-select form-select-sm" name="item-title" data-choices='{"searchEnabled": false}'>
+                                    <option value="*" selected>Any</option>
+                                    <option value="Appointment scheduled">Appointment scheduled</option>
+                                    <option value="Kickoff call">Kickoff call</option>
+                                    <option value="Quote accepted">Quote accepted</option>
+                                    <option value="Project in progress">Project in progress</option>
+                                    <option value="Initial review">Initial review</option>
+                                    <option value="Final review">Final review</option>
+                                    <option value="Completed">Completed</option>
+                                  </select>
+
                                 </div>
                               </div> <!-- / .row -->
                             </div>
@@ -201,26 +192,42 @@ if (isset($_POST['apply-filter'])) {
                                 <div class="col">
 
                                   <!-- Text -->
-                                  <small>To</small>
+                                  <small>Owner</small>
 
                                 </div>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control" name="to_date" placeholder="Select date" data-flatpickr>
+
+                                  <!-- Select -->
+                                  <select class="form-select form-select-sm" name="item-score" data-choices='{"searchEnabled": false}'>
+                                    <option value="*" selected>Any</option>
+                                    <option value="Dianna Smiley">Dianna Smiley</option>
+                                    <option value="Ab Hadley">Ab Hadley</option>
+                                    <option value="Adolfo Hess">Adolfo Hess</option>
+                                    <option value="Daniela Dewitt">Daniela Dewitt</option>
+                                    <option value="Miyah Myles">Miyah Myles</option>
+                                    <option value="Ryu Duke">Ryu Duke</option>
+                                    <option value="Glen Rouse">Glen Rouse</option>
+                                  </select>
+
                                 </div>
                               </div> <!-- / .row -->
                             </div>
                           </div>
 
                           <!-- Button -->
-                          <button type="submit" class="btn w-100 btn-primary" name="apply-filter">Apply Filter</button>
+                          <button class="btn w-100 btn-primary" type="submit">
+                            Apply filter
+                          </button>
 
                         </div>
-                        </form>
-                    </div>
-                  </div>
-                    <div class="col-auto me-n3" id="csvbuttoncontainer">
+                      </form>
 
                     </div>
+
+                  </div>
+                  <div class="col-auto me-n3" id="csvbuttoncontainer">
+
+                  </div>
                 </div> <!-- / .row -->
               </div>
               <div class="table-responsive">
@@ -256,12 +263,6 @@ if (isset($_POST['apply-filter'])) {
                       </th>
                       <th>
                         <a class="list-sort text-muted" data-sort="item-completed" href="#">Completed</a>
-                      </th>
-                      <th>
-                        <a class="list-sort text-muted" data-sort="item-approved" href="#">Approved</a>
-                      </th>
-                      <th>
-                        <a class="list-sort text-muted" data-sort="item-approved-by" href="#">Approve by</a>
                       </th>
                       <th>
                         <a class="list-sort text-muted" data-sort="item-assignee" href="#">Assignee</a>
@@ -305,8 +306,6 @@ if (isset($_POST['apply-filter'])) {
                       <td><?php echo htmlspecialchars(date('M d, Y', strtotime($row['start_date']))); ?></td>
                       <td><?php echo htmlspecialchars(date('M d, Y', strtotime($row['due_date']))); ?></td>
                       <td><?php echo htmlspecialchars(date('M d, Y', strtotime($row['date_completed']))); ?></td>
-                      <td>-</td>
-                      <td>-</td>
                       <td><?php echo htmlspecialchars($row['assignee']); ?></td>
                       <td><?php echo htmlspecialchars(date('M d, Y', strtotime($row['date_created']))); ?></td>
                       <td class="text-end">
@@ -319,11 +318,13 @@ if (isset($_POST['apply-filter'])) {
                           <div class="dropdown-menu dropdown-menu-end">
                             <form method="post">
                               <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($row['id']); ?>">
-                              <button type="submit" name="cancel-order" class="dropdown-item">Reopen</button>
+                              <input type="hidden" name="order_address" value="<?php echo htmlspecialchars($row['street_address']); ?>">
+                              <button type="submit" class="dropdown-item" name="reject">Reject</button>
+                              <button type="submit" class="dropdown-item" name="approve">Approve</button>
                             </form>
-                            <button type="button" name="view-report" class="dropdown-item">View report</button>
-                            <button type="button" name="download-gallery" class="dropdown-item">Download Gallery</button>
-                            <button type="button" name="reject-order" class="dropdown-item">Reject Order</button>
+                            <a href="#!" class="dropdown-item">
+                              Download Gallery
+                            </a>
                           </div>
                         </div>
 
@@ -334,7 +335,7 @@ if (isset($_POST['apply-filter'])) {
                 </table>
               </div>
               <?php if (mysqli_num_rows($result) <= 0) {
-                echo "<p class='text-center mt-4 mb-4'>There are no work orders to display.</p>";
+                echo "<p class='text-center mt-4 mb-4'>Yay, great job! You're all caught up.</p>";
               } ?>
               <div class="card-footer d-flex justify-content-between">
 
@@ -378,13 +379,13 @@ if (isset($_POST['apply-filter'])) {
                     <div class="col-auto me-n3">
 
                       <!-- Button -->
-                      <button class="btn btn-sm btn-white-20" data-bs-toggle="modal" data-bs-target="#modalMembers">
-                        Assign
+                      <button class="btn btn-sm btn-white-20">
+                        Approve
                       </button>
 
                       <!-- Button -->
                       <button class="btn btn-sm btn-white-20">
-                        Cancel
+                        Reject
                       </button>
 
                     </div>
@@ -404,44 +405,10 @@ if (isset($_POST['apply-filter'])) {
 
 </div> <!-- / .main-content -->
 
-<!-- MODALS -->
-<!-- Modal: Members -->
-<div class="modal fade" id="modalMembers" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-card card" data-list='{"valueNames": ["name"]}'>
-        <div class="card-header">
-
-          <!-- Title -->
-          <h4 class="card-header-title" id="exampleModalCenterTitle">
-            Assign work order(s)
-          </h4>
-
-          <!-- Close -->
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-        </div>
-        <div class="card-body">
-          <form method="post" id="user-selection">
-            <select class="form-select" name="users-list">
-              <?php foreach ($users as $user) { ?>
-              <option value="<?php echo htmlspecialchars($user['id']); ?>"><?php echo htmlspecialchars($user['first_name']), ' ', htmlspecialchars($user['last_name']); ?></option>
-              <?php }; ?>
-            </select>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" name="assign-orders" class="btn btn-primary" form="user-selection">Assign</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- Google Maps autocomplete script -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZm4AFgY_p4lNYcGbcaB26K3JWiLIeZOA&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cABC" async defer></script>
 <script type="text/javascript">
-  $(document).ready(function () {
+   $(document).ready(function () {
     let button = `<button type='button' onclick="window.location.href='download-csv.php?id=<?=implode(',', $ids)?>'" class='btn btn-sm btn-info'><i class="fe fe-arrow-down"></i>CSV</button>`;
     $('#csvbuttoncontainer').html(button);
   })

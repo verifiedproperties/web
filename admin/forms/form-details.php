@@ -1,6 +1,6 @@
 <?php
 // ==========================================
-// Date Created:   4/18/2022
+// Date Created:   5/24/2022
 // Developer: Richard Rodgers
 // ==========================================
 include '../../db.php';
@@ -8,16 +8,17 @@ session_start();
 if (!isset($_SESSION['username'])) {
   header('Location: ../../login');
 }
-$pagename = "Forms";
+$pagename = "Form Details";
 $pageheader = "";
 include '../template/head.php';
 
-$test = "Testing..";
+$form_id = $_GET['form_id'];
 
-// Fetching forms
-$query = "SELECT * FROM forms";
+// Fetching questions
+$query = "SELECT * FROM `questions` WHERE `form_id` = '$form_id'";
 $result = mysqli_query($conn, $query);
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 ?>
 
 <?php include '../template/offcanvas.php'; ?>
@@ -50,8 +51,8 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
               <div class="col-auto">
 
                 <!-- Buttons -->
-                <a href="new-order" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#new-form">
-                  <span class="fe fe-plus"></span>New Form
+                <a href="new-order" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#add-questions">
+                  <span class="fe fe-plus"></span>Questions
                 </a>
 
               </div>
@@ -67,9 +68,6 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
               } if (isset($_SESSION['questions-added'])) {
                 echo $_SESSION['questions-added'];
                 unset($_SESSION['questions-added']);
-              } if (isset($_SESSION['form-deleted'])) {
-                echo $_SESSION['form-deleted'];
-                unset($_SESSION['form-deleted']);
               }
             ?>
           </div>
@@ -214,16 +212,19 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                   <thead>
                     <tr>
                       <th>
-                        <a class="list-sort text-muted" data-sort="item-client" href="#">Id</a>
+                        <a class="list-sort text-muted" data-sort="item-client" href="#">ID</a>
                       </th>
                       <th>
-                        <a class="list-sort text-muted" data-sort="item-location" href="#">Name</a>
+                        <a class="list-sort text-muted" data-sort="item-location" href="#">Question</a>
                       </th>
                       <th>
                         <a class="list-sort text-muted" data-sort="item-county" href="#">Created</a>
                       </th>
                       <th>
                         <a class="list-sort text-muted" data-sort="item-service" href="#">Updated</a>
+                      </th>
+                      <th>
+                        <a class="list-sort text-muted" data-sort="item-service" href="#">Form ID</a>
                       </th>
                       <th></th>
                     </tr>
@@ -236,7 +237,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
                         <!-- Text -->
                         <span class="item-stage">
-                          <?php echo htmlspecialchars($row['name']); ?>
+                          <?php echo htmlspecialchars($row['question']); ?>
                         </span>
 
                       </td>
@@ -247,6 +248,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                         <span class="item-service"><?php echo date('M d, Y', strtotime($row['updated'])); ?></span>
 
                       </td>
+                      <td><?php echo htmlspecialchars($row['form_id']); ?></td>
                       <td class="text-end">
 
                         <!-- Dropdown -->
@@ -255,13 +257,13 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                             <i class="fe fe-more-vertical"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-end">
-                            <form method="post" action="process.php">
-                              <input type="hidden" name="form_id" value="<?php echo htmlspecialchars($row['id']); ?>">
-                              <button type="submit" name="delete_form" class="dropdown-item">Delete</button>
+                            <form method="post">
+                              <button type="submit" name="cancel-order" class="dropdown-item">Delete</button>
                             </form>
-                            <a href="form-details?form_id=<?php echo $row['id']; ?>" class="dropdown-item">Form Details</a>
+                            <a href="answers?question_id=<?php echo htmlspecialchars($row['id']); ?>" class="dropdown-item">Answers</a>
                           </div>
                         </div>
+
                       </td>
                     </tr>
                   </tbody>
@@ -269,7 +271,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 </table>
               </div>
               <?php if (mysqli_num_rows($result) <= 0) {
-                echo "<p class='text-center mt-4 mb-4'>There are no forms to display.</p>";
+                echo "<p class='text-center mt-4 mb-4'>There are no questions to display.</p>";
               } ?>
               <div class="card-footer d-flex justify-content-between">
 
@@ -302,41 +304,6 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
   </div>
 </div> <!-- / .main-content -->
 
-<!-- New form modal window -->
-<div class="modal" id="new-form" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">New form</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="process.php" method="post" class="row g-3" id="new-form-form">
-          <div class="col-8">
-            <label class="form-label">Form name</label>
-            <input type="text" name="form_name" class="form-control" placeholder="Choose a name for your new form" required>
-          </div>
-          <div class="col-4">
-            <label class="form-label">Photos required</label>
-            <input type="number" name="photos_required" class="form-control" required>
-          </div>
-          <div class="col-12">
-            <label class="form-label">Instructions</label>
-            <textarea name="instructions" class="form-control" rows="3" required></textarea>
-          </div>
-          <div class="col-12">
-            <input type="hidden" name="form_id" value="<?php echo $form_id ?>">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary" name="create-form" form="new-form-form">Create form</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- Add questions modal window -->
 <div class="modal" id="add-questions" tabindex="-1">
   <div class="modal-dialog">
@@ -346,7 +313,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="proccess.php" method="post" class="row g-3" id="new-questions">
+        <form action="process.php" method="post" class="row g-3" id="new-questions">
           <div class="col-8">
             <input type="text" name="question_one" class="form-control" placeholder="Question 1">
           </div>
@@ -402,6 +369,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
               <option value="">Text Field</option>
             </select>
           </div>
+          <input type="hidden" name="form_id" value="<?php echo $form_id; ?>">
         </form>
       </div>
       <div class="modal-footer">
