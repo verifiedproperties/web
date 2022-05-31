@@ -126,5 +126,5 @@
 - Method  ```GET```
 
 ### User details ✔
-- URL ```/api/work_orders/notification.php/?id=4```  
+- URL ```/api/users/details.php?user_id=4```  
 - Method  ```GET```
