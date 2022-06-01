@@ -62,7 +62,6 @@ if (!empty($email) && !empty($password)) {
                     "message" => "Successful login.",
                     "jwt" => $jwt,
                     "email" => $email,
-                    "id" => $id,
                     "expireAt" => $expire_claim
                 )
             );
