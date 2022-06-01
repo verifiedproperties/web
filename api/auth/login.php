@@ -24,14 +24,14 @@ $password = isset($_POST['password']) ? $_POST['password'] : die();
 
 $table_name = 'users';
 
-if (!empty($email) && !empty($password)) { 
+if (!empty($email) && !empty($password)) {
     $query = "SELECT * FROM `users` WHERE `email` = '$email' LIMIT 1";
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-    $hash = $row['password']; 
+    $hash = $row['password'];
 
-    $verify = password_verify($password, $hash); 
-    
+    $verify = password_verify($password, $hash);
+
     if ($verify == true) {
         if ($row['status'] == "active") {
             $secret_key = "D46BBCBB0CB1DBEE29E8A0AA5CA1CF51DF6C48779B3F9CD24211148747719D12";
@@ -62,6 +62,7 @@ if (!empty($email) && !empty($password)) {
                     "message" => "Successful login.",
                     "jwt" => $jwt,
                     "email" => $email,
+                    "id" => $id,
                     "expireAt" => $expire_claim
                 )
             );
@@ -84,5 +85,5 @@ if (!empty($email) && !empty($password)) {
     http_response_code(401);
     echo json_encode(array("message" => "Login failed. All fields are required"));
 }
- 
+
 ?>
