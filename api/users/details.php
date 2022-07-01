@@ -30,7 +30,7 @@
                 // Access is granted. Add code of the operation here
                 $user_id = filter_var($user_id, FILTER_SANITIZE_NUMBER_INT);
                 if($id == $user_id){
-                    $sql = "SELECT id, first_name, last_name, email, phone, dob, joined FROM `users` WHERE id = $id";
+                    $sql = "SELECT id, first_name, last_name, email, phone, address, dob, joined FROM `users` WHERE id = $id";
                     $result = mysqli_query($db, $sql);
                     $rows = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
